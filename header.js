@@ -11,6 +11,7 @@ const Search = document.createElement('input');
 Search.type = 'text';
 Search.id = 'header_Search';
 Search.placeholder = 'サイト内検索';
+Search.autocomplete = true;
 
 // ボタンの親リスト
 const Button_parent = document.createElement('ul');
