@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function() {
 // 1. 検索ワードを `sessionStorage` から取得
 const searchQuery = sessionStorage.getItem('searchQuery') || '';
 const searchInput = document.getElementById('header_Search');
@@ -62,3 +63,4 @@ function search(query) {
 
 // 6. JSON データを取得（fetchData を呼び出す）
 fetchData();
+});
