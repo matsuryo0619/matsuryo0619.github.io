@@ -1,38 +1,29 @@
-// search.js
-
 document.addEventListener('DOMContentLoaded', function() {
-  // カスタムイベント 'headerSearchCreated' をリッスン
   window.addEventListener('headerSearchCreated', function(event) {
-    // イベントが発火した時に検索バー (`header_Search`) を受け取って処理を開始
-    const searchInput = event.detail.searchInput;  // `header_Search` を受け取る
-    const searchQuery = sessionStorage.getItem('searchQuery') || '';  // sessionStorage から検索ワードを取得
+    const searchInput = event.detail.searchInput;
+    const searchQuery = sessionStorage.getItem('searchQuery') || '';
     const resultList = document.getElementById('searchResults');
 
-    // 検索バーに `sessionStorage` の値をセット
     searchInput.value = searchQuery;
-
-    // データ変数を定義（fetch で JSON を取得するために必要）
     let data = [];
 
-    // JSON データを取得
     async function fetchData() {
       try {
         const response = await fetch('sites.json');
         if (!response.ok) throw new Error('データ取得に失敗しました');
         
-        data = await response.json(); // JSONデータを `data` に格納
+        data = await response.json();
         console.log('データ取得成功:', data);
 
-        if (searchQuery) search(searchQuery);  // 検索ワードがあれば自動検索
+        if (searchQuery) search(searchQuery);
       } catch (error) {
         console.error(error);
         resultList.innerHTML = '<p>データを取得できませんでした</p>';
       }
     }
 
-    // 検索機能
     function search(query) {
-      resultList.innerHTML = ''; // 前回の検索結果をクリア
+      resultList.innerHTML = '';
 
       if (!query.trim()) {
         resultList.innerHTML = '<p>検索ワードを入力してください</p>';
@@ -50,18 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
-      // 検索結果を表示
       filteredData.forEach(result => {
         const div = document.createElement('div');
         div.classList.add('result-item');
 
-        // タグがない場合は「なし」と表示
         const tags = (result.tags && result.tags.length > 0) 
           ? result.tags.map(tag => `<a href="#" class="tag-link">${tag}</a>`).join(', ') 
           : 'なし';
 
         div.innerHTML = `
-          <h3><a href="${result.url}" target="_blank">${result.title}</a></h3>
+          <h3><a href="${result.url}" target="_blank" class="preview-link">${result.title}</a></h3>
           <p>${result.content}</p>
           <p><strong>タグ:</strong> ${tags}</p>
         `;
@@ -69,18 +58,67 @@ document.addEventListener('DOMContentLoaded', function() {
         resultList.appendChild(div);
       });
 
-      // タグがクリックされたときにそのタグで検索
+      setupPreviewHover(); // タイトルのホバーイベントを設定
+      setupTagClick(); // タグのクリックイベントを設定
+    }
+
+    function setupTagClick() {
       document.querySelectorAll('.tag-link').forEach(tagElement => {
         tagElement.addEventListener('click', function(event) {
-          event.preventDefault(); // ページ遷移を防ぐ
+          event.preventDefault();
           const tag = event.target.textContent;
-          sessionStorage.setItem('searchQuery', tag); // タグを sessionStorage に保存
-          window.location.href = 'Search.html'; // 新しい検索結果ページに遷移
+          sessionStorage.setItem('searchQuery', tag);
+          window.location.href = 'Search.html';
         });
       });
     }
 
-    // JSON データを取得（fetchData を呼び出す）
+    function setupPreviewHover() {
+      let previewTimeout;
+      let iframe;
+
+      document.querySelectorAll('.preview-link').forEach(link => {
+        link.addEventListener('mouseenter', function(event) {
+          previewTimeout = setTimeout(() => {
+            if (!iframe) {
+              iframe = document.createElement('iframe');
+              iframe.src = link.href;
+              iframe.style.position = 'absolute';
+              iframe.style.width = '400px';
+              iframe.style.height = '300px';
+              iframe.style.border = '1px solid black';
+              iframe.style.background = '#fff';
+              iframe.style.boxShadow = '2px 2px 8px rgba(0, 0, 0, 0.3)';
+              iframe.style.pointerEvents = 'none'; // クリック不可
+              document.body.appendChild(iframe);
+            }
+
+            // マウスの位置に基づいて iframe の位置を設定
+            document.addEventListener('mousemove', moveIframe);
+          }, 3000);
+        });
+
+        link.addEventListener('mouseleave', function() {
+          clearTimeout(previewTimeout);
+        });
+      });
+
+      function moveIframe(event) {
+        if (iframe) {
+          iframe.style.left = `${event.pageX + 10}px`;
+          iframe.style.top = `${event.pageY + 10}px`;
+        }
+      }
+
+      document.addEventListener('mouseleave', function() {
+        if (iframe) {
+          iframe.remove();
+          iframe = null;
+          document.removeEventListener('mousemove', moveIframe);
+        }
+      });
+    }
+
     fetchData();
   });
 });
