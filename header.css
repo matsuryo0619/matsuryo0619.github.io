@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: 35px;
   display: flex;
   align-items: center;  /* 垂直方向の中央揃え */
   justify-content: flex-start;  /* ヘッダー内の要素を左寄せ */
