@@ -55,7 +55,7 @@ Search.addEventListener('keydown', function(event) {
     const value = Search.value;
     if (value.trim().length > 0) {
       sessionStorage.setItem('searchQuery', value);
-      window.location.href = 'search.html';
+      window.location.href = 'Search.html';
     }
   }
 });
