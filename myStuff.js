@@ -1,35 +1,33 @@
 async function getProjectInfo() {
   try {
-    // myStuff.jsonを取得
+    // myStuff.jsonを読み込む
     const response = await fetch('myStuff.json');
-    const data = await response.json();
+    const data = await response.json();  // JSONデータを取得
 
-    // 各プロジェクトIDについて、GAS APIを呼び出してタイトルを取得
+    // dataが配列だと仮定して、各プロジェクトIDを使ってGASのAPIにリクエスト
     for (let i = 0; i < data.length; i++) {
       try {
-        // GASのAPIエンドポイントにリクエストを送信
-        const projectId = data[i].id;
-        const apiUrl = `https://script.google.com/macros/s/your-script-id/exec?id=${projectId}`;
+        const projectId = data[i].id;  // myStuff.jsonからIDを取得
+        const apiUrl = `https://script.google.com/macros/s/AKfycbxMqchIXx20DKA-Gm8tT0f7iCiw_ycU8EBbKXNnsItMSQxQb2gaESCbFLgj4L0jjA7juQ/exec?id=${projectId}`;
         
-        // GAS APIからプロジェクト情報を取得
+        // GAS APIにリクエストを送信
         const projectResponse = await fetch(apiUrl);
-        const projectData = await projectResponse.json();
-
-        // 取得したタイトルを表示
-        if (projectData.title) {
-          console.log(`プロジェクトタイトル: ${projectData.title}`);
-          console.log(`関連サイト: ${data[i].site}`);
+        
+        // レスポンスが正常なら、JSONとしてパース
+        if (projectResponse.ok) {
+          const projectData = await projectResponse.json();
+          console.log(`プロジェクトID: ${projectId} - タイトル: ${projectData.title}`);
         } else {
-          console.log(`プロジェクトID ${projectId} のタイトルが見つかりませんでした。`);
+          throw new Error(`プロジェクトID ${projectId} の取得に失敗しました。`);
         }
-
       } catch (projectError) {
-        console.error(`Error fetching project ${data[i].id}:`, projectError);
+        console.error(`プロジェクトID ${data[i].id} の処理中にエラーが発生しました:`, projectError);
       }
     }
   } catch (error) {
-    console.error('Error fetching myStuff.json:', error);
+    console.error('myStuff.json の読み込み中にエラーが発生しました:', error);
   }
 }
 
+// 関数を実行
 getProjectInfo();
