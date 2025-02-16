@@ -1,7 +1,8 @@
-#Logo {
-
+#header_logo {
+  width: 100px;
+  height: auto;
 }
 
-#Logo:hover {
-  translate: scale(1.1);
+#header_logo:hover {
+  transform: scale(1.1);
 }
