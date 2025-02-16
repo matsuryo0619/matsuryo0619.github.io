@@ -21,7 +21,7 @@ const ButtonList = [
 ]
 
 ButtonList.forEach((data) => {
-  const Button = document.createElement('button');
+  const Button = document.createElement('li');
   Button.classList.add('header_List');
   Button.textContent = data.text;
   Button.setAttribute('data-src', data.src);
@@ -30,3 +30,8 @@ ButtonList.forEach((data) => {
 
 //ヘッダーに子要素を追加
 header.appendChild(Logo);
+header.appendChild(Search);
+header.appendChild(Button_parent);
+
+//ヘッダーをHTMLに追加
+document.body.appendChild(header);
