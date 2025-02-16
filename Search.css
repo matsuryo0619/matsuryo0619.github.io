@@ -1,0 +1,56 @@
+/* 🔎 検索結果のコンテナ */
+#searchResults {
+  margin-top: 20px;
+  padding: 10px;
+  max-width: 600px;
+  background: #f5f5f5; /* 超薄い灰色 */
+  border-radius: 8px;
+  border: 1px solid #000; /* 黒い枠線 */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+}
+
+/* 📄 各検索結果 */
+.result-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  background: #fff; /* 白 */
+  border-radius: 5px;
+  border: 1px solid #000; /* 黒い枠線 */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* ホバー時のエフェクト */
+.result-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔗 タイトル（リンク） */
+.result-item h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.result-item h3 a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.result-item h3 a:hover {
+  color: #0056b3;
+}
+
+/* 📜 コンテンツの説明 */
+.result-item p {
+  font-size: 14px;
+  color: #444; /* ちょっと濃いめのグレー */
+  margin: 5px 0;
+}
+
+/* 🏷️ タグのスタイル */
+.result-item p strong {
+  font-weight: bold;
+  color: #222; /* さらに濃いグレー */
+}
