@@ -49,3 +49,9 @@ document.body.appendChild(header);
 Logo.addEventListener('click', function() {
   window.open('https://scratch.mit.edu');
 });
+
+Search.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    console.log('Enter');
+  }
+});
