@@ -19,8 +19,8 @@ Button_parent.style.listStyle = 'none';
 Button_parent.id = 'header_buttonlist';
 
 const ButtonList = [
-  {text: 'ホーム', src: 'Home.html'},
-  {text: '私の作品', src: 'myStuff.html'}
+  { text: 'ホーム', src: 'Home.html' },
+  { text: '私の作品', src: 'myStuff.html' }
 ];
 
 ButtonList.forEach((data) => {
@@ -29,7 +29,7 @@ ButtonList.forEach((data) => {
   Button.textContent = data.text;
   Button_parent.appendChild(Button);
 
-  Button.addEventListener('click', function() {
+  Button.addEventListener('click', function () {
     if (data.src.includes('https://')) {
       window.location.href = data.src;
     } else {
@@ -46,21 +46,13 @@ header.appendChild(Button_parent);
 // ヘッダーをHTMLに追加
 document.body.appendChild(header);
 
-//ヘッダー余白
-const headerMargin = document.createElement('p');
-headerMargin.id = 'header_margin';
-headerMargin.textContent = 'ヘッダー余白';
-
-document.body.prepend(headerMargin);
-
-
 // ヘッダーイベント
-Logo.addEventListener('click', function() {
+Logo.addEventListener('click', function () {
   window.open('https://scratch.mit.edu');
 });
 
 // 検索バーにEnterが押された時の処理
-Search.addEventListener('keydown', function(event) {
+Search.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     const value = Search.value;
     if (value.trim().length > 0) {
