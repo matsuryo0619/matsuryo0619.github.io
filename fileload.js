@@ -21,3 +21,8 @@ reqjs.forEach((file) => {
   }
   document.head.appendChild(script);
 });
+
+//サイトアイコン
+const icon = document.createElement('link');
+icon.href = 'img/icon.png';
+document.head.appendChild(icon);
