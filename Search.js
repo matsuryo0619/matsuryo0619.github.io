@@ -29,39 +29,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 検索機能
-    function search(query) {
-      resultList.innerHTML = ''; // 前回の検索結果をクリア
+function search(query) {
+  resultList.innerHTML = ''; // 前回の検索結果をクリア
 
-      if (!query.trim()) {
-        resultList.innerHTML = '<p>検索ワードを入力してください</p>';
-        return;
-      }
+  if (!query.trim()) {
+    resultList.innerHTML = '<p>検索ワードを入力してください</p>';
+    return;
+  }
 
-      const filteredData = data.filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase()) ||
-        item.content.toLowerCase().includes(query.toLowerCase()) ||
-        item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
-      );
+  const filteredData = data.filter(item =>
+    item.title.toLowerCase().includes(query.toLowerCase()) ||
+    item.content.toLowerCase().includes(query.toLowerCase()) ||
+    item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+  );
 
-      if (filteredData.length === 0) {
-        resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
-        return;
-      }
+  if (filteredData.length === 0) {
+    resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
+    return;
+  }
 
-      // 検索結果を表示
-      filteredData.forEach(result => {
-        const div = document.createElement('div');
-        div.classList.add('result-item');
+  // 検索結果を表示
+  filteredData.forEach(result => {
+    const div = document.createElement('div');
+    div.classList.add('result-item');
 
-        div.innerHTML = `
-          <h3><a href="${result.url}" target="_blank">${result.title}</a></h3>
-          <p>${result.content}</p>
-          <p><strong>タグ:</strong> ${result.tags.join(', ')}</p>
-        `;
+    // タグがない場合は「なし」と表示
+    const tags = (result.tags && result.tags.length > 0) ? result.tags.join(', ') : 'なし';
 
-        resultList.appendChild(div);
-      });
-    }
+    div.innerHTML = `
+      <h3><a href="${result.url}" target="_blank">${result.title}</a></h3>
+      <p>${result.content}</p>
+      <p><strong>タグ:</strong> ${tags}</p>
+    `;
+
+    resultList.appendChild(div);
+  });
+}
+
 
     // JSON データを取得（fetchData を呼び出す）
     fetchData();
