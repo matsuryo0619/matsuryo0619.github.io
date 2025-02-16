@@ -4,7 +4,7 @@ async function getProjectInfo() {
     const response = await fetch('myStuff.json');
     const data = await response.json();  // JSONデータを取得
 
-    // dataが配列だと仮定して、各プロジェクトIDを使ってGASのAPIにリクエスト
+    // myStuff.jsonの各アイテムからIDを取得してGAS APIにリクエスト
     for (let i = 0; i < data.length; i++) {
       try {
         const projectId = data[i].id;  // myStuff.jsonからIDを取得
