@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultList = document.getElementById('searchResults');
 
     searchInput.value = searchQuery;
+    document.title = `${searchQuery} - スゴスク!`;
     let data = [];
 
     async function fetchData() {
