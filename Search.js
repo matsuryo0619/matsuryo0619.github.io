@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
               iframe.style.zIndex = '1000';
               
               // マウスの位置に基づいて iframe の位置を設定 (少しだけマウスにかぶる)
-              iframe.style.left = `${mouseX + 10}px`;
-              iframe.style.top = `${mouseY + 10}px`;
+              iframe.style.left = `${mouseX - 10}px`;
+              iframe.style.top = `${mouseY - 10}px`;
 
               document.body.appendChild(iframe);
 
