@@ -95,19 +95,24 @@ document.addEventListener('DOMContentLoaded', function() {
               iframe.style.boxShadow = '2px 2px 8px rgba(0, 0, 0, 0.3)';
               iframe.style.zIndex = '1000';
               
-              // マウスの位置に基づいて iframe の位置を設定 (少しだけマウスにかぶる)
-              iframe.style.left = `${mouseX - 10}px`;
-              iframe.style.top = `${mouseY - 10}px`;
+              // マウスの右下に配置（少し被る）
+              iframe.style.left = `${mouseX + 10}px`;
+              iframe.style.top = `${mouseY + 10}px`;
 
               document.body.appendChild(iframe);
 
-              // マウスが iframe に触れていなければ削除
-              setTimeout(() => {
-                if (!iframe.matches(':hover')) {
+              // マウスが iframe に入ったら削除しない
+              iframe.addEventListener('mouseenter', () => {
+                clearTimeout(previewTimeout);
+              });
+
+              // マウスが iframe から離れたら削除
+              iframe.addEventListener('mouseleave', () => {
+                if (iframe) {
                   iframe.remove();
                   iframe = null;
                 }
-              }, 100);
+              });
             }
           }, 3000);
         });
@@ -115,13 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('mouseleave', function() {
           clearTimeout(previewTimeout);
         });
-      });
-
-      document.addEventListener('mousemove', function(event) {
-        if (iframe && !iframe.matches(':hover')) {
-          iframe.remove();
-          iframe = null;
-        }
       });
     }
 
