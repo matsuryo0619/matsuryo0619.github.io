@@ -25,8 +25,15 @@ ButtonList.forEach((data) => {
   const Button = document.createElement('li');
   Button.classList.add('header_List');
   Button.textContent = data.text;
-  Button.setAttribute('data-src', data.src);
   Button_parent.appendChild(Button);
+
+  Button.addEventListener('click', function() {
+    if (data.src.includes('https://')) {
+      window.location.href = data.src;
+    } else 
+      window.location.href = `https://matsuryo0619.github.io/scratchblog/${data.src}`;
+    }
+  });
 });
 
 //ヘッダーに子要素を追加
