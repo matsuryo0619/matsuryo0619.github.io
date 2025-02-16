@@ -14,6 +14,7 @@
 #header_logo {
   width: 100px;
   transition: transform 0.25s ease;
+  cursor: pointer;
 }
 
 #header_logo:hover {
