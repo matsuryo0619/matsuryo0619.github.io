@@ -45,3 +45,7 @@
 #header_buttonlist li:hover {
   background-color: hsl(260,46%,54%);
 }
+
+#header_margin {
+  height: 62px;
+}
