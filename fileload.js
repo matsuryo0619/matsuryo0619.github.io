@@ -1,5 +1,5 @@
 //ファイル名のみ記述(.cssや.jsは省く)
-const reqcss = ['main'];
+const reqcss = ['main', 'header'];
 const reqjs =[
   {src: 'header', defer: true}
 ]
