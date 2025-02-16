@@ -1,3 +1,5 @@
+// search.js
+
 document.addEventListener('DOMContentLoaded', function() {
   // カスタムイベント 'headerSearchCreated' をリッスン
   window.addEventListener('headerSearchCreated', function(event) {
@@ -8,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 検索バーに `sessionStorage` の値をセット
     searchInput.value = searchQuery;
-    //タイトルを変更
-    document.title = `${searchQuery} - エンジョイ_スクラッチ`;
 
     // データ変数を定義（fetch で JSON を取得するために必要）
     let data = [];
@@ -31,43 +31,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 検索機能
-function search(query) {
-  resultList.innerHTML = ''; // 前回の検索結果をクリア
+    function search(query) {
+      resultList.innerHTML = ''; // 前回の検索結果をクリア
 
-  if (!query.trim()) {
-    resultList.innerHTML = '<p>検索ワードを入力してください</p>';
-    return;
-  }
+      if (!query.trim()) {
+        resultList.innerHTML = '<p>検索ワードを入力してください</p>';
+        return;
+      }
 
-  const filteredData = data.filter(item =>
-    item.title.toLowerCase().includes(query.toLowerCase()) ||
-    item.content.toLowerCase().includes(query.toLowerCase()) ||
-    item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
-  );
+      const filteredData = data.filter(item =>
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.content.toLowerCase().includes(query.toLowerCase()) ||
+        item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+      );
 
-  if (filteredData.length === 0) {
-    resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
-    return;
-  }
+      if (filteredData.length === 0) {
+        resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
+        return;
+      }
 
-  // 検索結果を表示
-  filteredData.forEach(result => {
-    const div = document.createElement('div');
-    div.classList.add('result-item');
+      // 検索結果を表示
+      filteredData.forEach(result => {
+        const div = document.createElement('div');
+        div.classList.add('result-item');
 
-    // タグがない場合は「なし」と表示
-    const tags = (result.tags && result.tags.length > 0) ? result.tags.join(', ') : 'なし';
+        // タグがない場合は「なし」と表示
+        const tags = (result.tags && result.tags.length > 0) 
+          ? result.tags.map(tag => `<a href="#" class="tag-link">${tag}</a>`).join(', ') 
+          : 'なし';
 
-    div.innerHTML = `
-      <h3><a href="${result.url}" target="_blank">${result.title}</a></h3>
-      <p>${result.content}</p>
-      <p><strong>タグ:</strong> ${tags}</p>
-    `;
+        div.innerHTML = `
+          <h3><a href="${result.url}" target="_blank">${result.title}</a></h3>
+          <p>${result.content}</p>
+          <p><strong>タグ:</strong> ${tags}</p>
+        `;
 
-    resultList.appendChild(div);
-  });
-}
+        resultList.appendChild(div);
+      });
 
+      // タグがクリックされたときにそのタグで検索
+      document.querySelectorAll('.tag-link').forEach(tagElement => {
+        tagElement.addEventListener('click', function(event) {
+          event.preventDefault(); // ページ遷移を防ぐ
+          const tag = event.target.textContent;
+          sessionStorage.setItem('searchQuery', tag); // タグを sessionStorage に保存
+          window.location.href = 'Search.html'; // 新しい検索結果ページに遷移
+        });
+      });
+    }
 
     // JSON データを取得（fetchData を呼び出す）
     fetchData();
