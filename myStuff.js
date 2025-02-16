@@ -13,9 +13,10 @@ async function getProjectInfo() {
         if (projectResponse.ok) {
           const projectData = await projectResponse.json();
 
-          // projectDataの中身をログに出力して確認
-          console.log('プロジェクトデータ:', projectData);
+          // プロジェクトデータ全体をログに出力して確認
+          console.log('プロジェクトデータ全体:', projectData);
 
+          // ここで必要なフィールドを取り出して表示
           if (projectData.title) {
             console.log(`プロジェクトID: ${projectId} - タイトル: ${projectData.title}`);
           } else {
