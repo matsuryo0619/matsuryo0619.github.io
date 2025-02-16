@@ -6,7 +6,7 @@
   height: 35px;
   display: flex;
   align-items: center;  /* 垂直方向の中央揃え */
-  justify-content: flex-start;  /* ヘッダー内の要素を左寄せ */
+  justify-content: center;  /* ヘッダー内の要素を中央寄せ */
   background-color: #855CD6;
   padding: 10px 20px;
   z-index: 1000;
@@ -23,24 +23,24 @@
 }
 
 #header_Search {
-  width: 250px;  /* 横幅を250pxに設定 */
-  margin-left: 20px;  /* ロゴと検索ボックスの間に余白 */
+  width: 250px;
+  margin: 0 20px;  /* ロゴとボタンリストの間に余白 */
   border: none;
   height: 30px;
 }
 
 #header_buttonlist {
-  display: flex;  /* 横並びにする */
+  display: flex;
   padding: 0;
   margin: 0;
-  list-style: none;  /* デフォルトのリストスタイルを削除 */
+  list-style: none;
   color: white;
 }
 
 #header_buttonlist li {
-  margin-left: 20px;  /* ボタン間のスペース */
-  cursor: pointer;  /* クリック可能にする */
-  padding: 10px;  /* パディングを追加 */
+  margin: 0 10px;  /* ボタン間のスペースを調整 */
+  cursor: pointer;
+  padding: 10px;
 }
 
 #header_buttonlist li:hover {
