@@ -1,5 +1,5 @@
 //ファイル名のみ記述(.cssや.jsは省く)
-const reqcss = ['main', 'header'];
+const reqcss = ['main', 'header', 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'];
 const reqjs =[
   {src: 'header', defer: true}
 ]
