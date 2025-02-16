@@ -8,9 +8,6 @@
   border-radius: 8px;
   border: 1px solid #000; /* 黒い枠線 */
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* 📄 各検索結果 */
