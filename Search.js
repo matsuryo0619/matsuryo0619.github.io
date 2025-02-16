@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 検索バーに `sessionStorage` の値をセット
     searchInput.value = searchQuery;
+    //タイトルを変更
+    document.title = `${searchQuery} - エンジョイ_スクラッチ`;
 
     // データ変数を定義（fetch で JSON を取得するために必要）
     let data = [];
