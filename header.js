@@ -48,7 +48,8 @@ document.body.appendChild(header);
 //ヘッダー余白
 const margin = document.createElement('p');
 margin.id = 'header_margin';
-document.body.appendChild(margin);
+margin.textContent = 'ヘッダーの余白';
+document.body.insertBefore(margin, document.body.firstChild);
 
 // ヘッダーイベント
 Logo.addEventListener('click', function() {
