@@ -52,6 +52,7 @@ Logo.addEventListener('click', function() {
 
 Search.addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
-    console.log('Enter');
+    const value = Search.value;
+    console.log(value);
   }
 });
