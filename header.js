@@ -30,7 +30,7 @@ ButtonList.forEach((data) => {
   Button.addEventListener('click', function() {
     if (data.src.includes('https://')) {
       window.location.href = data.src;
-    } else 
+    } else {
       window.location.href = `https://matsuryo0619.github.io/scratchblog/${data.src}`;
     }
   });
