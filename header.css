@@ -13,6 +13,7 @@
 
 #header_logo {
   width: 100px;
+  translate: transform 0.5s ease;
 }
 
 #header_logo:hover {
