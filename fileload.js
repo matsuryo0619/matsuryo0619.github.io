@@ -24,5 +24,6 @@ reqjs.forEach((file) => {
 
 //サイトアイコン
 const icon = document.createElement('link');
+icon.rel = 'icon';
 icon.href = 'img/icon.png';
 document.head.appendChild(icon);
