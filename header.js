@@ -15,6 +15,7 @@ Search.placeholder = 'サイト内検索';
 //ボタンの親リスト
 const Button_parent = document.createElement('ul');
 Button_parent.style.listStyle = 'none';
+Button_parent.id = 'header_buttonlist';
 
 const ButtonList = [
   {text: 'ホーム', src: 'Home.html'}
