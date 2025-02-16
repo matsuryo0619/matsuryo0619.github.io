@@ -2,12 +2,12 @@
   {
     "title": "ホーム",
     "content": "エンジョイ_スクラッチのホーム",
-    "tags": ["pages"],
+    "tags": ["Pages"],
     "url": "Home.html"
   }, {
     "title": "私の作品",
     "content": "サイト主が作成したプロジェクト一覧",
-    "tags": ["pages"],
+    "tags": ["Pages"],
     "url": "myStuff.html"
   }, {
     "title": "にゃんこ大戦争 バトルシステム2",
