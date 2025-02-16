@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
         resultList.appendChild(div);
       });
 
-      setupPreviewHover(); // タイトルのホバーイベントを設定
-      setupTagClick(); // タグのクリックイベントを設定
+      setupPreviewHover();
+      setupTagClick();
     }
 
     function setupTagClick() {
@@ -79,22 +79,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
       document.querySelectorAll('.preview-link').forEach(link => {
         link.addEventListener('mouseenter', function(event) {
+          const targetLink = event.target.href;
+          const mouseX = event.pageX;
+          const mouseY = event.pageY;
+
           previewTimeout = setTimeout(() => {
             if (!iframe) {
               iframe = document.createElement('iframe');
-              iframe.src = link.href;
+              iframe.src = targetLink;
               iframe.style.position = 'absolute';
               iframe.style.width = '400px';
               iframe.style.height = '300px';
               iframe.style.border = '1px solid black';
               iframe.style.background = '#fff';
               iframe.style.boxShadow = '2px 2px 8px rgba(0, 0, 0, 0.3)';
-              iframe.style.pointerEvents = 'none'; // クリック不可
-              document.body.appendChild(iframe);
-            }
+              iframe.style.zIndex = '1000';
+              
+              // マウスの位置に基づいて iframe の位置を設定 (少しだけマウスにかぶる)
+              iframe.style.left = `${mouseX + 10}px`;
+              iframe.style.top = `${mouseY + 10}px`;
 
-            // マウスの位置に基づいて iframe の位置を設定
-            document.addEventListener('mousemove', moveIframe);
+              document.body.appendChild(iframe);
+
+              // マウスが iframe に触れていなければ削除
+              setTimeout(() => {
+                if (!iframe.matches(':hover')) {
+                  iframe.remove();
+                  iframe = null;
+                }
+              }, 100);
+            }
           }, 3000);
         });
 
@@ -103,18 +117,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       });
 
-      function moveIframe(event) {
-        if (iframe) {
-          iframe.style.left = `${event.pageX + 10}px`;
-          iframe.style.top = `${event.pageY + 10}px`;
-        }
-      }
-
-      document.addEventListener('mouseleave', function() {
-        if (iframe) {
+      document.addEventListener('mousemove', function(event) {
+        if (iframe && !iframe.matches(':hover')) {
           iframe.remove();
           iframe = null;
-          document.removeEventListener('mousemove', moveIframe);
         }
       });
     }
