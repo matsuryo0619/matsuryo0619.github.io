@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         div.innerHTML = `
           <h3><a href="${result.url}" target="_blank" class="preview-link">${result.title}</a></h3>
           <p>${result.content}</p>
-          <p><strong>タグ:</strong> ${tags}</p>
+          <p><b>タグ:</b> ${tags}</p>
         `;
 
         resultList.appendChild(div);
