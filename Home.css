@@ -1,7 +1,8 @@
 #title {
   align-items: center;
   justify-content: center;
-  font-size: 11vw;
+  font-size: 10vw;
+  text-align: center;
 }
 
 .title_claim {
