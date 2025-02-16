@@ -36,3 +36,8 @@ header.appendChild(Button_parent);
 
 //ヘッダーをHTMLに追加
 document.body.appendChild(header);
+
+//ヘッダーイベント
+Logo.addEventListener('click', function() {
+  window.open('https://scratch.mit.edu');
+});
