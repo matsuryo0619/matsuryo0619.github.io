@@ -5,21 +5,15 @@ async function getProjectInfo() {
 
     for (let i = 0; i < data.length; i++) {
       try {
-        const projectResponse = await fetch(`https://scratch.mit.edu/project/${data[i].id}/`);
+        // Scratch公式APIからプロジェクト情報を取得
+        const projectResponse = await fetch(`https://api.scratch.mit.edu/projects/${data[i].id}/`);
         if (!projectResponse.ok) {
           throw new Error(`HTTP error! status: ${projectResponse.status}`);
         }
-        const html = await projectResponse.text();
+        const projectData = await projectResponse.json();
 
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        if (doc.documentElement.nodeName === "html") {
-            const false_title = doc.title;
-            const title = false_title.slice(0, -11);
-            console.log(`タイトル: ${title}, Site: ${data[i].site}`);
-        } else {
-            console.error(`Error parsing HTML for project ${data[i].id}:`, doc.documentElement);
-        }
+        // タイトルを取得して表示
+        console.log(`タイトル: ${projectData.title}, Site: ${data[i].site}`);
 
       } catch (projectError) {
         console.error(`Error fetching project ${data[i].id}:`, projectError);
