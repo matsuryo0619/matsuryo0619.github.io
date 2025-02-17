@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       projectDiv.innerHTML = `
         <div class="project-header">
-          <h3><a href="${item.site || '#'}" target="_blank" class="preview-link">${item.title}</a></h3>
+          <h3><a href="https://scratch.mit.edu/projects/${item.id}/" target="_blank" class="preview-link">${item.text}</a></h3>
           <span class="user-name">${item.user || '不明'}</span>
         </div>
         <p>${item.content || '説明なし'}</p>
-        <p><b>タグ:</b> ${item.tags ? item.tags.join(', ') : 'なし'}</p>
+        <p><strong>タグ:</strong> ${item.tags ? item.tags.join(', ') : 'なし'}</p>
       `;
 
       resultList.appendChild(projectDiv);
