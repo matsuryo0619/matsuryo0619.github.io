@@ -46,6 +46,12 @@ header.appendChild(Button_parent);
 // ヘッダーをHTMLに追加
 document.body.appendChild(header);
 
+//P要素を追加
+const header_margin = document.createElement('p');
+header_margin.textContent = 'ヘッダー間隔';
+header_margin.id = 'header_margin';
+document.body.prepend(header_margin);
+
 // ヘッダーイベント
 Logo.addEventListener('click', function () {
   window.open('https://scratch.mit.edu');
