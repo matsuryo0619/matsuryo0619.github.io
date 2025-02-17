@@ -23,13 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
     data.forEach(item => {
       const projectDiv = document.createElement('div');
       projectDiv.classList.add('projectList');
+      projectDiv.innerHTML = `
+        <h3><a href='${item.site}'
 
-      const link = document.createElement('a');
-      link.textContent = item.title;
-      link.href = item.site || '#'; // siteが空ならリンクなし
-      link.target = '_blank';
-
-      projectDiv.appendChild(link);
       resultList.appendChild(projectDiv);
     });
   }
