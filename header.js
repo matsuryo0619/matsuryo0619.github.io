@@ -54,7 +54,7 @@ document.body.prepend(header_margin);
 
 // ヘッダーイベント
 Logo.addEventListener('click', function () {
-  window.open('https://scratch.mit.edu');
+  window.location.href = 'Home.html';
 });
 
 // 検索バーにEnterが押された時の処理
