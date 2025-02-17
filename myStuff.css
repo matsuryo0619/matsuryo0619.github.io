@@ -1,3 +1,4 @@
+/* 📂 プロジェクト一覧全体 */
 #projects {
   margin-top: 20px;
   padding: 10px;
@@ -9,6 +10,7 @@
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
 }
 
+/* 📄 各検索結果 */
 .projectList {
   padding: 15px;
   margin-bottom: 10px;
@@ -19,7 +21,46 @@
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
+/* ホバー時のエフェクト */
 .projectList:hover {
-  transform: translateY(-3px);
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px); /* 少し上に浮かせる */
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3); /* 影を強調 */
+}
+
+/* 🏷️ タイトル（リンク）のスタイル */
+.projectList h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.projectList h3 a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.projectList h3 a:hover {
+  color: #0056b3;
+}
+
+/* 👤 ユーザー名のスタイル */
+.user-name {
+  font-size: 14px;
+  color: #555;
+  background: #eee;
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+
+/* 📜 コンテンツの説明 */
+.projectList p {
+  font-size: 14px;
+  color: #444; /* ちょっと濃いめのグレー */
+  margin: 5px 0;
+}
+
+/* 🏷️ タグのスタイル */
+.projectList p strong {
+  font-weight: bold;
+  color: #222; /* さらに濃いグレー */
 }
