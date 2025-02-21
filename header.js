@@ -5,7 +5,7 @@ header.id = 'header';
 // ヘッダーの子要素を作成
 const Logo = document.createElement('img');
 Logo.id = 'header_logo';
-Logo.src = 'img/Logo.png';
+Logo.src = 'https://matsuryo0619.github.io/scratchblog/img/Logo.png';
 
 const Search = document.createElement('input');
 Search.type = 'text';
