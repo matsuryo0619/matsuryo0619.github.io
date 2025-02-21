@@ -1,7 +1,7 @@
 [
   {
     "title": "ホーム",
-    "content": "エンジョイ_スクラッチのホーム",
+    "content": "スゴスク!のホーム",
     "tags": ["Pages"],
     "url": "Home.html"
   }, {
@@ -13,6 +13,6 @@
     "title": "にゃんこ大戦争 バトルシステム2",
     "content": "にゃんこ大戦争 バトルシステム2 について",
     "tags": ["プロジェクト", "にゃんこ大戦争", "主", "作品"],
-    "url": "myStuff.html"
+    "url": "article/article.html"
   }
 ]
