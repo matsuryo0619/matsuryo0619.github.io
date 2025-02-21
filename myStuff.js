@@ -28,17 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
           <h3><a href="https://scratch.mit.edu/projects/${item.id}/" target="_blank" class="preview-link">${item.text}</a></h3>
           <span class="user-name" data-user="${item.user || '不明'}">${item.user || '不明'}</span>
         </div>
-        <p>${item.content || '説明なし'}</p>
+        <p class="project-content">${item.content || '説明なし'}</p>
         <p><strong>タグ:</strong> ${item.tags ? item.tags.join(', ') : 'なし'}</p>
       `;
 
       resultList.appendChild(projectDiv);
     });
-    //ユーザーネームクリックイベント
+
+    // 🔹 ユーザーネームをクリックすると、新しいタブでScratchのプロフィールページを開く
     document.querySelectorAll('.user-name').forEach(userElement => {
       userElement.addEventListener('click', function() {
         const userName = this.getAttribute('data-user');
-        window.open(`https://scratch.mit.edu/users/${userName}/`);
+        if (userName !== '不明') {
+          window.open(`https://scratch.mit.edu/users/${userName}/`, '_blank');
+        }
       });
     });
   }
