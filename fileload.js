@@ -8,14 +8,14 @@ const reqjs =[
 reqcss.forEach((word) => {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = `${word}.css`;
+  link.href = `https://matsuryo0619.github.io/scratchblog/${word}.css`;
   document.head.appendChild(link);
 });
 
 //JSを読み込む
 reqjs.forEach((file) => {
   const script = document.createElement('script');
-  script.src = `${file.src}.js`;
+  script.src = `https://matsuryo0619.github.io/scratchblog/${file.src}.js`;
   if (file.defer) {
     script.defer = true;
   }
@@ -25,5 +25,5 @@ reqjs.forEach((file) => {
 //サイトアイコン
 const icon = document.createElement('link');
 icon.rel = 'icon';
-icon.href = 'img/icon.png';
+icon.href = 'https://matsuryo0619.github.io/scratchblog/img/icon.png';
 document.head.appendChild(icon);
