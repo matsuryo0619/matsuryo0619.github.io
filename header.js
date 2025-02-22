@@ -63,7 +63,7 @@ Search.addEventListener('keydown', function (event) {
     const value = Search.value;
     if (value.trim().length > 0) {
       sessionStorage.setItem('searchQuery', value);  // 検索ワードを sessionStorage に保存
-      window.location.href = 'Search.html';  // Search.html に遷移
+      window.location.href = 'https://matsuryo0619.github.io/scratchblog/Search.html';  // Search.html に遷移
     }
   }
 });
