@@ -14,11 +14,18 @@ document.addEventListener('DOMContentLoaded', function() {
       const pagekey = `art${sitedata}`
       //取得したキーに対応するページを表示
       const pageData = pagesData.pages[pagekey];
+      const container = document.createElement('div');
 
+      const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>");
+      container.id = 'content';
       if(pageData) {
-
+        container.innerHTML = `
+          <h1>${pageData.title}</h1>
+          <p>${pageData.data}</p>
+          <div>${formattedContent}</div>
+        `
       } else {
-
+        container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
       }
     })
     .catch(error => console.error('YAML読み込みエラー', error));
