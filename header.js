@@ -6,7 +6,8 @@ header.id = 'header';
 const Logo = document.createElement('img');
 Logo.id = 'header_logo';
 Logo.src = 'https://matsuryo0619.github.io/scratchblog/img/Logo.png';
-
+//サイト内検索
+const SearchDIV = document.createElement('div');
 const Search = document.createElement('input');
 Search.type = 'text';
 Search.id = 'header_Search';
