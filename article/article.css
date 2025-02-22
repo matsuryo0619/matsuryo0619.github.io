@@ -1,0 +1,51 @@
+/* 🌟 ページ全体のデザイン */
+body {
+  background-color: #f4f4f4;
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* 🌟 記事コンテンツ（中央寄せ） */
+#content {
+  max-width: 800px;
+  margin: 40px auto; /* 横中央寄せ */
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* 🌟 記事タイトル */
+#content h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* 🌟 記事の日付 */
+#content p.date {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* 🌟 記事の本文 */
+#content div {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  text-align: left;
+}
+
+/* 🌟 記事内のリンク */
+#content a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#content a:hover {
+  text-decoration: underline;
+}
