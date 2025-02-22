@@ -1,16 +1,35 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // メニューを作成
-  function createMenu() {
-    const menu = document.createElement('nav');
+  // メニューを作成（目次用）
+  function createMenu(pagesData) {
+    const menu = document.createElement('div');
     menu.id = 'menu';
-    menu.innerHTML = `
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="about.html">このサイトについて</a></li>
-        <li><a href="blog.html">ブログ一覧</a></li>
-      </ul>
-    `;
-    document.body.prepend(menu);
+
+    // メニュー用コンテンツ（div内にpタグでタイトルを追加）
+    const sections = pagesData.pages;
+    let menuHTML = '';
+    
+    Object.keys(sections).forEach((key) => {
+      const page = sections[key];
+      
+      // ページデータ内で.id属性がある.titleクラスを持つ要素を探して、pタグに追加
+      const titleElements = page.content.match(/<p[^>]*class=["'][^"']*title[^"']*["'][^>]*id=["'][^"']*["'][^>]*>.*?<\/p>/g);
+
+      if (titleElements) {
+        // その要素ごとに、メニューを追加する
+        titleElements.forEach((element, index) => {
+          // <p>要素からテキストを取り出して表示
+          const textContent = element.replace(/<.*?>/g, ''); // タグを除去したテキストを取得
+          menuHTML += `
+            <div class="menu-item">
+              <p class="title" id="${key}-${index}">${textContent}</p>
+            </div>
+          `;
+        });
+      }
+    });
+
+    menu.innerHTML = menuHTML;
+    document.body.appendChild(menu);
   }
 
   // URLからdataを取得
@@ -40,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         container.innerHTML = `
           <h1>${pageData.title}</h1>
           <p class="date">${pageData.data}</p>
-          <pre>${formattedContent}</pre>
+          <div id="${pagekey}">${formattedContent}</div>
         `;
 
       } else {
@@ -48,9 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       document.body.appendChild(container);
+      
+      // 目次を作成
+      createMenu(pagesData);
     })
     .catch(error => console.error('YAML読み込みエラー', error));
-
-  // メニューを作成
-  createMenu();
 });
