@@ -54,7 +54,7 @@ document.body.prepend(header_margin);
 
 // ヘッダーイベント
 Logo.addEventListener('click', function () {
-  window.location.href = 'Home.html';
+  window.location.href = 'https://matsuryo0619.github.io/scratchblog/Home.html';
 });
 
 // 検索バーにEnterが押された時の処理
