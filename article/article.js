@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
       }
+      document.appendChild(container);
     })
     .catch(error => console.error('YAML読み込みエラー', error));
 });
