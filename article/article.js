@@ -19,19 +19,42 @@ document.addEventListener('DOMContentLoaded', function() {
       // メニュー（目次）の作成
       const menu = document.createElement('div');
       menu.id = 'menu';
-      
+
+      // ページ内スクロール用メニュー
+      const menuList = document.createElement('div');
+      menuList.classList.add('menu-list');
+
       // Object.keysでページのキーを取得してループ
       Object.keys(pagesData.pages).forEach((key) => {
         const page = pagesData.pages[key];
         if (page.title) {
-          const menuItem = document.createElement('p');
-          menuItem.classList.add('menu-item');
-          menuItem.innerHTML = `<a href="?data=${key}">${page.title}</a>`;
-          menu.appendChild(menuItem);
+          // ページ内でIDを持っている要素を選別して、目次として追加
+          const sections = page.content.match(/<(\w+)\s+id="([^"]+)">/g); // id属性を持つタグを抽出
+          if (sections) {
+            sections.forEach((section) => {
+              const idMatch = section.match(/id="([^"]+)"/);
+              const id = idMatch ? idMatch[1] : '';
+
+              const menuItem = document.createElement('p');
+              menuItem.classList.add('menu-item');
+              menuItem.innerHTML = `<a href="#${id}">${id}</a>`;  // IDに基づいてリンクを生成
+              
+              // クリックイベントでスクロール
+              menuItem.addEventListener("click", () => {
+                const item = document.getElementById(id);
+                if (item) {
+                  item.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              });
+
+              menuList.appendChild(menuItem);
+            });
+          }
         }
       });
-      
+
       // メニューをページに追加
+      menu.appendChild(menuList);
       document.body.appendChild(menu);
 
       if (pageData) {
@@ -47,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
       }
+
       document.body.appendChild(container);
     })
     .catch(error => console.error('YAML読み込みエラー', error));
