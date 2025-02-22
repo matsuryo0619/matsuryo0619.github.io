@@ -1,51 +1,71 @@
-/* 🌟 ページ全体のデザイン */
-body {
-  background-color: #f4f4f4;
-  font-family: 'Nunito', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* 🌟 記事コンテンツ（中央寄せ） */
-#content {
-  max-width: 800px;
-  margin: 40px auto; /* 横中央寄せ */
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+/* メニューのスタイル */
+#menu {
+  width: 100%;
+  background: #333;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   text-align: center;
 }
 
-/* 🌟 記事タイトル */
-#content h1 {
-  font-size: 28px;
+#menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+#menu ul li a {
+  color: white;
+  text-decoration: none;
   font-weight: bold;
-  color: #333;
+}
+
+#menu ul li a:hover {
+  text-decoration: underline;
+}
+
+/* コンテンツ全体のスタイル */
+body {
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  margin: 60px 0 20px; /* メニューの固定表示対策 */
+}
+
+/* 記事コンテンツ */
+#content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 記事タイトル */
+#content h1 {
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
-/* 🌟 記事の日付 */
-#content p.date {
+/* 記事の日付 */
+.date {
   font-size: 14px;
-  color: #777;
-  margin-bottom: 20px;
+  color: gray;
 }
 
-/* 🌟 記事の本文 */
-#content div {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #444;
+/* 記事の本文 */
+pre {
   text-align: left;
-}
-
-/* 🌟 記事内のリンク */
-#content a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-#content a:hover {
-  text-decoration: underline;
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
