@@ -1,29 +1,49 @@
-//ファイル名のみ記述(.cssや.jsは省く)
-const reqcss = ['main', 'header', 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'];
-const reqjs =[
-  {src: 'header', defer: true}
-]
+// CSSファイルと外部リンクのリスト
+const reqcss = [
+  'main', 
+  'header', 
+  'https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'
+];
 
-//CSSを読み込む
+// JSファイルのリスト
+const reqjs = [
+  {src: 'header', defer: true}
+];
+
+// CSSを読み込む
 reqcss.forEach((word) => {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = `https://matsuryo0619.github.io/scratchblog/${word}.css`;
+
+  // URLがフルパスで指定されているか、相対パスで指定されているかを判別
+  if (word.startsWith('http')) {
+    link.href = word;
+  } else {
+    link.href = `https://matsuryo0619.github.io/scratchblog/${word}.css`;
+  }
+  
   document.head.appendChild(link);
 });
 
-//JSを読み込む
+// JSを読み込む
 reqjs.forEach((file) => {
   const script = document.createElement('script');
-  script.src = `https://matsuryo0619.github.io/scratchblog/${file.src}.js`;
+  
+  // JSファイルのパスを設定
+  if (file.src.startsWith('http')) {
+    script.src = file.src;
+  } else {
+    script.src = `https://matsuryo0619.github.io/scratchblog/${file.src}.js`;
+  }
+
   if (file.defer) {
     script.defer = true;
   }
   document.head.appendChild(script);
 });
 
-//サイトアイコン
+// サイトアイコンを設定
 const icon = document.createElement('link');
 icon.rel = 'icon';
-icon.href = 'https://matsuryo0619.github.io/scratchblog/img/icon.png';
+icon.href = 'https://matsuryo0619.github.io/scratchblog/img/icon.png'; // アイコンのURLを設定
 document.head.appendChild(icon);
