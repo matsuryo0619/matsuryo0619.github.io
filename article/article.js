@@ -9,26 +9,32 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(yamlData => {
       // YAMLをJavaScriptオブジェクトへ変換
       const pagesData = jsyaml.load(yamlData);
+      
       // 動的にキーを作成
       const pagekey = `art${sitedata}`;
       // ページデータを取得
       const pageData = pagesData.pages[pagekey];
       const container = document.createElement('div');
 
-      if (pageData) {
-        // メニュー（目次）の作成
-        const menu = document.createElement('div');
-        menu.id = 'menu';
-        pagesData.pages.forEach((page, index) => {
-          if (page.title) {
-            const menuItem = document.createElement('p');
-            menuItem.classList.add('menu-item');
-            menuItem.innerHTML = `<a href="?data=${index}">${page.title}</a>`;
-            menu.appendChild(menuItem);
-          }
-        });
-        document.body.appendChild(menu);
+      // メニュー（目次）の作成
+      const menu = document.createElement('div');
+      menu.id = 'menu';
+      
+      // Object.keysでページのキーを取得してループ
+      Object.keys(pagesData.pages).forEach((key) => {
+        const page = pagesData.pages[key];
+        if (page.title) {
+          const menuItem = document.createElement('p');
+          menuItem.classList.add('menu-item');
+          menuItem.innerHTML = `<a href="?data=${key}">${page.title}</a>`;
+          menu.appendChild(menuItem);
+        }
+      });
+      
+      // メニューをページに追加
+      document.body.appendChild(menu);
 
+      if (pageData) {
         // 記事内容の整形と表示
         const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>"); // <h3 t> → <h3>
 
