@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // メニューを作成
+  function createMenu() {
+    const menu = document.createElement('nav');
+    menu.id = 'menu';
+    menu.innerHTML = `
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="about.html">このサイトについて</a></li>
+        <li><a href="blog.html">ブログ一覧</a></li>
+      </ul>
+    `;
+    document.body.prepend(menu);
+  }
+
   // URLからdataを取得
   const urlParams = new URLSearchParams(window.location.search);
   const sitedata = urlParams.get('data');
@@ -16,10 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (pageData) {
         // 🔥 `<タグ t>` の `t>` を `>` に変換
         let formattedContent = pageData.content.replace(/<(\w+)\s*t>/g, "<$1>");
-
         // 🔥 `<tタグ>` を `<タグ>` に変換
         formattedContent = formattedContent.replace(/<t(\w+)>/g, "<$1>");
-
         // 🔥 **HTMLタグをエスケープして「そのまま表示」**
         formattedContent = formattedContent.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -38,4 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
       document.body.appendChild(container);
     })
     .catch(error => console.error('YAML読み込みエラー', error));
+
+  // メニューを作成
+  createMenu();
 });
