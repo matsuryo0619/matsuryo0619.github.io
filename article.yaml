@@ -3,4 +3,4 @@ pages:
     title: "2D RPG風ゲーム 1"
     data: "2025-2-22"
     content: |
-      <h3 class='title' id='savecode' t>セーブコード</h3　t>
+      <h3 class='menu' id='savecode' t>セーブコード</h3　t>
