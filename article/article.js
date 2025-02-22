@@ -19,38 +19,31 @@ document.addEventListener('DOMContentLoaded', function() {
       // メニュー（目次）の作成
       const menu = document.createElement('div');
       menu.id = 'menu';
+      menu.classList.add('menu');
 
-      // ページ内スクロール用メニュー
+      // ページ内でクラスが"menu"かつIDを持つ要素を探す
+      const sections = document.querySelectorAll('.menu[id]');
       const menuList = document.createElement('div');
       menuList.classList.add('menu-list');
 
-      // Object.keysでページのキーを取得してループ
-      Object.keys(pagesData.pages).forEach((key) => {
-        const page = pagesData.pages[key];
-        if (page.title) {
-          // ページ内でIDを持っている要素を選別して、目次として追加
-          const sections = page.content.match(/<(\w+)\s+id="([^"]+)">/g); // id属性を持つタグを抽出
-          if (sections) {
-            sections.forEach((section) => {
-              const idMatch = section.match(/id="([^"]+)"/);
-              const id = idMatch ? idMatch[1] : '';
+      // それぞれのIDを持つ要素を目次に追加
+      sections.forEach((section) => {
+        const id = section.id;
+        const title = section.textContent || section.innerText;  // タイトルを取得
 
-              const menuItem = document.createElement('p');
-              menuItem.classList.add('menu-item');
-              menuItem.innerHTML = `<a href="#${id}">${id}</a>`;  // IDに基づいてリンクを生成
-              
-              // クリックイベントでスクロール
-              menuItem.addEventListener("click", () => {
-                const item = document.getElementById(id);
-                if (item) {
-                  item.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-              });
-
-              menuList.appendChild(menuItem);
-            });
+        const menuItem = document.createElement('p');
+        menuItem.classList.add('menu-item');
+        menuItem.innerHTML = `<a href="#${id}">${title}</a>`;  // IDに基づいてリンクを生成
+        
+        // クリックイベントでスクロール
+        menuItem.addEventListener("click", () => {
+          const item = document.getElementById(id);
+          if (item) {
+            item.scrollIntoView({ behavior: "smooth", block: "start" });
           }
-        }
+        });
+
+        menuList.appendChild(menuItem);
       });
 
       // メニューをページに追加
