@@ -62,3 +62,8 @@
 #header_Search::placeholder {
   color: #e6e6e6;
 }
+
+#header_SearchBtn {
+  padding: 10px;
+  cursor: pointer;
+}
