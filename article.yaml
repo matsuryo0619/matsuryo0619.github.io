@@ -4,3 +4,31 @@ pages:
     data: "2025-2-22"
     content: |
       <h3 class='menu' id='savecode' t>セーブコード</h3　t>
+      <input type='text' id='Savecode_input' t>
+      <div id='Player_progress' t></div t>
+    action: |
+      document.addEventListener('DOMContentLoaded', function() {
+        const Savecode_input = document.getElementById('Savecode_input');
+
+        // イベントリスナーを正しく設定
+        Savecode_input.addEventListener('input', Change_Savecode);
+
+        function Change_Savecode() {
+          const Savecode = Savecode_input.value;
+          const SaveData = Savecode.split(':');
+
+          // もし最低限のデータがなかったら処理しない
+          if (SaveData.length < 1) return;
+
+          const PlayerData = {
+              name: SaveData[0] || "名無し", // 名前が空なら「名無し」
+              level: Number(SaveData[1]) || 1, // 数値変換（空なら1）
+              hp: Number(SaveData[2]) || 100, // HP（空なら100）
+              mp: Number(SaveData[3]) || 50, // MP（空なら50）
+              gold: Number(SaveData[4]) || 0, // お金（空なら0）
+              items: SaveData.slice(5) // アイテムは配列で格納
+          };
+
+          console.log(PlayerData); // デバッグ用
+    }
+});
