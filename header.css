@@ -27,6 +27,8 @@
   margin: 0 20px;  /* ロゴとボタンリストの間に余白 */
   border: none;
   height: 30px;
+  background-color: #00000000;
+  color: white;
 }
 
 #header_buttonlist {
@@ -49,4 +51,14 @@
 
 #header_margin {
   height: 40px;
+}
+
+#SearchBOX {
+  background-color: #6c4bad;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#header_Search::placeholder {
+  color: #e6e6e6;
 }
