@@ -81,6 +81,15 @@ Search.addEventListener('keydown', function (event) {
   }
 });
 
+//検索ボタンが押されたときの処理
+SearchBtn.addEventListener('click', function() {
+  const value = Search.value;
+  if (value.trim().length > 0) {
+    sessionStorage.setItem('searchQuery', value);
+    window.location.href = 'https://matsuryo0619.github.io/scratchblog/Search.html';
+  }
+});
+
 // 検索バーが作成された後にカスタムイベントを発火
 const event = new CustomEvent('headerSearchCreated', {
   detail: { searchInput: Search }  // `searchInput` 要素をイベントの詳細として渡す
