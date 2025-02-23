@@ -23,8 +23,8 @@ SearchBtn.classList.add('fa-solid');
 SearchBtn.classList.add('fa-magnifying-glass');
 SearchBtn.id = 'header_SearchBtn';
 
-SearchDIV.appendChild(Search);
-SearchDIV.appendChild(SearchBtn)
+SearchDIV.appendChild(SearchBtn);
+SearchDIV.appendChild(Search)
 
 // ボタンの親リスト
 const Button_parent = document.createElement('ul');
