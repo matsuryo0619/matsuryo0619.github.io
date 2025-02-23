@@ -10,7 +10,7 @@ pages:
       document.addEventListener('DOMContentLoaded', function() {
         const Savecode_input = document.getElementById('Savecode_input');
 
-        // イベントリスナーを正しく設定
+        // 入力イベントリスナーを正しく設定
         Savecode_input.addEventListener('input', Change_Savecode);
 
         function Change_Savecode() {
@@ -29,6 +29,7 @@ pages:
               items: SaveData.slice(5) // アイテムは配列で格納
           };
 
+          // PlayerData をコンソールに表示
           console.log(PlayerData); // デバッグ用
         }
       });
