@@ -21,6 +21,7 @@ Search.autocomplete = 'off';
 const SearchBtn = document.createElement('i');
 SearchBtn.classList.add('fa-solid');
 SearchBtn.classList.add('fa-magnifying-glass');
+SearchBtn.id = 'header_SearchBtn';
 
 SearchDIV.appendChild(Search);
 SearchDIV.appendChild(SearchBtn)
