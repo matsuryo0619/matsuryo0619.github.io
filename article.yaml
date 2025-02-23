@@ -3,9 +3,9 @@ pages:
     title: "2D RPG風ゲーム 1"
     data: "2025-2-22"
     content: |
-      <h3 class='menu' id='savecode' t>セーブコード</h3　t>
+      <h3 class='menu' id='savecode' t>セーブコード</h3>
       <input type='text' id='Savecode_input' t>
-      <div id='Player_progress' t></div t>
+      <div id='Player_progress' t></div>
     action: |
       document.addEventListener('DOMContentLoaded', function() {
         const Savecode_input = document.getElementById('Savecode_input');
@@ -30,5 +30,5 @@ pages:
           };
 
           console.log(PlayerData); // デバッグ用
-    }
-});
+        }
+      });
