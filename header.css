@@ -16,6 +16,7 @@
   width: 80px;
   transition: transform 0.25s ease;
   cursor: pointer;
+  padding: 5px;
 }
 
 #header_logo:hover {
