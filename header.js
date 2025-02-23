@@ -75,8 +75,7 @@ Search.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     const value = Search.value;
     if (value.trim().length > 0) {
-      sessionStorage.setItem('searchQuery', value);  // 検索ワードを sessionStorage に保存
-      window.location.href = 'https://matsuryo0619.github.io/scratchblog/Search.html';  // Search.html に遷移
+      window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${value}`;  // Search.html に遷移
     }
   }
 });
@@ -85,8 +84,7 @@ Search.addEventListener('keydown', function (event) {
 SearchBtn.addEventListener('click', function() {
   const value = Search.value;
   if (value.trim().length > 0) {
-    sessionStorage.setItem('searchQuery', value);
-    window.location.href = 'https://matsuryo0619.github.io/scratchblog/Search.html';
+    window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${value}`;
   }
 });
 
