@@ -9,6 +9,9 @@ pages:
     action: |
       const Savecode_input = document.getElementById('Savecode_input');
 
+      // 初回ロードフラグ
+      let isFirstLoad = !localStorage.getItem('rpg1_userdata');
+
       // イベントリスナーを正しく設定
       Savecode_input.addEventListener('input', function() {
         Change_progress();
@@ -17,7 +20,22 @@ pages:
 
       function Change_progress() {
         // localStorageからデータを取得、なければinputから取得
-        const Savecode = localStorage.getItem('rpg1_userdata') || Savecode_input.value;
+        let Savecode = localStorage.getItem('rpg1_userdata') || Savecode_input.value;
+
+        // 初回ロード時、アイテムを保存する処理を行う
+        if (isFirstLoad && Savecode) {
+          const SaveData = Savecode.split(':');
+          if (SaveData.length < 1) return;
+
+          // アイテムが保存されていなければ、デフォルトのアイテムをセット
+          if (SaveData.length <= 5) {
+            Savecode = `${SaveData[0]}:${SaveData[1]}:${SaveData[2]}:${SaveData[3]}:${SaveData[4]}:アイテム1`; // デフォルトアイテムを追加
+            localStorage.setItem('rpg1_userdata', Savecode); // 更新されたSavecodeをlocalStorageに保存
+          }
+
+          // 初回ロードフラグをfalseに変更
+          isFirstLoad = false;
+        }
 
         // Savecodeを分割してPlayerDataを生成
         const SaveData = Savecode.split(':');
@@ -40,6 +58,7 @@ pages:
           <p class='progress'>現在HP: ${PlayerData.hp}</p>
           <p class='progress'>現在MP: ${PlayerData.mp}</p>
           <p class='progress'>所持金: ${PlayerData.gold}</p>
+          <p class='progress'>アイテム: ${PlayerData.items.join(', ')}</p>
         `;
       }
 
