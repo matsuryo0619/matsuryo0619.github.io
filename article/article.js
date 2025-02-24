@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (pageData.action) {
           addScriptToHead(pageData.action);
         }
+        //スタイルをheadに追加
+        if (pageData.style) {
+          addStyleToHead(pageData.style);
+        }
       } else {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
         document.body.appendChild(container);
@@ -46,5 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
     scriptElement.type = 'text/javascript';
     scriptElement.textContent = scriptContent;
     document.head.appendChild(scriptElement);
+  }
+
+  function addStyleToHead(styleContent) {
+    const StyleElement = document.createElement('style');
+    StyleElement.rel = 'stylesheet'
+    StyleElement.type = 'text/css';
+    StyleElement.textContent = styleContent;
+    document.head.appendChild(StyleElement);
   }
 });
