@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function addStyleToHead(styleContent) {
     const StyleElement = document.createElement('style');
-    StyleElement.rel = 'stylesheet'
     StyleElement.type = 'text/css';
     StyleElement.textContent = styleContent;
     document.head.appendChild(StyleElement);
