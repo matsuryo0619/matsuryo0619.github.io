@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(yamlData => {
       // YAMLをJavaScriptオブジェクトへ変換
       const pagesData = jsyaml.load(yamlData);
-      
+
       // 動的にキーを作成
       const pagekey = `art${sitedata}`;
       // ページデータを取得
@@ -26,22 +26,25 @@ document.addEventListener('DOMContentLoaded', function() {
           <p class="date">${pageData.data}</p>
           <div>${formattedContent}</div>
         `;
+
+        document.body.appendChild(container);
+
+        // 🛠 actionスクリプトをheadに追加
+        if (pageData.action) {
+          addScriptToHead(pageData.action);
+        }
       } else {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
-      }
-
-      document.body.appendChild(container);
-
-      // action 部分のJavaScriptを実行する
-      const actionCode = pageData.action;
-      if (actionCode) {
-        try {
-          // YAMLから取得したJavaScriptコードを評価して実行
-          eval(actionCode);
-        } catch (error) {
-          console.error('Actionコードの実行中にエラーが発生しました:', error);
-        }
+        document.body.appendChild(container);
       }
     })
     .catch(error => console.error('YAML読み込みエラー', error));
+
+  // 🛠 actionスクリプトを<head>に追加する関数
+  function addScriptToHead(scriptContent) {
+    const scriptElement = document.createElement('script');
+    scriptElement.type = 'text/javascript';
+    scriptElement.textContent = scriptContent;
+    document.head.appendChild(scriptElement);
+  }
 });
