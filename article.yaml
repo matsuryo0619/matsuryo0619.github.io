@@ -31,6 +31,6 @@ pages:
           <p class='progress'>レベル: ${PlayerData.level}</p>
           <p class='progress'>現在HP: ${PlayerData.hp}</p>
           <p class='progress'>現在MP: ${PlayerData.mp}</p>
-          <p class='progres'>所持金: ${PlayerData.gold}</p>
+          <p class='progress'>所持金: ${PlayerData.gold}</p>
         `
       });
