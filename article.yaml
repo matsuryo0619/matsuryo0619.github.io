@@ -9,6 +9,10 @@ pages:
     action: |
       const Savecode_input = document.getElementById('Savecode_input');
 
+      if (localStorage.getItem('rpg1_userdata')) {
+        Savecode_input.value = localStorage.getItem('rpg1_userdata');
+      }
+
       // 初回ロードフラグ
       let isFirstLoad = !localStorage.getItem('rpg1_userdata');
 
