@@ -55,16 +55,24 @@ pages:
           items: SaveData.slice(6) // アイテムは配列で格納
         };
 
+        // アイテムを「名前 × 数量」の形で表示
+        let itemText = PlayerData.items
+          .map(item => {
+            const [name, count] = item.split(',');
+            return `${name} × ${count || 1}`; // 数量がない場合は1
+          })
+          .join('<br>'); // 改行を追加
+
         // プレイヤーの進行状況を表示
         const Player_progress = document.getElementById('Player_progress');
         Player_progress.innerHTML = `
           <p class='progress'>名前: ${PlayerData.name}</p>
           <p class='progress'>レベル: ${PlayerData.level}</p>
-          <p clasS='progress'>残り経験値: ${PlayerData.RemaEXP}</p>
+          <p class='progress'>残り経験値: ${PlayerData.RemaEXP}</p>
           <p class='progress'>現在HP: ${PlayerData.hp}</p>
           <p class='progress'>現在MP: ${PlayerData.mp}</p>
           <p class='progress'>所持金: ${PlayerData.gold}</p>
-          <p class='progress'>アイテム: ${PlayerData.items.join(', ')}</p>
+          <p class='progress'>アイテム:<br>${itemText}</p>
         `;
       }
 
@@ -76,3 +84,4 @@ pages:
 
       // 初回ロード時にも進行状況を更新
       Change_progress();
+
