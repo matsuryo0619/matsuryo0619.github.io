@@ -48,10 +48,11 @@ pages:
         const PlayerData = {
           name: SaveData[0] || "名無し", // 名前が空なら「名無し」
           level: Number(SaveData[1]) || 1, // 数値変換（空なら1）
-          hp: Number(SaveData[2]) || 100, // HP（空なら100）
-          mp: Number(SaveData[3]) || 50, // MP（空なら50）
-          gold: Number(SaveData[4]) || 0, // お金（空なら0）
-          items: SaveData.slice(5) // アイテムは配列で格納
+          RemaEXP: Number(SaveData[2]) || 0,
+          hp: Number(SaveData[3]) || 100, // HP（空なら100）
+          mp: Number(SaveData[4]) || 50, // MP（空なら50）
+          gold: Number(SaveData[5]) || 0, // お金（空なら0）
+          items: SaveData.slice(6) // アイテムは配列で格納
         };
 
         // プレイヤーの進行状況を表示
@@ -59,6 +60,7 @@ pages:
         Player_progress.innerHTML = `
           <p class='progress'>名前: ${PlayerData.name}</p>
           <p class='progress'>レベル: ${PlayerData.level}</p>
+          <p clasS='progress'>残り経験値: ${PlayerData.RemaEXP}</p>
           <p class='progress'>現在HP: ${PlayerData.hp}</p>
           <p class='progress'>現在MP: ${PlayerData.mp}</p>
           <p class='progress'>所持金: ${PlayerData.gold}</p>
