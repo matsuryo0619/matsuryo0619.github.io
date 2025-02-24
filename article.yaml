@@ -12,31 +12,42 @@ pages:
       // イベントリスナーを正しく設定
       Savecode_input.addEventListener('input', function() {
         Change_progress();
+        UpdateSavecode();
       });
 
       function Change_progress() {
-          const Savecode = Savecode_input.value;
+        // localStorageからデータを取得、なければinputから取得
+        const Savecode = localStorage.getItem('rpg1_userdata') || Savecode_input.value;
 
-          const SaveData = Savecode.split(':');
-          if (SaveData.length < 1) return;
+        // Savecodeを分割してPlayerDataを生成
+        const SaveData = Savecode.split(':');
+        if (SaveData.length < 1) return;
 
-          const PlayerData = {
-            name: SaveData[0] || "名無し", // 名前が空なら「名無し」
-            level: Number(SaveData[1]) || 1, // 数値変換（空なら1）
-            hp: Number(SaveData[2]) || 100, // HP（空なら100）
-            mp: Number(SaveData[3]) || 50, // MP（空なら50）
-            gold: Number(SaveData[4]) || 0, // お金（空なら0）
-            items: SaveData.slice(5) // アイテムは配列で格納
-          };
+        const PlayerData = {
+          name: SaveData[0] || "名無し", // 名前が空なら「名無し」
+          level: Number(SaveData[1]) || 1, // 数値変換（空なら1）
+          hp: Number(SaveData[2]) || 100, // HP（空なら100）
+          mp: Number(SaveData[3]) || 50, // MP（空なら50）
+          gold: Number(SaveData[4]) || 0, // お金（空なら0）
+          items: SaveData.slice(5) // アイテムは配列で格納
+        };
 
-          const Player_progress = document.getElementById('Player_progress');
-          Player_progress.innerHTML = `
-            <p class='progress'>名前: ${PlayerData.name}</p>
-            <p class='progress'>レベル: ${PlayerData.level}</p>
-            <p class='progress'>現在HP: ${PlayerData.hp}</p>
-            <p class='progress'>現在MP: ${PlayerData.mp}</p>
-            <p class='progress'>所持金: ${PlayerData.gold}</p>
-          `
-        }
+        // プレイヤーの進行状況を表示
+        const Player_progress = document.getElementById('Player_progress');
+        Player_progress.innerHTML = `
+          <p class='progress'>名前: ${PlayerData.name}</p>
+          <p class='progress'>レベル: ${PlayerData.level}</p>
+          <p class='progress'>現在HP: ${PlayerData.hp}</p>
+          <p class='progress'>現在MP: ${PlayerData.mp}</p>
+          <p class='progress'>所持金: ${PlayerData.gold}</p>
+        `;
+      }
 
-        Change_progress();
+      // SavecodeをlocalStorageに保存する関数
+      function UpdateSavecode() {
+        const Savecode = Savecode_input.value;
+        localStorage.setItem('rpg1_userdata', Savecode);
+      }
+
+      // 初回ロード時にも進行状況を更新
+      Change_progress();
