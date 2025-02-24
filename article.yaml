@@ -7,7 +7,6 @@ pages:
       <input type='text' id='Savecode_input' t>
       <div id='Player_progress' t></div>
     action: |
-      document.addEventListener('DOMContentLoaded', function() {
         const Savecode_input = document.getElementById('Savecode_input');
 
         // イベントリスナーを正しく設定
@@ -30,4 +29,3 @@ pages:
           // コンソールにPlayerDataを表示
           console.log('プレイヤーデータ:', PlayerData);
         });
-      });
