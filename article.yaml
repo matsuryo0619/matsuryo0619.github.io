@@ -4,7 +4,7 @@ pages:
     data: "2025-2-22"
     content: |
       <h3 class='menu' id='savecode' t>セーブコード</h3>
-      <input type='text' id='Savecode_input' t>
+      <input type='text' id='Savecode_input' placeholder='セーブコードを入力してね!' t>
       <div id='Player_progress' t></div>
     action: |
       const Savecode_input = document.getElementById('Savecode_input');
