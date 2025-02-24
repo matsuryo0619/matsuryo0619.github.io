@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+
   // ヘッダーを作成
   const header = document.createElement('header');
   header.id = 'header';
@@ -94,4 +94,3 @@ document.addEventListener('DOMContentLoaded', function () {
     detail: { searchInput: Search }
   });
   window.dispatchEvent(event);
-});
