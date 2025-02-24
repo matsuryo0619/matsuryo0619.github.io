@@ -11,26 +11,32 @@ pages:
 
       // イベントリスナーを正しく設定
       Savecode_input.addEventListener('input', function() {
-        const Savecode = Savecode_input.value;
-
-        const SaveData = Savecode.split(':');
-        if (SaveData.length < 1) return;
-
-        const PlayerData = {
-          name: SaveData[0] || "名無し", // 名前が空なら「名無し」
-          level: Number(SaveData[1]) || 1, // 数値変換（空なら1）
-          hp: Number(SaveData[2]) || 100, // HP（空なら100）
-          mp: Number(SaveData[3]) || 50, // MP（空なら50）
-          gold: Number(SaveData[4]) || 0, // お金（空なら0）
-          items: SaveData.slice(5) // アイテムは配列で格納
-        };
-
-        const Player_progress = document.getElementById('Player_progress');
-        Player_progress.innerHTML = `
-          <p class='progress'>名前: ${PlayerData.name}</p>
-          <p class='progress'>レベル: ${PlayerData.level}</p>
-          <p class='progress'>現在HP: ${PlayerData.hp}</p>
-          <p class='progress'>現在MP: ${PlayerData.mp}</p>
-          <p class='progress'>所持金: ${PlayerData.gold}</p>
-        `
+        Change_progress();
       });
+
+      function Change_progress() {
+          const Savecode = Savecode_input.value;
+
+          const SaveData = Savecode.split(':');
+          if (SaveData.length < 1) return;
+
+          const PlayerData = {
+            name: SaveData[0] || "名無し", // 名前が空なら「名無し」
+            level: Number(SaveData[1]) || 1, // 数値変換（空なら1）
+            hp: Number(SaveData[2]) || 100, // HP（空なら100）
+            mp: Number(SaveData[3]) || 50, // MP（空なら50）
+            gold: Number(SaveData[4]) || 0, // お金（空なら0）
+            items: SaveData.slice(5) // アイテムは配列で格納
+          };
+
+          const Player_progress = document.getElementById('Player_progress');
+          Player_progress.innerHTML = `
+            <p class='progress'>名前: ${PlayerData.name}</p>
+            <p class='progress'>レベル: ${PlayerData.level}</p>
+            <p class='progress'>現在HP: ${PlayerData.hp}</p>
+            <p class='progress'>現在MP: ${PlayerData.mp}</p>
+            <p class='progress'>所持金: ${PlayerData.gold}</p>
+          `
+        }
+
+        Change_progress();
