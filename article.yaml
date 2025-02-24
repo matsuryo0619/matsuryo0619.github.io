@@ -7,25 +7,25 @@ pages:
       <input type='text' id='Savecode_input' t>
       <div id='Player_progress' t></div>
     action: |
-        const Savecode_input = document.getElementById('Savecode_input');
+      const Savecode_input = document.getElementById('Savecode_input');
 
-        // イベントリスナーを正しく設定
-        Savecode_input.addEventListener('input', function() {
-          const Savecode = Savecode_input.value;
-          console.log('入力が変更されました:', Savecode);
+      // イベントリスナーを正しく設定
+      Savecode_input.addEventListener('input', function() {
+        const Savecode = Savecode_input.value;
+        console.log('入力が変更されました:', Savecode);
 
-          const SaveData = Savecode.split(':');
-          if (SaveData.length < 1) return;
+        const SaveData = Savecode.split(':');
+        if (SaveData.length < 1) return;
 
-          const PlayerData = {
-            name: SaveData[0] || "名無し", // 名前が空なら「名無し」
-            level: Number(SaveData[1]) || 1, // 数値変換（空なら1）
-            hp: Number(SaveData[2]) || 100, // HP（空なら100）
-            mp: Number(SaveData[3]) || 50, // MP（空なら50）
-            gold: Number(SaveData[4]) || 0, // お金（空なら0）
-            items: SaveData.slice(5) // アイテムは配列で格納
-          };
+        const PlayerData = {
+          name: SaveData[0] || "名無し", // 名前が空なら「名無し」
+          level: Number(SaveData[1]) || 1, // 数値変換（空なら1）
+          hp: Number(SaveData[2]) || 100, // HP（空なら100）
+          mp: Number(SaveData[3]) || 50, // MP（空なら50）
+          gold: Number(SaveData[4]) || 0, // お金（空なら0）
+          items: SaveData.slice(5) // アイテムは配列で格納
+        };
 
-          // コンソールにPlayerDataを表示
-          console.log('プレイヤーデータ:', PlayerData);
-        });
+        // コンソールにPlayerDataを表示
+        console.log('プレイヤーデータ:', PlayerData);
+      });
