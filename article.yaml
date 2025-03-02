@@ -3,9 +3,11 @@ pages:
     title: "2D RPG風ゲーム 1"
     data: "2025-2-22"
     content: |
-      <h3 class='menu' id='savecode' t>セーブコード</h3>
-      <input type='text' id='Savecode_input' placeholder='セーブコードを入力してね!' t>
-      <div id='Player_progress' t></div>
+      <div class='Mainmenu' t>
+        <h3 t>セーブコード</h3>
+        <input type='text' id='Savecode_input' placeholder='セーブコードを入力してね!' t>
+        <div id='Player_progress' t></div>
+      </div>
     style: |
       Savecode_input {
         
