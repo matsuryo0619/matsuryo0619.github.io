@@ -60,6 +60,12 @@
   // ヘッダーをHTMLに追加
   document.body.appendChild(header);
 
+  //Header.css
+  const headercss = document.createElement('link');
+  headercss.rel = 'stylesheet';
+  headercss.href = 'header.css';
+  document.head.appendChild('headercss');
+
   // P要素を追加
   const header_margin = document.createElement('p');
   header_margin.textContent = 'ヘッダー間隔';
