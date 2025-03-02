@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
         document.body.appendChild(container);
       }
+      //ページ作成を知らせるカスタムイベント
+      const PageFinish = new CustomEvent('PageFinish');
+      document.dispatchEvent(PageFinish);
     })
     .catch(error => console.error('YAML読み込みエラー', error));
 
