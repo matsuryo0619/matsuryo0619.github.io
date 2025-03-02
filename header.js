@@ -1,12 +1,11 @@
+// ヘッダーを作成
+const header = document.createElement('header');
+header.id = 'header';
 
-  // ヘッダーを作成
-  const header = document.createElement('header');
-  header.id = 'header';
-
-  // ヘッダーの子要素を作成
-  const Logo = document.createElement('img');
-  Logo.id = 'header_logo';
-  Logo.src = 'https://matsuryo0619.github.io/scratchblog/img/Logo.png';
+// ヘッダーの子要素を作成
+const Logo = document.createElement('img');
+Logo.id = 'header_logo';
+Logo.src = 'https://matsuryo0619.github.io/scratchblog/img/Logo.png';
 
   // サイト内検索
   const SearchDIV = document.createElement('div');
@@ -59,12 +58,6 @@
 
   // ヘッダーをHTMLに追加
   document.body.appendChild(header);
-
-  //Header.css
-  const headercss = document.createElement('link');
-  headercss.rel = 'stylesheet';
-  headercss.href = 'header.css';
-  document.head.appendChild('headercss');
 
   // P要素を追加
   const header_margin = document.createElement('p');
