@@ -3,7 +3,7 @@ document.addEventListener('PageFinish', function() {
   index.id = 'index';
   document.body.appendChild(index);
 
-  const classMenus = document.querySelectorAll('#content > .Mainmenu');
+  const classMenus = document.querySelectorAll('.Mainmenu');
 
   classMenus.forEach(function(data, i) {
     const indexMenu = document.createElement('p');
