@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const pageData = pagesData.pages[pagekey];
       const container = document.createElement('div');
 
-      if (pageData && pageData.public) {
+      if (pageData && (pageData.public || true)) {
         // 記事内容の整形と表示
         const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>"); // <h3 t> → <h3>
 
