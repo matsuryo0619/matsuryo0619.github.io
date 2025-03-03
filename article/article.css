@@ -10,7 +10,10 @@ body {
 /* 記事の本文 */
 #content {
   max-width: 900px;
-  margin: 20px auto;
+  width: 65vw;
+  position: absolute;
+  right: 5vw;
+  margin: 0;
   padding: 20px;
   background: #ffffff; /* 明るい白背景 */
   border-radius: 8px;
@@ -52,7 +55,7 @@ div#index {
   margin: 0;
   padding: 5px;
   background-color: #efdada;
-  width: 25%;
+  width: 25vw;
   text-align: center;
   left: 5vw;
   top: 75px;
