@@ -11,6 +11,7 @@ document.addEventListener('PageFinish', function() {
   classMenus.forEach(function(data, i) {
     const indexMenu = document.createElement('p');
     indexMenu.textContent = data.getAttribute('data-ml') || `メニュー${i + 1}`;
+    indexMenu.classList.add('indexMenu');
     indexMenu.addEventListener('click', function() {
       const rect = data.getBoundingClientRect();
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
