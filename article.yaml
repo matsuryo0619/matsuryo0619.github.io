@@ -10,7 +10,7 @@ pages:
         <div id='Player_progress' t></div>
       </div>
     style: |
-      Savecode_input {
+      #Savecode_input {
         
       }
     action: |
