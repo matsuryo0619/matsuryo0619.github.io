@@ -58,7 +58,7 @@ div#index {
   top: 75px;
 }
 
-div#index p {
+div#index p.indexMenu {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
