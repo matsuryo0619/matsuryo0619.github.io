@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (pageData.style) {
           addStyleToHead(pageData.style);
         }
+      } else if(!pageData.public) {
+        container.innerHTML = "<p>指定されたページは公開されていません</p>";
+        document.body.appendChild(container);
       } else {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
         document.body.appendChild(container);
