@@ -51,7 +51,7 @@ div#index {
   border-radius: 5px;
   margin: 0;
   padding: 5px;
-  background-color: #F9F9F9;
+  background-color: #efdada;
   width: 25%;
   text-align: center;
   left: 5vw;
@@ -64,4 +64,8 @@ div#index p.indexMenu {
   padding: 5px;
   background-color: #ebebeb;
   border-radius: 5px;
+}
+
+div#index p:not(.indexMenu) {
+  font-weight: bold;
 }
