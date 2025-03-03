@@ -8,7 +8,8 @@ const reqcss = [
 
 // JSファイルのリスト
 const reqjs = [
-  {src: 'header', defer: true}
+  {src: 'header', defer: true},
+  {src: 'context', defer: true}
 ];
 
 // CSSを読み込む
