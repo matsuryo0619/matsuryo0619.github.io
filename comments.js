@@ -11,7 +11,7 @@ function test(wcheck) {
 }
 
 function createGoogleForm() {
-  const formId = "14ibAl3L2AUcabiROLD8AwGTcoPOPQEfV7TBrha1AtkA";
+  const formId = "1FAIpQLSeJi8SiLCAtUaep3Z7wGK0H2OZosK_YEaRMo7vxB_VEFrWq8g";
   const formUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
 
   const form = document.createElement("form");
