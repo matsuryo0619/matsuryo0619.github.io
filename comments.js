@@ -7,7 +7,12 @@ function test(wcheck) {
     return false;
   }
   document.getElementById("submitbutton").disabled = true;
-  return true; // submitted=!0; を修正
+  return true;
+}
+
+function getUrlParameter(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name) || ""; // パラメータが無い場合は空文字を返す
 }
 
 function createGoogleForm() {
@@ -25,7 +30,7 @@ function createGoogleForm() {
   // 名前入力欄
   const nameParagraph = document.createElement("p");
   const nameInput = document.createElement("input");
-  nameInput.name = "entry.691642850"; // 必要に応じてentry番号を変更してください
+  nameInput.name = "entry.691642850"; // 必要に応じてentry番号を変更
   nameInput.placeholder = "名前";
   nameInput.value = "名無し";
   nameInput.required = true;
@@ -35,15 +40,23 @@ function createGoogleForm() {
   // コメント入力欄
   const commentParagraph = document.createElement("p");
   const commentTextarea = document.createElement("textarea");
-  commentTextarea.name = "entry.1605539997"; // 必要に応じてentry番号を変更してください
+  commentTextarea.name = "entry.1605539997"; // 必要に応じてentry番号を変更
   commentTextarea.placeholder = "コメント";
   commentTextarea.rows = 10;
   commentTextarea.cols = 40;
   commentTextarea.maxLength = 400;
-  commentTextarea.id = "Comments_wcheck"; // IDを変更
+  commentTextarea.id = "Comments_wcheck";
   commentTextarea.required = true;
   commentParagraph.appendChild(commentTextarea);
   form.appendChild(commentParagraph);
+
+  // entry.148490561 に "art" + URLパラメータの data をセット
+  const dataValue = getUrlParameter("data");
+  const hiddenInput = document.createElement("input");
+  hiddenInput.type = "hidden";
+  hiddenInput.name = "entry.148490561";
+  hiddenInput.value = "art" + dataValue;
+  form.appendChild(hiddenInput);
 
   // 送信ボタン
   const submitInput = document.createElement("input");
