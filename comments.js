@@ -25,7 +25,7 @@ function createGoogleForm() {
   // 名前入力欄
   const nameParagraph = document.createElement("p");
   const nameInput = document.createElement("input");
-  nameInput.name = "entry.1716700289"; // 必要に応じてentry番号を変更してください
+  nameInput.name = "entry.691642850"; // 必要に応じてentry番号を変更してください
   nameInput.placeholder = "名前";
   nameInput.value = "名無し";
   nameInput.required = true;
@@ -35,7 +35,7 @@ function createGoogleForm() {
   // コメント入力欄
   const commentParagraph = document.createElement("p");
   const commentTextarea = document.createElement("textarea");
-  commentTextarea.name = "entry.1966114683"; // 必要に応じてentry番号を変更してください
+  commentTextarea.name = "entry.1605539997"; // 必要に応じてentry番号を変更してください
   commentTextarea.placeholder = "コメント";
   commentTextarea.rows = 10;
   commentTextarea.cols = 40;
