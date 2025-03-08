@@ -144,9 +144,9 @@ document.addEventListener('PageFinish', function() {
         const timestamp = entry["タイムスタンプ"];
         const commentsText = entry["コメント"];
 
-        if (name === "匿名") {
+        if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
           text += `
-            ${data.length - i} 名前: 匿名 ${timestamp} 
+            ${data.length - i} 名前: ${name} ${timestamp} 
             <pre>${commentsText}</pre>
           `;
         } else {
