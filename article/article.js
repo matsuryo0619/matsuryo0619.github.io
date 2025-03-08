@@ -16,9 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const pageData = pagesData.pages[pagekey];
       const container = document.createElement('div');
 
-      console.log(pageData); // pageData の内容を確認
-
-      if (pageData && pageData.public) {
+      if (pageData && (pageData.public)) {
         // 記事内容の整形と表示
         const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>"); // <h3 t> → <h3>
 
@@ -36,52 +34,22 @@ document.addEventListener('DOMContentLoaded', function() {
         if (pageData.action) {
           addScriptToHead(pageData.action);
         }
-
-        // 🛠 スタイルをheadに追加（nullやundefinedのチェックを追加！）
-        if (pageData.style && typeof pageData.style === 'string' && pageData.style.trim() !== '') {
-          console.log('スタイル内容:', pageData.style); // styleの内容を確認
+        //スタイルをheadに追加
+        if (pageData.style) {
           addStyleToHead(pageData.style);
-        } else {
-          console.warn('Invalid or missing style:', pageData.style);
         }
-      } else if (pageData && !pageData.public) {
+      } else if(!pageData.public) {
         container.innerHTML = "<p>指定されたページは公開されていません</p>";
         document.body.appendChild(container);
       } else {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
         document.body.appendChild(container);
       }
-
-      // ページ作成を知らせるカスタムイベント
+      //ページ作成を知らせるカスタムイベント
       const PageFinish = new CustomEvent('PageFinish');
       document.dispatchEvent(PageFinish);
-
-      // メニュー開閉のボタンを追加
-      document.querySelectorAll(".Mainmenu").forEach(menu => {
-        let button = document.createElement('button');
-        button.textContent = "▼";
-        button.classList.add('toggleButton');
-
-        let h1 = menu.querySelector('h1');
-        h1.style.display = 'inline-block';
-        h1.after(button);
-
-        let wrapper = document.createElement("div");
-        wrapper.classList.add("contentWrapper");
-
-        let content = Array.from(menu.children).slice(1); // 修正: Array.form → Array.from
-        content.forEach(el => wrapper.appendChild(el));
-        menu.appendChild(wrapper);
-
-        button.addEventListener('click', function() {
-          wrapper.classList.toggle("open");
-          button.textContent = wrapper.classList.contains("open") ? "▲" : "▼";
-        });
-      });
     })
-    .catch(error => {
-      console.error('YAML読み込みエラー:', error);
-    });
+    .catch(error => console.error('YAML読み込みエラー', error));
 
   // 🛠 actionスクリプトを<head>に追加する関数
   function addScriptToHead(scriptContent) {
@@ -91,11 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(scriptElement);
   }
 
-  // 🛠 スタイルを<head>に追加する関数
   function addStyleToHead(styleContent) {
-    const styleElement = document.createElement('style');
-    styleElement.type = 'text/css';
-    styleElement.textContent = styleContent;
-    document.head.appendChild(styleElement);
+    const StyleElement = document.createElement('style');
+    StyleElement.type = 'text/css';
+    StyleElement.textContent = styleContent;
+    document.head.appendChild(StyleElement);
   }
 });
