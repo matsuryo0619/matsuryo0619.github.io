@@ -27,3 +27,8 @@ footer.addEventListener('mouseenter', () => {
   footer_uparrow.style.opacity = '0';
   footer_downarrow.style.opacity = '1';
 });
+
+footer.addEventListener('mouseleave', () => {
+  footer_uparrow.style.opacity = '1';
+  footer_downarrow.style.opacity = '0';
+});
