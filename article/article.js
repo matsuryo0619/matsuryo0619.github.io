@@ -34,22 +34,47 @@ document.addEventListener('DOMContentLoaded', function() {
         if (pageData.action) {
           addScriptToHead(pageData.action);
         }
-        //スタイルをheadに追加
+        // スタイルをheadに追加
         if (pageData.style) {
           addStyleToHead(pageData.style);
         }
-      } else if(!pageData.public) {
+      } else if (!pageData.public) {
         container.innerHTML = "<p>指定されたページは公開されていません</p>";
         document.body.appendChild(container);
       } else {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
         document.body.appendChild(container);
       }
-      //ページ作成を知らせるカスタムイベント
+
+      // ページ作成を知らせるカスタムイベント
       const PageFinish = new CustomEvent('PageFinish');
       document.dispatchEvent(PageFinish);
+
+      // 📌 メニュー開閉ボタンを追加
+      document.querySelectorAll(".Mainmenu").forEach(menu => {
+        let button = document.createElement('button');
+        button.textContent = "▼";
+        button.classList.add('toggleButton');
+
+        let h1 = menu.querySelector('h1');
+        h1.style.display = 'inline-block';
+        h1.after(button);
+
+        let wrapper = document.createElement("div");
+        wrapper.classList.add("contentWrapper");
+
+        let content = Array.from(menu.children).slice(1); // 🛠 修正: Array.form → Array.from
+        content.forEach(el => wrapper.appendChild(el));
+        menu.appendChild(wrapper);
+
+        button.addEventListener('click', function() {
+          wrapper.classList.toggle("open");
+          button.textContent = wrapper.classList.contains("open") ? "▲" : "▼";
+        });
+      });
+
     })
-    .catch(error => console.error('YAML読み込みエラー', error));
+    .catch(error => console.error('YAML読み込みエラー', error)); // 🛠 修正: .catch の位置
 
   // 🛠 actionスクリプトを<head>に追加する関数
   function addScriptToHead(scriptContent) {
