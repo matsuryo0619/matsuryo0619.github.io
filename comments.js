@@ -79,7 +79,7 @@ document.addEventListener('PageFinish', function() {
 
     //topを指定
     const content = document.getElementById('content');
-    form.style.top = content.style.height;
+    form.style.top = content.style.height + 100;
   }
 
   // フォーム生成関数の実行
