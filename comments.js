@@ -84,16 +84,6 @@ document.addEventListener('PageFinish', function() {
 
     const content = document.getElementById('content');
     content.appendChild(form);
-
-    // content の高さを取得し、フォームの位置を調整
-    const contentHeight = parseInt(window.getComputedStyle(content).height, 10);
-    form.style.top = (contentHeight + 100) + 'px';
-
-    // hidden_iframeを作成
-    const hiddenIframe = document.createElement("iframe");
-    hiddenIframe.name = "hidden_iframe";
-    hiddenIframe.style.display = "none";
-    document.body.appendChild(hiddenIframe);
   }
   
   // フォーム生成
@@ -115,11 +105,14 @@ document.addEventListener('PageFinish', function() {
 
       let text = "";
       data.forEach((entry, i) => {
-        const name = entry["ペンネーム"];
+        const name = entry["ペンネーム"]; // ペンネームを取得
         const timestamp = entry["タイムスタンプ"];
         const commentsText = entry["コメント"];
-        const id = entry["サイドID"];
-        text += `${i + 1} 名前: <a href="https://scratch.mit.edu/users/${id}/">${name}</a> ${timestamp} <pre>${commentsText}</pre>`;
+
+        text += `
+          ${i + 1} 名前: <a href="https://scratch.mit.edu/users/${name}/">${name}</a> ${timestamp} 
+          <pre>${commentsText}</pre>
+        `;
       });
       document.getElementById("comments").innerHTML = text;
     })
@@ -127,11 +120,4 @@ document.addEventListener('PageFinish', function() {
       console.error("コメントデータの読み込みに失敗しました:", error);
     });
 
-  // コメントテキストの処理
-  function replaceText(text) {
-    if (text === undefined || text === null) {
-      return ""; // undefinedやnullなら空文字を返す
-    }
-    return text; // HTMLタグをエスケープせずそのまま返す
-  }
 });
