@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const pagesData = jsyaml.load(yamlData);
 
       // 動的にキーを作成
-      const pagekey = art${sitedata};
+      const pagekey = `art${sitedata}`;
       // ページデータを取得
       const pageData = pagesData.pages[pagekey];
       const container = document.createElement('div');
@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>"); // <h3 t> → <h3>
 
         container.id = 'content';
-        container.innerHTML = 
+        container.innerHTML = `
           <h1>${pageData.title}</h1>
           <p class="date">${pageData.data}</p>
           <div>${formattedContent}</div>
-        ;
-        document.title = ${pageData.title} - スゴスク!;
+        `;
+        document.title = `${pageData.title} - スゴスク!`;
 
         document.body.appendChild(container);
 
