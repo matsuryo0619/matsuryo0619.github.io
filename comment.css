@@ -11,14 +11,11 @@
   border: none;
   background-color: transparent;
   outline: none;
+  position: relative;
+  padding-bottom: 5px; /* 下線が表示される位置を少し下に */
 }
 
-#form_Name_border {
-  border-bottom: none;
-  width: 0px;
-  transition: width 0.5s ease;
-}
-
-#form_Name:focus #form_Name_border {
-  border-bottom: solid black 1px;
+#form_Name:focus {
+  box-shadow: 0 2px 0 0 black; /* フォーカス時に下線が出現する効果 */
+  transition: box-shadow 0.5s ease; /* box-shadowのアニメーション */
 }
