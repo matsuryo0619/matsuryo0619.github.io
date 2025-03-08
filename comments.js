@@ -49,8 +49,7 @@ document.addEventListener('PageFinish', function() {
     const nameParagraph = document.createElement("p");
     const nameInput = document.createElement("input");
     nameInput.name = "entry.691642850";
-    nameInput.placeholder = "名前";
-    nameInput.value = "名無し";
+    nameInput.placeholder = "スクラッチネーム";
     nameInput.required = true;
     nameParagraph.appendChild(nameInput);
     form.appendChild(nameParagraph);
