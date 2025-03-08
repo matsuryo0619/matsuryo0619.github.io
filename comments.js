@@ -118,7 +118,7 @@ document.addEventListener('PageFinish', function() {
         const commentsText = entry["コメント"];
 
         text += `
-          ${data.length - i + 1} 名前: <a href="https://scratch.mit.edu/users/${name}/">${name}</a> ${timestamp} 
+          ${data.length - i} 名前: <a href="https://scratch.mit.edu/users/${name}/">${name}</a> ${timestamp} 
           <pre>${commentsText}</pre>
         `;
       });
