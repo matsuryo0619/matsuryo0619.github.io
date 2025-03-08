@@ -3,7 +3,8 @@ const reqcss = [
   'main', 
   'header', 
   'https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap', 
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
+  'footer'
 ];
 
 // JSファイルのリスト
