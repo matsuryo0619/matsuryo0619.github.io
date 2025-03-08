@@ -23,17 +23,25 @@ document.addEventListener('PageFinish', function() {
     form.action = formUrl;
     form.method = "post";
     form.id = 'Comment_form';
-    
+    form.target = "hidden_iframe"; // リダイレクトを防ぐためのiframeを指定
+
     // 送信時の処理
     form.onsubmit = function() {
       // コメントにNGワードが含まれていなければフォームを送信
       if (!test(document.getElementById("Comments_wcheck").value)) {
         return false; // NGワードが含まれている場合は送信しない
       }
-      // 送信後、ページをリロード
+
+      // 現在のスクロール位置を保存
+      const scrollY = window.scrollY;
+
+      // 送信後、1秒待ってページをリロードし、スクロール位置を復元
       setTimeout(() => {
-        location.reload(); // 1秒後にリロード
-      }, 1000); // 1秒待つことでフォーム送信完了を待つ
+        location.reload();
+        window.scrollTo(0, scrollY);
+      }, 1000);
+
+      return true; // フォーム送信を許可
     };
 
     // 名前入力欄
@@ -84,6 +92,11 @@ document.addEventListener('PageFinish', function() {
     // 100px 足して form に適用
     form.style.top = (contentHeight + 100) + 'px';
 
+    // hidden_iframeを作成（リダイレクトを防ぐため）
+    const hiddenIframe = document.createElement("iframe");
+    hiddenIframe.name = "hidden_iframe";
+    hiddenIframe.style.display = "none";
+    document.body.appendChild(hiddenIframe);
   }
 
   // フォーム生成関数の実行
