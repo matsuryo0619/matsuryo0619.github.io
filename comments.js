@@ -105,46 +105,25 @@ document.addEventListener('PageFinish', function() {
   document.getElementById('content').appendChild(comments);
 
   // d3.v6のfetchを使用してCSVを読み込み
-  fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A2:D")
+  fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A1:D")
     .then(response => response.text())
     .then(function(csvText) {
-      console.log('CSV Text:', csvText);  // CSVデータ内容の確認
-
       // CSVの読み込みとパース
-      const data = d3.csvParse(csvText, function(d) {
-        return {
-          timestamp: d["2025/03/08 20:49:32"],  // 日付
-          name: d["matsumotoryoukotyann"],      // 名前
-          comment: d["こうなっていたんだ!!"],   // コメント
-          id: 'art' + d["art1"]                  // ID (art + dataのID)
-        };
-      });
-      console.log('Parsed Data:', data);  // パースされたデータを確認
+      const data = d3.csvParse(csvText);
 
       // データの逆順に
       data.reverse();
 
       let text = "";
       data.forEach((entry, i) => {
-        // 新しい順番に合わせてデータを取得
-        const timestamp = replaceText(entry.timestamp); // 日付
-        const name = replaceText(entry.name);           // 名前
-        const comment = replaceText(entry.comment);     // コメント
-        const id = entry.id;                            // ID (art + dataのID)
-
-        // データ内容をコンソールに出力して確認
-        console.log(`Comment ${i + 1}: Timestamp: ${timestamp}, Name: ${name}, Comment: ${comment}, ID: ${id}`);
-
-        text += `${i + 1} 日付: ${timestamp} 名前: <a href="mailto:${id}">${name}</a> <pre>${comment}</pre>`;
+        const timestamp = replaceText(entry['タイムスタンプ']);
+        const name = replaceText(entry['ペンネーム']);
+        const comment = replaceText(entry['コメント']);
+        const id = replaceText(entry['サイドID']);
+        
+        text += `${i + 1} 名前: <a href="mailto:${id}">${name}</a> ${timestamp} <pre>${comment}</pre>`;
       });
-
-      // コメント表示エリアにデータを挿入
-      const commentsContainer = document.getElementById("comments");
-      if (commentsContainer) {
-        commentsContainer.innerHTML = text;
-      } else {
-        console.error("コメント表示エリアが見つかりません");
-      }
+      document.getElementById("comments").innerHTML = text;
     })
     .catch(function(error) {
       console.error("コメントデータの読み込みに失敗しました:", error);
