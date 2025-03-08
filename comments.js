@@ -146,7 +146,7 @@ document.addEventListener('PageFinish', function() {
 
         if (name === "匿名") {
           text += `
-            ${data.length - i} 名前: <p>匿名</p> ${timestamp} 
+            ${data.length - i} 名前: 匿名 ${timestamp} 
             <pre>${commentsText}</pre>
           `;
         } else {
