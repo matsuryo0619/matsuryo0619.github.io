@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.innerHTML = `
           <h1>${pageData.title}</h1>
           <p class="date">${pageData.data}</p>
-          <div>${formattedContent}</div>
+          <div id="Rough_menu">${formattedContent}</div>
         `;
         document.title = `${pageData.title} - スゴスク!`;
 
