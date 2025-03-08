@@ -6,5 +6,5 @@ document.addEventListener('DOMContentLoaded', function() {
   //フッターメニュー
 
   //フッターを追加
-  document.appendChild(footer);
+  document.body.appendChild(footer);
 });
