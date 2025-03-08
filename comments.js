@@ -28,29 +28,6 @@ document.addEventListener('PageFinish', function() {
     form.method = "post";
     form.id = 'Comment_form';
 
-    // iframeを作成してフォーム送信先に設定
-    const iframe = document.createElement("iframe");
-    iframe.name = "hidden_iframe";
-    iframe.style.display = "none"; // iframeを非表示にする
-    document.body.appendChild(iframe);
-
-    // 送信前にNGワードチェック
-    form.onsubmit = function() {
-      // コメントにNGワードが含まれていなければ送信
-      if (!test(document.getElementById("Comments_wcheck").value)) {
-        return false;
-      }
-
-      // 送信後、1秒待ってページをリロードし、スクロール位置を復元
-      const scrollY = window.scrollY;
-      setTimeout(() => {
-        location.reload();
-        window.scrollTo(0, scrollY);
-      }, 1000);
-
-      return true; // フォーム送信を許可
-    };
-
     // 名前入力欄
     const nameParagraph = document.createElement("p");
     const nameInput = document.createElement("input");
@@ -88,9 +65,58 @@ document.addEventListener('PageFinish', function() {
     submitInput.value = "送信";
     form.appendChild(submitInput);
 
-    // Googleフォームを追加する
+    // フォームを追加
     const content = document.getElementById('Rough_menu');
     content.appendChild(form);
+
+    // 送信ボタンを無効にする関数
+    document.getElementById("submitbutton").disabled = true;
+
+    // テキストエリアの入力があればボタンを有効にする
+    const textareas = document.getElementsByTagName('textarea');
+    const inputs = document.getElementsByTagName('input');
+    
+    // コメントが入力されていればボタンを有効にする
+    Array.from(textareas).forEach(function(textarea) {
+      textarea.addEventListener('input', function() {
+        if (textarea.value.trim() !== "") {
+          submitInput.disabled = false; // ボタンを有効にする
+        } else {
+          submitInput.disabled = true; // ボタンを無効にする
+        }
+      });
+    });
+
+    // フォーム送信時のカスタム処理
+    form.onsubmit = function(event) {
+      event.preventDefault(); // リダイレクトを防ぐために、デフォルトの送信処理をキャンセル
+
+      // コメントにNGワードが含まれていなければ送信
+      if (!test(document.getElementById("Comments_wcheck").value)) {
+        return false;
+      }
+
+      // 送信ボタンを無効化して、送信完了状態にする
+      document.getElementById("submitbutton").disabled = true;
+
+      // ここでフォームを実際に送信
+      const iframe = document.createElement("iframe");
+      iframe.name = "hidden_iframe";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+
+      form.target = "hidden_iframe"; // iframeをターゲットに指定
+      form.submit(); // フォーム送信
+
+      // 送信後、1秒待ってページをリロードし、スクロール位置を復元
+      const scrollY = window.scrollY;
+      setTimeout(() => {
+        location.reload();
+        window.scrollTo(0, scrollY);
+      }, 1000);
+
+      return true; // フォーム送信を許可
+    };
   }
 
   // フォーム生成
@@ -118,7 +144,7 @@ document.addEventListener('PageFinish', function() {
         const commentsText = entry["コメント"];
 
         text += `
-          ${data.length - i} 名前: <a href="https://scratch.mit.edu/users/${name}/">${name}</a> ${timestamp} 
+          ${i + 1} 名前: <a href="https://scratch.mit.edu/users/${name}/">${name}</a> ${timestamp} 
           <pre>${commentsText}</pre>
         `;
       });
@@ -127,5 +153,4 @@ document.addEventListener('PageFinish', function() {
     .catch(function(error) {
       console.error("コメントデータの読み込みに失敗しました:", error);
     });
-
 });
