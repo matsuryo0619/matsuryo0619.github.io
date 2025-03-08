@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <p class="date">${pageData.data}</p>
           <div>${formattedContent}</div>
         `;
+        document.title = `${pageData.title} - スゴスク!`;
 
         document.body.appendChild(container);
 
