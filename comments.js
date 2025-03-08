@@ -33,6 +33,7 @@ document.addEventListener('PageFinish', function() {
     const nameInput = document.createElement("input");
     nameInput.name = "entry.691642850";
     nameInput.placeholder = "スクラッチネーム";
+    nameInput.value = "匿名";
     nameInput.required = true;
     nameParagraph.appendChild(nameInput);
     form.appendChild(nameParagraph);
@@ -143,10 +144,17 @@ document.addEventListener('PageFinish', function() {
         const timestamp = entry["タイムスタンプ"];
         const commentsText = entry["コメント"];
 
-        text += `
-          ${data.length - i} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
-          <pre>${commentsText}</pre>
-        `;
+        if (name === "匿名") {
+          text += `
+            ${data.length - i} 名前: <p>匿名</p> ${timestamp} 
+            <pre>${commentsText}</pre>
+          `;
+        } else {
+          text += `
+            ${data.length - i} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
+            <pre>${commentsText}</pre>
+          `;
+        }
       });
       document.getElementById("comments").innerHTML = text;
     })
