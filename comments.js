@@ -22,6 +22,7 @@ document.addEventListener('PageFinish', function() {
     const form = document.createElement("form");
     form.action = formUrl;
     form.method = "post";
+    form.id = 'Comment_form';
     
     // 送信時の処理
     form.onsubmit = function() {
