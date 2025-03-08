@@ -106,23 +106,41 @@ document.addEventListener('PageFinish', function() {
 
   // d3.v6のfetchを使用してCSVを読み込み
   fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A2:D")
-    .then(response => response.text())
+    .then(response => {
+      console.log('Response received:', response);  // レスポンスの確認
+      return response.text();
+    })
     .then(function(csvText) {
+      console.log('CSV Text:', csvText);  // CSVデータ内容の確認
+
       // CSVの読み込みとパース
       const data = d3.csvParse(csvText);
+      console.log('Parsed Data:', data);  // パースされたデータを確認
 
       // データの逆順に
       data.reverse();
 
       let text = "";
       data.forEach((entry, i) => {
-        const name = replaceText(entry.Name);
-        const mail = replaceText(entry.Mail);
-        const timestamp = replaceText(entry.Timestamp);
-        const comments = replaceText(entry.Comments);
-        text += `${i + 1} 名前: <a href="mailto:${mail}">${name}</a> ${timestamp} <pre>${comments}</pre>`;
+        // 新しい順番に合わせてデータを取得
+        const timestamp = replaceText(entry[0]); // 0: 日付
+        const name = replaceText(entry[1]); // 1: 名前
+        const comment = replaceText(entry[2]); // 2: コメント
+        const id = 'art' + replaceText(entry[3]); // 3: ID (art + dataのID)
+
+        // データ内容をコンソールに出力して確認
+        console.log(`Comment ${i + 1}: Timestamp: ${timestamp}, Name: ${name}, Comment: ${comment}, ID: ${id}`);
+
+        text += `${i + 1} 日付: ${timestamp} 名前: <a href="mailto:${id}">${name}</a> <pre>${comment}</pre>`;
       });
-      document.getElementById("comments").innerHTML = text;
+
+      // コメント表示エリアにデータを挿入
+      const commentsContainer = document.getElementById("comments");
+      if (commentsContainer) {
+        commentsContainer.innerHTML = text;
+      } else {
+        console.error("コメント表示エリアが見つかりません");
+      }
     })
     .catch(function(error) {
       console.error("コメントデータの読み込みに失敗しました:", error);
