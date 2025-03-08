@@ -8,6 +8,7 @@ footer.id = 'footer';
 const footer_uparrow = document.createElement('i');
 footer_uparrow.classList.add('fa-regular');
 footer_uparrow.classList.add('fa-square-caret-up');
+footer_uparrow.id = 'footer_uparrow';
 
 //フッターにメニューを追加
 footer.appendChild(footer_uparrow);
