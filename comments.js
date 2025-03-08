@@ -82,7 +82,7 @@ document.addEventListener('PageFinish', function() {
     submitInput.value = "送信";
     form.appendChild(submitInput);
 
-    const content = document.getElementById('content');
+    const content = document.getElementById('Rough_menu');
     content.appendChild(form);
   }
   
@@ -91,7 +91,7 @@ document.addEventListener('PageFinish', function() {
 
   const comments = document.createElement('div');
   comments.id = 'comments';
-  document.getElementById('content').appendChild(comments);
+  document.getElementById('Rough_menu').appendChild(comments);
 
   // d3.v6のfetchを使用してCSVを読み込み
   fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A1:D")
