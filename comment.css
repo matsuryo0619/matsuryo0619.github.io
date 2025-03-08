@@ -6,3 +6,19 @@
   width: 90%;
   resize: none;
 }
+
+#form_Name {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+#form_Name_border {
+  border-bottom: none;
+  width: 0px;
+  transition: width 0.5s ease;
+}
+
+#form_Name:focus #form_Name_border {
+  border-bottom: solid black 1px;
+}
