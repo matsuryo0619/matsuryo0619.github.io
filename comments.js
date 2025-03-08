@@ -76,6 +76,10 @@ document.addEventListener('PageFinish', function() {
 
     // フォームをDOMに追加
     document.body.appendChild(form);
+
+    //topを指定
+    const content = document.getElementById('content');
+    form.style.top = content.style.height;
   }
 
   // フォーム生成関数の実行
