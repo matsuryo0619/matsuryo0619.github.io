@@ -111,7 +111,14 @@ document.addEventListener('PageFinish', function() {
       console.log('CSV Text:', csvText);  // CSVデータ内容の確認
 
       // CSVの読み込みとパース
-      const data = d3.csvParse(csvText);
+      const data = d3.csvParse(csvText, function(d) {
+        return {
+          timestamp: d["2025/03/08 20:49:32"],  // 日付
+          name: d["matsumotoryoukotyann"],      // 名前
+          comment: d["こうなっていたんだ!!"],   // コメント
+          id: 'art' + d["art1"]                  // ID (art + dataのID)
+        };
+      });
       console.log('Parsed Data:', data);  // パースされたデータを確認
 
       // データの逆順に
@@ -120,10 +127,10 @@ document.addEventListener('PageFinish', function() {
       let text = "";
       data.forEach((entry, i) => {
         // 新しい順番に合わせてデータを取得
-        const timestamp = replaceText(entry[0]); // 0: 日付
-        const name = replaceText(entry[1]); // 1: 名前
-        const comment = replaceText(entry[2]); // 2: コメント
-        const id = 'art' + replaceText(entry[3]); // 3: ID (art + dataのID)
+        const timestamp = replaceText(entry.timestamp); // 日付
+        const name = replaceText(entry.name);           // 名前
+        const comment = replaceText(entry.comment);     // コメント
+        const id = entry.id;                            // ID (art + dataのID)
 
         // データ内容をコンソールに出力して確認
         console.log(`Comment ${i + 1}: Timestamp: ${timestamp}, Name: ${name}, Comment: ${comment}, ID: ${id}`);
