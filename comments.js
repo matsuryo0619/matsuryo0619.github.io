@@ -120,7 +120,7 @@ document.addEventListener('PageFinish', function() {
         const timestamp = entry["タイムスタンプ"];
         const commentsText = entry["コメント"];
         const id = entry["サイドID"];
-        text += `${i + 1} 名前: <a href="mailto:${id}">${name}</a> ${timestamp} <pre>${commentsText}</pre>`;
+        text += `${i + 1} 名前: <a href="https://scratch.mit.edu/users/${id}/">${name}</a> ${timestamp} <pre>${commentsText}</pre>`;
       });
       document.getElementById("comments").innerHTML = text;
     })
