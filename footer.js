@@ -23,12 +23,12 @@ footer.appendChild(footer_downarrow);
 document.body.appendChild(footer);
 
 //フッター処理系
-footer.addEventListener('mouseenter', () => {
+footer.addEventListener('mouseover', () => {
   footer_uparrow.style.opacity = '0';
   footer_downarrow.style.opacity = '1';
 });
 
-footer.addEventListener('mouseleave', () => {
+footer.addEventListener('mouseout', () => {
   footer_uparrow.style.opacity = '1';
   footer_downarrow.style.opacity = '0';
 });
