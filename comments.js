@@ -96,6 +96,9 @@ document.addEventListener('PageFinish', function() {
     hiddenIframe.style.display = "none";
     document.body.appendChild(hiddenIframe);
   }
+  
+  // フォーム生成
+  createGoogleForm();
 
   const comments = document.createElement('div');
   comments.id = 'comments';
@@ -124,9 +127,6 @@ document.addEventListener('PageFinish', function() {
     .catch(function(error) {
       console.error("コメントデータの読み込みに失敗しました:", error);
     });
-
-  // フォーム生成
-  createGoogleForm();
 
   // コメントテキストの処理
   function replaceText(text) {
