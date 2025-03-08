@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const pageData = pagesData.pages[pagekey];
       const container = document.createElement('div');
 
+      console.log(pageData); // pageData の内容を確認
+
       if (pageData && pageData.public) {
         // 記事内容の整形と表示
         const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>"); // <h3 t> → <h3>
@@ -35,9 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
           addScriptToHead(pageData.action);
         }
 
-        // 🛠 スタイルをheadに追加（nullや空文字チェックを追加！）
-        if (pageData.style && pageData.style.trim() !== "") {
+        // 🛠 スタイルをheadに追加（nullやundefinedのチェックを追加！）
+        if (pageData.style && typeof pageData.style === 'string' && pageData.style.trim() !== '') {
+          console.log('スタイル内容:', pageData.style); // styleの内容を確認
           addStyleToHead(pageData.style);
+        } else {
+          console.warn('Invalid or missing style:', pageData.style);
         }
       } else if (pageData && !pageData.public) {
         container.innerHTML = "<p>指定されたページは公開されていません</p>";
@@ -74,7 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       });
     })
-    .catch(error => console.error('YAML読み込みエラー', error));
+    .catch(error => {
+      console.error('YAML読み込みエラー:', error);
+    });
 
   // 🛠 actionスクリプトを<head>に追加する関数
   function addScriptToHead(scriptContent) {
