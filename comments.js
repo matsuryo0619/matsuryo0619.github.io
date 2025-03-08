@@ -106,10 +106,7 @@ document.addEventListener('PageFinish', function() {
 
   // d3.v6のfetchを使用してCSVを読み込み
   fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A2:D")
-    .then(response => {
-      console.log('Response received:', response);  // レスポンスの確認
-      return response.text();
-    })
+    .then(response => response.text())
     .then(function(csvText) {
       console.log('CSV Text:', csvText);  // CSVデータ内容の確認
 
