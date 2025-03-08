@@ -143,17 +143,21 @@ document.addEventListener('PageFinish', function() {
         const name = entry["ペンネーム"]; // ペンネームを取得
         const timestamp = entry["タイムスタンプ"];
         const commentsText = entry["コメント"];
-
-        if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
-          text += `
-            ${data.length - i} 名前: ${name} ${timestamp} 
-            <pre>${commentsText}</pre>
-          `;
-        } else {
-          text += `
-            ${data.length - i} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
-            <pre>${commentsText}</pre>
-          `;
+        const SiteID = entry["サイトID"];
+        const This_siteID = 'art' + getUrlParameter("data"); 
+        
+        if (SiteID === This_siteID) {
+          if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
+            text += `
+              ${data.length - i} 名前: ${name} ${timestamp} 
+              <pre>${commentsText}</pre>
+            `;
+          } else {
+            text += `
+              ${data.length - i} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
+              <pre>${commentsText}</pre>
+            `;
+          }
         }
       });
       document.getElementById("comments").innerHTML = text;
