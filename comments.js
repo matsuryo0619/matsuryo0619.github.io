@@ -76,7 +76,7 @@ document.addEventListener('PageFinish', function() {
 
     const content = document.getElementById('content');
     // フォームをDOMに追加
-    container.appendChild(form);
+    content.appendChild(form);
 
     // content の高さを取得（数値に変換）
     const contentHeight = parseInt(window.getComputedStyle(content).height, 10);
