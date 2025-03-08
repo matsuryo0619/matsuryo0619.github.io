@@ -1,4 +1,3 @@
-document.addEventListener('PageFinish', function() {
   //フッターの親要素を作成
   const footer = document.createElement('footer');
   footer.id = 'footer';
@@ -7,4 +6,3 @@ document.addEventListener('PageFinish', function() {
 
   //フッターを追加
   document.body.appendChild(footer);
-});
