@@ -9,6 +9,7 @@
   height: 300px;
   width: 100%;
   transition: transform 0.5s ease;
+  text-align: center;
 }
 
 #footer:hover {
