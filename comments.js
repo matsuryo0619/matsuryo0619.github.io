@@ -1,4 +1,5 @@
-var NGComments = ["死ね", "バカ", ".exe"]; // 簡易的なNGワードの設定
+document.addEventListener('PageFinish', function() {
+  var NGComments = ["死ね", "バカ", ".exe"]; // 簡易的なNGワードの設定
 var regex = new RegExp(NGComments.join("|"));
 
 function test(wcheck) {
@@ -77,3 +78,5 @@ function createGoogleForm() {
 
 // フォーム生成関数の実行
 createGoogleForm();
+
+});
