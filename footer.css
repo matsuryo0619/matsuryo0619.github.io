@@ -1,11 +1,12 @@
 #footer {
-  padding: 100px;
+  padding: 0;
+  margin: 0;
   background-color: #bababa;
   position: fixed;
   z-index: 1000;
   top: 97%;
   left: 0;
-  height: 250px;
+  height: 300px;
   width: 100%;
   transition: transform 0.5s ease;
 }
