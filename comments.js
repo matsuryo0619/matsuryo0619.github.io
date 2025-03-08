@@ -127,27 +127,34 @@ document.addEventListener('PageFinish', function() {
       const filteredData = data.filter(entry => entry["サイトID"] === This_siteID);
 
       let text = "";
-      filteredData.forEach((entry, index) => {
-        const name = entry["ペンネーム"];
-        const timestamp = entry["タイムスタンプ"];
-        const commentsText = entry["コメント"];
 
-        if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
-          text += `
-            ${filteredData.length - index} 名前: ${name} ${timestamp} 
-            <pre>${commentsText}</pre>
-          `;
-        } else {
-          text += `
-            ${filteredData.length - index} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
-            <pre>${commentsText}</pre>
-          `;
-        }
-      });
+      if (filteredData.length === 0) {
+        // コメントがなかった場合
+        text = "<p>コメントはまだありません</p>";
+      } else {
+        filteredData.forEach((entry, index) => {
+          const name = entry["ペンネーム"];
+          const timestamp = entry["タイムスタンプ"];
+          const commentsText = entry["コメント"];
+
+          if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
+            text += `
+              ${filteredData.length - index} 名前: ${name} ${timestamp} 
+              <pre>${commentsText}</pre>
+            `;
+          } else {
+            text += `
+              ${filteredData.length - index} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
+              <pre>${commentsText}</pre>
+            `;
+          }
+        });
+      }
 
       document.getElementById("comments").innerHTML = text;
     })
     .catch(function(error) {
       console.error("コメントデータの読み込みに失敗しました:", error);
+      document.getElementById("comments").innerHTML = "<p>コメントの取得に失敗しました</p>";
     });
 });
