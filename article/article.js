@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
           addScriptToHead(pageData.action);
         }
 
-        // 🛠 スタイルをheadに追加（nullチェックを追加！）
-        if (pageData.style) {
+        // 🛠 スタイルをheadに追加（nullや空文字チェックを追加！）
+        if (pageData.style && pageData.style.trim() !== "") {
           addStyleToHead(pageData.style);
         }
       } else if (pageData && !pageData.public) {
