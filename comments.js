@@ -38,7 +38,12 @@ document.addEventListener('PageFinish', function() {
     nameInput.id = "form_Name";
     nameParagraph.appendChild(nameInput);
     form.appendChild(nameParagraph);
-
+    
+    //名前入力欄スタイル用
+    const name_span = document.createElement('span');
+    name_span.id = 'form_Name_Border';
+    nameParagraph.appendChild(name_span);
+    
     // コメント入力欄
     const commentParagraph = document.createElement("p");
     const commentTextarea = document.createElement("textarea");
