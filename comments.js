@@ -29,6 +29,7 @@ document.addEventListener('PageFinish', function() {
     form.id = 'Comment_form';
     form.target = "hidden_iframe"; // リダイレクトを防ぐため
 
+    // 送信前にNGワードチェック
     form.onsubmit = function() {
       // コメントにNGワードが含まれていなければ送信
       if (!test(document.getElementById("Comments_wcheck").value)) {
@@ -82,13 +83,15 @@ document.addEventListener('PageFinish', function() {
     submitInput.value = "送信";
     form.appendChild(submitInput);
 
+    // Googleフォームを追加する
     const content = document.getElementById('Rough_menu');
     content.appendChild(form);
   }
-  
+
   // フォーム生成
   createGoogleForm();
 
+  // コメント表示エリア
   const comments = document.createElement('div');
   comments.id = 'comments';
   document.getElementById('Rough_menu').appendChild(comments);
