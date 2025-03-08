@@ -35,6 +35,7 @@ document.addEventListener('PageFinish', function() {
     nameInput.placeholder = "スクラッチネーム";
     nameInput.value = "匿名";
     nameInput.required = true;
+    nameInput.id = "form_Name";
     nameParagraph.appendChild(nameInput);
     form.appendChild(nameParagraph);
 
