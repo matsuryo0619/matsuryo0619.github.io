@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const pageData = pagesData.pages[pagekey];
       const container = document.createElement('div');
 
-      if (pageData && (pageData.public)) {
+      if (pageData && pageData.public) {
         // 記事内容の整形と表示
         const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>"); // <h3 t> → <h3>
 
@@ -34,11 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (pageData.action) {
           addScriptToHead(pageData.action);
         }
-        // スタイルをheadに追加
+
+        // 🛠 スタイルをheadに追加（nullチェックを追加！）
         if (pageData.style) {
           addStyleToHead(pageData.style);
         }
-      } else if (!pageData.public) {
+      } else if (pageData && !pageData.public) {
         container.innerHTML = "<p>指定されたページは公開されていません</p>";
         document.body.appendChild(container);
       } else {
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const PageFinish = new CustomEvent('PageFinish');
       document.dispatchEvent(PageFinish);
 
-      // 📌 メニュー開閉ボタンを追加
+      // メニュー開閉のボタンを追加
       document.querySelectorAll(".Mainmenu").forEach(menu => {
         let button = document.createElement('button');
         button.textContent = "▼";
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let wrapper = document.createElement("div");
         wrapper.classList.add("contentWrapper");
 
-        let content = Array.from(menu.children).slice(1); // 🛠 修正: Array.form → Array.from
+        let content = Array.from(menu.children).slice(1); // 修正: Array.form → Array.from
         content.forEach(el => wrapper.appendChild(el));
         menu.appendChild(wrapper);
 
@@ -72,9 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
           button.textContent = wrapper.classList.contains("open") ? "▲" : "▼";
         });
       });
-
     })
-    .catch(error => console.error('YAML読み込みエラー', error)); // 🛠 修正: .catch の位置
+    .catch(error => console.error('YAML読み込みエラー', error));
 
   // 🛠 actionスクリプトを<head>に追加する関数
   function addScriptToHead(scriptContent) {
@@ -84,10 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(scriptElement);
   }
 
+  // 🛠 スタイルを<head>に追加する関数
   function addStyleToHead(styleContent) {
-    const StyleElement = document.createElement('style');
-    StyleElement.type = 'text/css';
-    StyleElement.textContent = styleContent;
-    document.head.appendChild(StyleElement);
+    const styleElement = document.createElement('style');
+    styleElement.type = 'text/css';
+    styleElement.textContent = styleContent;
+    document.head.appendChild(styleElement);
   }
 });
