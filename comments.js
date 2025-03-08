@@ -27,7 +27,12 @@ document.addEventListener('PageFinish', function() {
     form.action = formUrl;
     form.method = "post";
     form.id = 'Comment_form';
-    form.target = "hidden_iframe"; // リダイレクトを防ぐため
+
+    // iframeを作成してフォーム送信先に設定
+    const iframe = document.createElement("iframe");
+    iframe.name = "hidden_iframe";
+    iframe.style.display = "none"; // iframeを非表示にする
+    document.body.appendChild(iframe);
 
     // 送信前にNGワードチェック
     form.onsubmit = function() {
@@ -124,4 +129,3 @@ document.addEventListener('PageFinish', function() {
     });
 
 });
-
