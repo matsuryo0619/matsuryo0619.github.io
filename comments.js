@@ -116,12 +116,11 @@ document.addEventListener('PageFinish', function() {
 
       let text = "";
       data.forEach((entry, i) => {
-        const timestamp = replaceText(entry['タイムスタンプ']);
-        const name = replaceText(entry['ペンネーム']);
-        const comment = replaceText(entry['コメント']);
-        const id = replaceText(entry['サイドID']);
-        
-        text += `${i + 1} 名前: <a href="mailto:${id}">${name}</a> ${timestamp} <pre>${comment}</pre>`;
+        const name = replaceText(entry["ペンネーム"]);
+        const timestamp = replaceText(entry["タイムスタンプ"]);
+        const comments = replaceText(entry["コメント"]);
+        const id = replaceText(entry["サイドID"]);
+        text += `${i + 1} 名前: <a href="mailto:${id}">${name}</a> ${timestamp} <pre>${comments}</pre>`;
       });
       document.getElementById("comments").innerHTML = text;
     })
@@ -131,6 +130,9 @@ document.addEventListener('PageFinish', function() {
 
   // 特殊文字をエスケープする関数
   function replaceText(text) {
+    if (text === undefined || text === null) {
+      return ""; // undefinedやnullなら空文字を返す
+    }
     return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 });
