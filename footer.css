@@ -15,3 +15,9 @@
 #footer:hover {
   transform: translateY(-250px);
 }
+
+#footer_uparrow, #footer_downarrow {
+  position: absolute;
+  transition: opacity 0.5s ease;
+  top: 5px;
+}
