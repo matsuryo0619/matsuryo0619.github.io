@@ -70,44 +70,30 @@ document.addEventListener('PageFinish', function() {
     const content = document.getElementById('Rough_menu');
     content.appendChild(form);
 
-    // 送信ボタンを無効にする関数
+    // 送信ボタンを無効にする
     document.getElementById("submitbutton").disabled = true;
 
     // テキストエリアの入力があればボタンを有効にする
-    const textareas = document.getElementsByTagName('textarea');
-    const inputs = document.getElementsByTagName('input');
-    
-    // コメントが入力されていればボタンを有効にする
-    Array.from(textareas).forEach(function(textarea) {
-      textarea.addEventListener('input', function() {
-        if (textarea.value.trim() !== "") {
-          submitInput.disabled = false; // ボタンを有効にする
-        } else {
-          submitInput.disabled = true; // ボタンを無効にする
-        }
-      });
+    commentTextarea.addEventListener('input', function() {
+      submitInput.disabled = commentTextarea.value.trim() === "";
     });
 
     // フォーム送信時のカスタム処理
     form.onsubmit = function(event) {
-      event.preventDefault(); // リダイレクトを防ぐために、デフォルトの送信処理をキャンセル
+      event.preventDefault(); // デフォルトの送信処理をキャンセル
 
-      // コメントにNGワードが含まれていなければ送信
-      if (!test(document.getElementById("Comments_wcheck").value)) {
-        return false;
-      }
+      if (!test(commentTextarea.value)) return false;
 
-      // 送信ボタンを無効化して、送信完了状態にする
-      document.getElementById("submitbutton").disabled = true;
+      submitInput.disabled = true;
 
-      // ここでフォームを実際に送信
+      // ここでフォームを送信
       const iframe = document.createElement("iframe");
       iframe.name = "hidden_iframe";
       iframe.style.display = "none";
       document.body.appendChild(iframe);
 
-      form.target = "hidden_iframe"; // iframeをターゲットに指定
-      form.submit(); // フォーム送信
+      form.target = "hidden_iframe";
+      form.submit();
 
       // 送信後、1秒待ってページをリロードし、スクロール位置を復元
       const scrollY = window.scrollY;
@@ -116,7 +102,7 @@ document.addEventListener('PageFinish', function() {
         window.scrollTo(0, scrollY);
       }, 1000);
 
-      return true; // フォーム送信を許可
+      return true;
     };
   }
 
@@ -132,34 +118,33 @@ document.addEventListener('PageFinish', function() {
   fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A1:D")
     .then(response => response.text())
     .then(function(csvText) {
-      // CSVの読み込みとパース
       const data = d3.csvParse(csvText);
-
-      // データの逆順に
       data.reverse();
 
+      const This_siteID = 'art' + getUrlParameter("data");
+
+      // art1 だけをフィルタリング
+      const filteredData = data.filter(entry => entry["サイトID"] === This_siteID);
+
       let text = "";
-      data.forEach((entry, i) => {
-        const name = entry["ペンネーム"]; // ペンネームを取得
+      filteredData.forEach((entry, index) => {
+        const name = entry["ペンネーム"];
         const timestamp = entry["タイムスタンプ"];
         const commentsText = entry["コメント"];
-        const SiteID = entry["サイトID"];
-        const This_siteID = 'art' + getUrlParameter("data"); 
-        
-        if (SiteID === This_siteID) {
-          if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
-            text += `
-              ${data.length - i} 名前: ${name} ${timestamp} 
-              <pre>${commentsText}</pre>
-            `;
-          } else {
-            text += `
-              ${data.length - i} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
-              <pre>${commentsText}</pre>
-            `;
-          }
+
+        if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
+          text += `
+            ${filteredData.length - index} 名前: ${name} ${timestamp} 
+            <pre>${commentsText}</pre>
+          `;
+        } else {
+          text += `
+            ${filteredData.length - index} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
+            <pre>${commentsText}</pre>
+          `;
         }
       });
+
       document.getElementById("comments").innerHTML = text;
     })
     .catch(function(error) {
