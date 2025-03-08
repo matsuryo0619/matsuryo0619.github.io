@@ -116,11 +116,11 @@ document.addEventListener('PageFinish', function() {
 
       let text = "";
       data.forEach((entry, i) => {
-        const name = replaceText(entry["ペンネーム"]);
-        const timestamp = replaceText(entry["タイムスタンプ"]);
-        const comments = replaceText(entry["コメント"]);
-        const id = replaceText(entry["サイドID"]);
-        text += `${i + 1} 名前: <a href="mailto:${id}">${name}</a> ${timestamp} <pre>${comments}</pre>`;
+        const name = entry["ペンネーム"];
+        const timestamp = entry["タイムスタンプ"];
+        const commentsText = entry["コメント"];
+        const id = entry["サイドID"];
+        text += `${i + 1} 名前: <a href="mailto:${id}">${name}</a> ${timestamp} <pre>${commentsText}</pre>`;
       });
       document.getElementById("comments").innerHTML = text;
     })
@@ -128,11 +128,11 @@ document.addEventListener('PageFinish', function() {
       console.error("コメントデータの読み込みに失敗しました:", error);
     });
 
-  // 特殊文字をエスケープする関数
+  // コメントテキストの処理
   function replaceText(text) {
     if (text === undefined || text === null) {
       return ""; // undefinedやnullなら空文字を返す
     }
-    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return text; // HTMLタグをエスケープせずそのまま返す
   }
 });
