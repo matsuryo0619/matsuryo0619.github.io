@@ -74,8 +74,9 @@ document.addEventListener('PageFinish', function() {
     submitInput.value = "送信";
     form.appendChild(submitInput);
 
+    const container = document.getElementById('content');
     // フォームをDOMに追加
-    document.body.appendChild(form);
+    container.appendChild(form);
 
     //topを指定
     const content = document.getElementById('content');
