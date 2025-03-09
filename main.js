@@ -8,3 +8,12 @@ setTimeout(function() {
       location.reload();  
     }
 }, 1000); // 1000ms = 1秒
+
+//常にデータを更新させるように
+const urlParams = new URLSearchParams(window.location.search);
+if (!urlParams.has('rand')) {
+    let rand = Math.floor(Math.random() * 1000000);
+    rand = String(rand).padStart(6, '0');
+    urlParams.set('rand', rand); 
+    window.location.href = `${window.location.pathname}?${urlParams.toString()}`;
+}
