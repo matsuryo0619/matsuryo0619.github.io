@@ -22,6 +22,7 @@
 
 #Comment_form textarea {
   border: none;
+  height: auto;
   max-height: 200px;
   outline: none;
   background-color: transparent;
