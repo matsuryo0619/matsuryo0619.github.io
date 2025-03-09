@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
           : 'なし';
         
         div.innerHTML = `
-          <h3><a href="${result.url}" target="_blank" class="preview-link">${result.title}</a></h3>
+          <h3><a href="https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(result.url)}" target="_blank" class="preview-link">${result.title}</a></h3>
           <p>${result.content}</p>
           <p><b>タグ:</b> ${tags}</p>
         `;
