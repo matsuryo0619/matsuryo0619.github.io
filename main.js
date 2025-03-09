@@ -10,10 +10,10 @@ setTimeout(function() {
 }, 1000); // 1000ms = 1秒
 
 //常にデータを更新させるように
-let urlParams = new URLSearchParams(window.location.search);
-if (!urlParams.has('rand')) {
+if (!window.location.search.includes('rand=')) {  
+    let urlParams = new URLSearchParams(window.location.search); // `if` の中だけで宣言
     let rand = Math.floor(Math.random() * 1000000);
     rand = String(rand).padStart(6, '0');
-    urlParams.set('rand', rand); 
+    urlParams.set('rand', rand);
     window.location.href = `${window.location.pathname}?${urlParams.toString()}`;
 }
