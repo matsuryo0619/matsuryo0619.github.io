@@ -52,6 +52,11 @@ document.addEventListener('PageFinish', function() {
     commentParagraph.appendChild(commentTextarea);
     form.appendChild(commentParagraph);
 
+    commentTextarea.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = `${Math.min(this.scrollHeight, 200)}px`;
+    });
+
     // URLパラメータを hidden フィールドに追加
     const dataValue = getUrlParameter("data");
     const hiddenInput = document.createElement("input");
