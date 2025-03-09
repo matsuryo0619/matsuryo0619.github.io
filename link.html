@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <title>スゴスク! - リンク</title>
+    <meta charset='UTF-8'>
+    <style>
+      button {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>以下のリンクを開きます｡よろしいですか?</h1>
+    <p id='link'></p>
+    <br>
+    <button id='none'>いいえ</button>
+    <button id='yes'>はい</button>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // 'link' パラメータを取得
+      let link = urlParams.get('link');
+      link = decodeURLComponent(link);
+      document.getElementById('link').textContent = link;
+
+      // ボタンのクリックイベント設定
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (this.id === "none") {
+            window.close();  // ウィンドウを閉じる
+          } else if (this.id === "yes") {
+            window.location.href = link;  // 'link' のURLに遷移
+          }
+        });
+      });  
+
+    </script>
+  </body>
+</html>
