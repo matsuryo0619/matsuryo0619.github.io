@@ -20,7 +20,7 @@
 
       // 'link' パラメータを取得
       let link = urlParams.get('link');
-      link = decodeURLComponent(link);
+      link = decodeURlComponent(link);
       document.getElementById('link').textContent = link;
 
       // ボタンのクリックイベント設定
