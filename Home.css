@@ -15,21 +15,24 @@
 
 #title.active {
   opacity: 1;
-  animation: scaleBounce 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: scaleBounce 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* より滑らかなスケールアニメーション */
+/* 実際の動きは 0.6s で終わるが、アニメーション全体は 2s */
 @keyframes scaleBounce {
   0% {
     transform: scale(0.5);
   }
-  60% {
-    transform: scale(1.15); /* 少し大きくなる */
+  30% {
+    transform: scale(1.15);
   }
-  85% {
-    transform: scale(0.97); /* ちょっとだけ縮む */
+  50% {
+    transform: scale(0.97);
+  }
+  70% {
+    transform: scale(1);
   }
   100% {
-    transform: scale(1); /* 安定する */
+    transform: scale(1); /* 残り 1.4s はこの状態を維持 */
   }
 }
