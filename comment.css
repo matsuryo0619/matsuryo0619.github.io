@@ -19,3 +19,16 @@
   box-shadow: 0 2px 0 0 black; /* フォーカス時に下線が出現する効果 */
   transition: box-shadow 0.5s ease; /* box-shadowのアニメーション */
 }
+
+#Comment_form textarea {
+  border: none;
+  max-height: 200px;
+  outline: none;
+  background-color: transparent;
+  padding-bottom: 5px;
+}
+
+#Comment_form textarea:focus {
+  box-shadow: 0 2px 0 0 black;
+  transition: box-shadow 0.5s ease;
+}
