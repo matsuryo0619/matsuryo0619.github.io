@@ -168,8 +168,9 @@ document.addEventListener('PageFinish', function() {
 
       comments.querySelectorAll('.Comment_text').forEach(comment => {
         comment.querySelectorAll('a').forEach(anchor => {
-        // 各 a 要素の href 属性の先頭に追加
-        anchor.href = 'https://matsuryo0619.github.io/scratchblog/link.html?link=' + encodeURIComponent(anchor.href);
+          // 各 a 要素の href 属性の先頭に追加
+          anchor.href = 'https://matsuryo0619.github.io/scratchblog/link.html?link=' + encodeURIComponent(anchor.href);
+          anchor.target = '_blank';
         });
       });
     })
