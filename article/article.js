@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         container.id = 'content';
         container.innerHTML = `
-          <h1>${pageData.title}</h1>
+          <h1 id="content_title">${pageData.title}</h1>
           <p class="date">${pageData.data}</p>
           <div id="Rough_menu">${formattedContent}</div>
         `;
