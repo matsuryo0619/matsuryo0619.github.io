@@ -2,7 +2,7 @@ const title = document.getElementById('title');
 
 const options = {
   root: null,
-  rootMargin: '0px',
+  rootMargin: '0px　0px -50% 0px',
   threshold: 0.5
 };
 
