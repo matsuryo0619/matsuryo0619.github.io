@@ -10,7 +10,7 @@ setTimeout(function() {
 }, 1000); // 1000ms = 1秒
 
 //常にデータを更新させるように
-const urlParams = new URLSearchParams(window.location.search);
+let urlParams = new URLSearchParams(window.location.search);
 if (!urlParams.has('rand')) {
     let rand = Math.floor(Math.random() * 1000000);
     rand = String(rand).padStart(6, '0');
