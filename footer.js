@@ -23,10 +23,13 @@ Comment_Credit.href = 'https://oilabo.vercel.app/blog/2021/static-website-commen
 Comment_Credit.textContent = 'コメント機能';
 Comment_Credit.target = '_blank';
 
+//フッターメニューを追加
+footer_menu.appendChild(Comment_Credit);
+
 //フッターにメニューを追加
 footer.appendChild(footer_uparrow);
 footer.appendChild(footer_downarrow);
-footer_menu.appendChild(Comment_Credit);
+footer.appendChild(footer_menu);
 
 //フッターを追加
 document.body.appendChild(footer);
