@@ -5,6 +5,12 @@
     <meta charset='UTF-8'>
     <script src='fileload.js'></script>
     <script src='comments.js' defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const PageFinish = new CustomEvent('PageFinish');
+        document.dispatchEvent(PageFinish);
+      });
+    </script>
   </head>
   <body>
     
