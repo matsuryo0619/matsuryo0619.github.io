@@ -66,10 +66,6 @@ document.addEventListener('PageFinish', function() {
       this.style.height = `${Math.min(lineCount * 24, 200)}px`;
     });
 
-    commentTextarea.addEventListener('focus', function() {
-      this.select();
-    });
-
     // URLパラメータを hidden フィールドに追加
     const dataValue = getUrlParameter("data");
     const hiddenInput = document.createElement("input");
