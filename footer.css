@@ -11,6 +11,10 @@
   transition: transform 0.5s ease;
   text-align: center;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
 }
 
 #footer:hover {
@@ -21,4 +25,8 @@
   position: absolute;
   transition: opacity 0.5s ease;
   top: 5px;
+}
+
+#footer_menu {
+  position: absolute;
 }
