@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
       userElement.addEventListener('click', function() {
         const userName = this.getAttribute('data-user');
         if (userName !== '不明') {
-          window.open(`https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURlComponent('https://scratch.mit.edu/users/' + userName}`, '_blank');
+          window.open(`https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent('https://scratch.mit.edu/users/' + userName)}`, '_blank');
         }
       });
     });
