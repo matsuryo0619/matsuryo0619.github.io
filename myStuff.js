@@ -23,9 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const projectDiv = document.createElement('div');
       projectDiv.classList.add('projectList');
 
+      // 修正した部分
       projectDiv.innerHTML = `
         <div class="project-header">
-          <h3><a href="https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent('https://scratch.mit.edu/projects/'${item.id})}" target="_blank" class="preview-link">${item.text}</a></h3>
+          <h3><a href="https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent('https://scratch.mit.edu/projects/' + item.id)}" target="_blank" class="preview-link">${item.text}</a></h3>
           <span class="user-name" data-user="${item.user || '不明'}">${item.user || '不明'}</span>
         </div>
         <p class="project-content">${item.content || '説明なし'}</p>
