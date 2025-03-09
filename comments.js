@@ -156,7 +156,7 @@ document.addEventListener('PageFinish', function() {
             `;
           } else {
             text += `
-              ${filteredData.length - index} 名前: <a href="${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}" target="_blank">${name}</a> ${timestamp} 
+              ${filteredData.length - index} 名前: <a href="https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}" target="_blank">${name}</a> ${timestamp} 
               <pre class='Comment_text'>${commentsText}</pre>
             `;
           }
