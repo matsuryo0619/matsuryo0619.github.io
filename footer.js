@@ -3,7 +3,6 @@ const footer = document.createElement('footer');
 footer.id = 'footer';
 
 //フッターメニュー
-
 //フッター矢印 - 上
 const footer_uparrow = document.createElement('i');
 footer_uparrow.classList.add('fa-regular');
@@ -14,10 +13,15 @@ const footer_downarrow = document.createElement('i');
 footer_downarrow.classList.add('fa-regular');
 footer_downarrow.classList.add('fa-square-caret-down');
 footer_downarrow.id = 'footer_downarrow';
+//コメント機能クレジット表示
+const Comment_Credit = document.createElement('a');
+Comment_Credit.href = 'https://oilabo.vercel.app/blog/2021/static-website-commenting/#google_vignette';
+Comment_Credit.textContent = 'コメント機能';
 
 //フッターにメニューを追加
 footer.appendChild(footer_uparrow);
 footer.appendChild(footer_downarrow);
+footer.appendChild(Comment_Credit);
 
 //フッターを追加
 document.body.appendChild(footer);
