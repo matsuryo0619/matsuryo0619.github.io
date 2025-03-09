@@ -19,7 +19,7 @@ footer_menu.id = 'footer_menu';
 
 //コメント機能クレジット表示
 const Comment_Credit = document.createElement('a');
-Comment_Credit.href = 'https://oilabo.vercel.app/blog/2021/static-website-commenting/#google_vignette';
+Comment_Credit.href = 'https://matsuryo0619.github.io/scratchblog/link.html?link=' + encodeURIComponent('https://oilabo.vercel.app/blog/2021/static-website-commenting/#google_vignette');
 Comment_Credit.textContent = 'コメント機能';
 Comment_Credit.target = '_blank';
 
