@@ -11,7 +11,8 @@ const reqcss = [
 const reqjs = [
   {src: 'header', defer: true},
   {src: 'context', defer: true},
-  {src: 'footer', defer: true}
+  {src: 'footer', defer: true},
+  {src: 'main', defer: false}
 ];
 
 // CSSを読み込む
