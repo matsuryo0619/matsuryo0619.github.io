@@ -15,6 +15,9 @@ rand = String(rand).padStart(6, '0');
 // 現在のURLパラメータを取得
 let urlParams = new URLSearchParams(window.location.search);
 
-// `rand` を毎回更新
+// `rand` を削除してから新しい値をセット（これで二重にならない！）
+urlParams.delete('rand');
 urlParams.set('rand', rand);
+
+// 更新されたURLにリダイレクト
 window.location.href = `${window.location.pathname}?${urlParams.toString()}`;
