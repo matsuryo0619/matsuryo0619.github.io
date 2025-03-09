@@ -52,10 +52,15 @@ document.addEventListener('PageFinish', function() {
     commentParagraph.appendChild(commentTextarea);
     form.appendChild(commentParagraph);
 
-    // 入力時に高さを自動調整
+    // コメントエリアの高さを自動調整
     commentTextarea.addEventListener('input', function() {
       this.style.height = 'auto'; // 高さをリセット
-      this.style.height = `${Math.min(this.scrollHeight, 200)}px`; // 内容に合わせて高さを調整（最大200px）
+
+      // 改行 (\n) で行数をカウント
+      const lineCount = this.value.split('\n').length;
+
+      // 行数に24pxを掛け算し、最大200pxに制限
+      this.style.height = `${Math.min(lineCount * 24, 200)}px`;
     });
 
     // URLパラメータを hidden フィールドに追加
