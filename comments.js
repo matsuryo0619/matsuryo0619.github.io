@@ -38,6 +38,9 @@ document.addEventListener('PageFinish', function() {
     nameInput.id = "form_Name";
     nameParagraph.appendChild(nameInput);
     form.appendChild(nameParagraph);
+    nameInput.addEventListener('focus', function() {
+      this.select();
+    });
     
     // コメント入力欄
     const commentParagraph = document.createElement("p");
@@ -61,6 +64,10 @@ document.addEventListener('PageFinish', function() {
 
       // 行数に24pxを掛け算し、最大200pxに制限
       this.style.height = `${Math.min(lineCount * 24, 200)}px`;
+    });
+
+    commentTextarea.addEventListener('focus', function() {
+      this.select();
     });
 
     // URLパラメータを hidden フィールドに追加
