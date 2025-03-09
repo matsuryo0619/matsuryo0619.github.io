@@ -52,9 +52,10 @@ document.addEventListener('PageFinish', function() {
     commentParagraph.appendChild(commentTextarea);
     form.appendChild(commentParagraph);
 
+    // 入力時に高さを自動調整
     commentTextarea.addEventListener('input', function() {
-      this.style.height = 'auto';
-      this.style.height = `${Math.min(this.scrollHeight, 200)}px`;
+      this.style.height = 'auto'; // 高さをリセット
+      this.style.height = `${Math.min(this.scrollHeight, 200)}px`; // 内容に合わせて高さを調整（最大200px）
     });
 
     // URLパラメータを hidden フィールドに追加
