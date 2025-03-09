@@ -4,17 +4,32 @@
   font-size: 10vw;
   text-align: center;
   font-family: 'Nunito', sans-serif;
+  transform: scale(0.5);
+  transition: opacity 0.3s ease;
+  opacity: 0;
 }
 
 .title_claim {
   color: #f5bc42;
 }
 
-#title {
-  transform: scale(0.5);
-  transition: transform 0.5s ease;
+#title.active {
+  opacity: 1;
+  animation: scaleBounce 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-#title.active {
-  transform: scale(1);
+/* より滑らかなスケールアニメーション */
+@keyframes scaleBounce {
+  0% {
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.15); /* 少し大きくなる */
+  }
+  85% {
+    transform: scale(0.97); /* ちょっとだけ縮む */
+  }
+  100% {
+    transform: scale(1); /* 安定する */
+  }
 }
