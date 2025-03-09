@@ -9,3 +9,12 @@
 .title_claim {
   color: #f5bc42;
 }
+
+#title {
+  transform: scale(0.5);
+  transition: transform 0.5s ease;
+}
+
+#title.active {
+  transform: scale(1);
+}
