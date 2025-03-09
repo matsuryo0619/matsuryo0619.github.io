@@ -91,4 +91,13 @@ pages:
 
       // 初回ロード時にも進行状況を更新
       Change_progress();
+  art2: 
+    title: "にゃんこ大戦争 バトルシステム2"
+    data: "2025-3-9"
+    public: true
+    content: |
 
+    style: |
+
+    action: |
+    
