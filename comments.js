@@ -152,18 +152,26 @@ document.addEventListener('PageFinish', function() {
           if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
             text += `
               ${filteredData.length - index} 名前: ${name} ${timestamp} 
-              <pre>${commentsText}</pre>
+              <pre class='Comment_text'>${commentsText}</pre>
             `;
           } else {
             text += `
-              ${filteredData.length - index} 名前: <a href="https://scratch.mit.edu/users/${name}/" target="_blank">${name}</a> ${timestamp} 
-              <pre>${commentsText}</pre>
+              ${filteredData.length - index} 名前: <a href="${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}" target="_blank">${name}</a> ${timestamp} 
+              <pre class='Comment_text'>${commentsText}</pre>
             `;
           }
         });
       }
 
-      document.getElementById("comments").innerHTML = text;
+      const comments = document.getElementById("comments");
+      comments.innerHTML = text;
+
+      comments.querySelectorAll('.Comment_text').forEach(comment => {
+        comment.querySelectorAll('a').forEach(anchor => {
+        // 各 a 要素の href 属性の先頭に追加
+        anchor.href = 'https://matsuryo0619.github.io/scratchblog/link.html?link=' + encodeURIComponent(anchor.href);
+        });
+      });
     })
     .catch(function(error) {
       console.error("コメントデータの読み込みに失敗しました:", error);
