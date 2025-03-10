@@ -19,16 +19,14 @@ const callback = (entries, observer) => {
 const observer = new IntersectionObserver(callback, options);
 observer.observe(title);
 
-// アニメーション終了後に `span` をフェードイン
+// アニメーション終了後に `span` をフェードイン＆ `.title_claim` を滑らかに戻す
 title.addEventListener("animationend", () => {
-  document.querySelectorAll("#title span:not(.title_claim)").forEach(span => {
-    span.style.display = "inline"; // `display: none` を解除
-    span.style.opacity = "0"; // 最初は透明
-    span.style.transition = "opacity 1.5s ease-out"; // 1.5秒かけてなめらかに表示
+  document.querySelector(".title_claim").classList.add("space"); // 文字間を元に戻す
 
-    // 少し時間を空けてからフェードイン開始
+  document.querySelectorAll("#title span:not(.title_claim)").forEach(span => {
     setTimeout(() => {
-      span.style.opacity = "1";
-    }, 200); // 0.2秒待ってから徐々に表示
+      span.style.opacity = "1"; // フェードイン
+      span.style.transform = "translateY(0)"; // 上にスライド
+    }, 200); // 0.2秒遅れて開始
   });
 });
