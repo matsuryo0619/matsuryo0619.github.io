@@ -1,7 +1,6 @@
 #title {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   font-size: 10vw;
   text-align: center;
   font-family: 'Nunito', sans-serif;
@@ -14,10 +13,7 @@
 }
 
 .title_claim {
-  display: inline-block;
-  margin-right: -0.3em; /* 調整：文字間を詰める */
-  color: #f5bc42; /* 黄色 */
-  transition: margin-right 1.5s ease-out;
+  color: #f5bc42;
 }
 
 #title.active {
@@ -26,15 +22,7 @@
 }
 
 #title span:not(.title_claim) {
-  opacity: 0;  /* 最初は透明 */
-  display: inline; /* レイアウトを確保 */
-  transform: translateY(10px); /* 下から登場 */
-  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-}
-
-/* フェードイン後に `.title_claim` を滑らかに戻す */
-.title_claim.space {
-  margin-right: 0; /* 元の位置に戻す */
+  display: none;
 }
 
 @keyframes scaleBounce {
@@ -50,6 +38,7 @@
   35% {
     transform: scale(1);
   }
+  /* ここから先は見た目の変化なし */
   50% {
     transform: scale(1);
   }
