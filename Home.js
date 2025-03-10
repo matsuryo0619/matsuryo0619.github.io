@@ -19,9 +19,14 @@ const callback = (entries, observer) => {
 const observer = new IntersectionObserver(callback, options);
 observer.observe(title);
 
-// アニメーション終了後に `span` を表示
+// アニメーション終了後に `span` をフェードイン
 title.addEventListener("animationend", () => {
   document.querySelectorAll("#title span:not(.title_claim)").forEach(span => {
-    span.style.display = "unset";
+    span.style.display = "inline"; // `display: none` を解除
+    span.style.opacity = "0"; // 透明な状態で表示
+    span.style.transition = "opacity 0.5s ease-in-out"; // なめらかに表示
+    requestAnimationFrame(() => {
+      span.style.opacity = "1"; // フェードイン
+    });
   });
 });
