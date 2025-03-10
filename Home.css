@@ -15,10 +15,9 @@
 
 #title.active {
   opacity: 1;
-  animation: scaleBounce 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: scaleBounce 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* 実際の動きは 0.6s で終わるが、アニメーション全体は 2s */
 @keyframes scaleBounce {
   0% {
     transform: scale(0.5);
