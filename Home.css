@@ -15,8 +15,9 @@
 
 .title_claim {
   display: inline-block;
-  margin-right: -0.5em; /* 最初は文字が詰まる */
-  transition: margin-right 1.5s ease-out; /* なめらかに戻す */
+  margin-right: -0.3em; /* 調整：文字間を詰める */
+  color: #f5bc42; /* 黄色 */
+  transition: margin-right 1.5s ease-out;
 }
 
 #title.active {
