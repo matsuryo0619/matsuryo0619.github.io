@@ -23,10 +23,12 @@ observer.observe(title);
 title.addEventListener("animationend", () => {
   document.querySelectorAll("#title span:not(.title_claim)").forEach(span => {
     span.style.display = "inline"; // `display: none` を解除
-    span.style.opacity = "0"; // 透明な状態で表示
-    span.style.transition = "opacity 0.5s ease-in-out"; // なめらかに表示
-    requestAnimationFrame(() => {
-      span.style.opacity = "1"; // フェードイン
-    });
+    span.style.opacity = "0"; // 最初は透明
+    span.style.transition = "opacity 1.5s ease-out"; // 1.5秒かけてなめらかに表示
+
+    // 少し時間を空けてからフェードイン開始
+    setTimeout(() => {
+      span.style.opacity = "1";
+    }, 200); // 0.2秒待ってから徐々に表示
   });
 });
