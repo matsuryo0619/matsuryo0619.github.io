@@ -20,6 +20,7 @@
 
 #title span:not(.title_claim) {
   display: none;
+  transition: opacity 0.3s ease;
 }
 
 @keyframes scaleBounce {
