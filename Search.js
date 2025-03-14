@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const keywords = splitSearchQuery(query);
 
   console.log('🔍 検索ワード:', keywords);
-  console.log('🔍 検索タイプ（searchtype）:', searchtype);  // searchtype を直接確認
+  console.log('🔍 検索タイプ（searchtype）:', searchtype);  // searchtype を確認
 
   if (keywords.length === 0) {
     console.log('⚠️ 検索ワードが空です');
@@ -38,10 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
-  console.log('🔄 検索モード:', searchtype === 'or' ? 'OR検索' : 'AND検索'); // searchtype をそのまま使う
+  // 大文字 OR / AND を小文字に変換
+  const mode = searchtype.toLowerCase();  
+  console.log('🔄 検索モード:', mode === 'or' ? 'OR検索' : 'AND検索'); 
 
   const filteredData = data.filter(item => {
-    const match = searchtype === 'or'  // ここで 'or' なら OR 検索
+    const match = mode === 'or'  // 'or' なら OR 検索
       ? keywords.some(keyword =>
           item.title.toLowerCase().includes(keyword.toLowerCase()) ||
           item.content.toLowerCase().includes(keyword.toLowerCase()) ||
@@ -53,9 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
           item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
         );
 
-    // **各アイテムのマッチ状態を表示**
     console.log('📝 チェック中:', item.title, '| マッチ:', match);
-
     return match;
   });
 
