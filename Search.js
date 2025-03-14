@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function search(query, data, searchtype) {
   resultList.innerHTML = '';
   const keywords = splitSearchQuery(query);
-  
+
   console.log('🔍 検索ワード:', keywords);
-  console.log('🔍 検索タイプ:', searchtype);
+  console.log('🔍 検索タイプ（searchtype）:', searchtype);  // searchtype の確認
 
   if (keywords.length === 0) {
     console.log('⚠️ 検索ワードが空です');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const useOrSearch = searchtype === 'or';
 
-  console.log('🔄 検索モード:', useOrSearch ? 'OR検索' : 'AND検索');
+  console.log('🔄 検索モード:', useOrSearch ? 'OR検索' : 'AND検索'); // 検索モードが OR になっているか確認
 
   const filteredData = data.filter(item => {
     const match = useOrSearch
@@ -88,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
   setupPreviewHover();
   setupTagClick();
 }
-
 
     function matchesKeyword(item, keyword) {
       keyword = keyword.toLowerCase();
