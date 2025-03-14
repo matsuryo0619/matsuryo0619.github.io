@@ -28,15 +28,22 @@ document.addEventListener('DOMContentLoaded', function () {
     function search(query, data, searchtype) {
   resultList.innerHTML = '';
   const keywords = splitSearchQuery(query);
+  
+  console.log('🔍 検索ワード:', keywords);
+  console.log('🔍 検索タイプ:', searchtype);
+
   if (keywords.length === 0) {
+    console.log('⚠️ 検索ワードが空です');
     resultList.innerHTML = '<p>検索ワードを入力してください</p>';
     return;
   }
 
   const useOrSearch = searchtype === 'or';
 
-  const filteredData = data.filter(item => 
-    useOrSearch
+  console.log('🔄 検索モード:', useOrSearch ? 'OR検索' : 'AND検索');
+
+  const filteredData = data.filter(item => {
+    const match = useOrSearch
       ? keywords.some(keyword =>
           item.title.toLowerCase().includes(keyword.toLowerCase()) ||
           item.content.toLowerCase().includes(keyword.toLowerCase()) ||
@@ -46,10 +53,18 @@ document.addEventListener('DOMContentLoaded', function () {
           item.title.toLowerCase().includes(keyword.toLowerCase()) ||
           item.content.toLowerCase().includes(keyword.toLowerCase()) ||
           item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
-        )
-  );
+        );
+
+    // **各アイテムのマッチ状態を表示**
+    console.log('📝 チェック中:', item.title, '| マッチ:', match);
+
+    return match;
+  });
+
+  console.log('📌 フィルタ後のデータ:', filteredData);
 
   if (filteredData.length === 0) {
+    console.log('⚠️ 検索結果なし');
     resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
     return;
   }
