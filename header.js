@@ -29,6 +29,7 @@ SearchBtn.id = 'header_SearchBtn';
 // サイト内検索方法
 const SearchForm = document.createElement('select');
 SearchForm.id = 'header_option';
+SearchForm.value = urlParams.get('type');
 
 // サイト内検索方法オプション
 const SearchForm_option = [
