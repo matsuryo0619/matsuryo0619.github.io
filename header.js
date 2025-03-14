@@ -1,3 +1,6 @@
+//URLパラメータ
+const urlParams = new URLSearchParams(window.location.search);
+
 // ヘッダーを作成
 const header = document.createElement('header');
 header.id = 'header';
