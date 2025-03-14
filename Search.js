@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('headerSearchCreated', function (event) {
     const searchInput = event.detail.searchInput;
     const urlParams = new URLSearchParams(window.location.search);
-    const searchQuery = urlParams.get('q');
+    const searchtext = urlParams.get('q');
+    const searchQuery = decodeURIComponent(searchtext);
     const resultList = document.getElementById('searchResults');
     searchInput.value = searchQuery;
     document.title = `${searchQuery} - スゴスク!`;
