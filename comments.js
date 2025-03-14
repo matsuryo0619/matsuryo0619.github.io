@@ -50,6 +50,7 @@ document.addEventListener('PageFinish', function() {
     commentTextarea.rows = 10;
     commentTextarea.cols = 40;
     commentTextarea.maxLength = 400;
+    commentTextarea.height = 24;
     commentTextarea.id = "Comments_wcheck";
     commentTextarea.required = true;
     commentParagraph.appendChild(commentTextarea);
