@@ -28,8 +28,20 @@
   margin: 0 20px;  /* ロゴとボタンリストの間に余白 */
   border: none;
   height: 30px;
-  background-color: #00000000;
+  background-color: transparent;
   color: white;
+}
+
+#header_option {
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  backgrund-color: transparent;
+  color: white;
+}
+
+#header_option option {
+  color: black;
 }
 
 #header_buttonlist {
