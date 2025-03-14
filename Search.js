@@ -26,8 +26,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function search(query, data, searchtype) {
+      
       resultList.innerHTML = '';
       const keywords = splitSearchQuery(query);
+      console.log('searchtype:', searchtype);
+console.log('filterMethod:', filterMethod);
+console.log('useOrSearch:', useOrSearch);
+console.log('keywords:', keywords);
+
       if (keywords.length === 0) {
         resultList.innerHTML = '<p>検索ワードを入力してください</p>';
         return;
