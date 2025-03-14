@@ -111,7 +111,7 @@ function SearchURL() {
 }
 
 SearchForm.addEventListener('change', () => {
-  if (window.location.pathname === 'scratchblog/Search.html') {
+  if (window.location.pathname === '/scratchblog/Search.html') {
     urlParams.set('type', SearchForm.value);
     location.reload();
   }
