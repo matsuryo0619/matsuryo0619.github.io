@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (filteredData.length === 0) {
     console.log('⚠️ 検索結果なし');
-    resultList.innerHTML = SS'<p>結果が見つかりませんでした</p>';
+    resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
     return;
   }
 
