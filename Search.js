@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const keywords = splitSearchQuery(query);
 
   console.log('🔍 検索ワード:', keywords);
-  console.log('🔍 検索タイプ（searchtype）:', searchtype);  // searchtype を確認
+  console.log('🔍 検索タイプ（searchtype）:', searchtype);
 
   if (keywords.length === 0) {
     console.log('⚠️ 検索ワードが空です');
@@ -38,25 +38,39 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
-  // 大文字 OR / AND を小文字に変換
-  const mode = searchtype.toLowerCase();  
-  console.log('🔄 検索モード:', mode === 'or' ? 'OR検索' : 'AND検索'); 
+  const mode = searchtype.toLowerCase();
+  console.log('🔄 検索モード:', mode === 'or' ? 'OR検索' : 'AND検索');
 
   const filteredData = data.filter(item => {
-    const match = mode === 'or'  // 'or' なら OR 検索
-      ? keywords.some(keyword =>
-          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
-          item.content.toLowerCase().includes(keyword.toLowerCase()) ||
-          item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
-        )
-      : keywords.every(keyword =>
-          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
-          item.content.toLowerCase().includes(keyword.toLowerCase()) ||
-          item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
-        );
+    let matchedWords = []; // どのキーワードがヒットしたか記録するリスト
 
-    console.log('📝 チェック中:', item.title, '| マッチ:', match);
-    return match;
+    const isMatch = keywords[mode === 'or' ? 'some' : 'every'](keyword => {
+      let hitLocations = []; // どこにヒットしたか記録
+
+      if (item.title.toLowerCase().includes(keyword.toLowerCase())) {
+        hitLocations.push('タイトル');
+      }
+      if (item.content.toLowerCase().includes(keyword.toLowerCase())) {
+        hitLocations.push('内容');
+      }
+      if (item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))) {
+        hitLocations.push('タグ');
+      }
+
+      if (hitLocations.length > 0) {
+        matchedWords.push(`"${keyword}"（${hitLocations.join(', ')}）`);
+        return true; // このキーワードでマッチした
+      }
+      return false; // マッチしなかった
+    });
+
+    // **ログ出力**
+    console.log('📝 チェック中:', item.title, '| マッチ:', isMatch);
+    if (matchedWords.length > 0) {
+      console.log('  ↳ ヒット:', matchedWords.join('、 '));
+    }
+
+    return isMatch;
   });
 
   console.log('📌 フィルタ後のデータ:', filteredData);
@@ -85,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   setupTagClick();
 }
+
 
     function matchesKeyword(item, keyword) {
       keyword = keyword.toLowerCase();
