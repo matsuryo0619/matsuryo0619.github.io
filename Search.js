@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const keywords = splitSearchQuery(query);
 
   console.log('🔍 検索ワード:', keywords);
-  console.log('🔍 検索タイプ（searchtype）:', searchtype);  // searchtype の確認
+  console.log('🔍 検索タイプ（searchtype）:', searchtype);  // searchtype を直接確認
 
   if (keywords.length === 0) {
     console.log('⚠️ 検索ワードが空です');
@@ -38,12 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
-  const useOrSearch = searchtype === 'or';
-
-  console.log('🔄 検索モード:', useOrSearch ? 'OR検索' : 'AND検索'); // 検索モードが OR になっているか確認
+  console.log('🔄 検索モード:', searchtype === 'or' ? 'OR検索' : 'AND検索'); // searchtype をそのまま使う
 
   const filteredData = data.filter(item => {
-    const match = useOrSearch
+    const match = searchtype === 'or'  // ここで 'or' なら OR 検索
       ? keywords.some(keyword =>
           item.title.toLowerCase().includes(keyword.toLowerCase()) ||
           item.content.toLowerCase().includes(keyword.toLowerCase()) ||
