@@ -75,7 +75,7 @@ Logo.src = 'https://matsuryo0619.github.io/scratchblog/img/Logo.png';
     if (event.key === 'Enter') {
       const value = Search.value;
       if (value.trim().length > 0) {
-        window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${value}`;
+        window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(value)}`;
       }
     }
   });
@@ -84,7 +84,7 @@ Logo.src = 'https://matsuryo0619.github.io/scratchblog/img/Logo.png';
   SearchBtn.addEventListener('click', function () {
     const value = Search.value;
     if (value.trim().length > 0) {
-      window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${value}`;
+      window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(value)}`;
     }
   });
 
