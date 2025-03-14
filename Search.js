@@ -33,16 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const useOrSearch = searchtype === 'or'; // searchtype が "or" なら OR 検索
-      const filterMethod = useOrSearch ? 'some' : 'every';
-
-      const filteredData = data.filter(item =>
-        keywords[filterMethod](keyword =>
-          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
-          item.content.toLowerCase().includes(keyword.toLowerCase()) ||
-          item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
-        )
-      );
+      const useOrSearch = searchtype === 'or'; // OR検索ならtrue
+      const filteredData = data.filter(item => {
+        return useOrSearch
+          ? keywords.some(keyword => matchesKeyword(item, keyword)) // OR検索
+          : keywords.every(keyword => matchesKeyword(item, keyword)); // AND検索
+      });
 
       if (filteredData.length === 0) {
         resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
@@ -69,6 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
       setupTagClick();
     }
 
+    function matchesKeyword(item, keyword) {
+      keyword = keyword.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(keyword) ||
+        item.content.toLowerCase().includes(keyword) ||
+        item.tags.some(tag => tag.toLowerCase().includes(keyword))
+      );
+    }
+
     function setupTagClick() {
       document.querySelectorAll('.tag-link').forEach(tagElement => {
         if (!tagElement.hasAttribute('data-click-bound')) {
@@ -83,8 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function splitSearchQuery(query) {
-      const keywords = query.split(/[& ]+/);
-      return keywords.filter(keyword => keyword.trim() !== '');
+      return query.split(/\s+/).filter(keyword => keyword.trim() !== ''); // 空白で分割し、空文字を除外
     }
 
     function setupPreviewHover() {
@@ -125,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
               });
             }
           }, 1000); // 1秒の遅延
-
         });
 
         link.addEventListener('mouseleave', function () {
