@@ -38,6 +38,7 @@
   outline: none;
   background-color: transparent;
   color: white;
+  margin-right: 5px;
 }
 
 #header_option option {
