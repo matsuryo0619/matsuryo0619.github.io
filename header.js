@@ -43,7 +43,11 @@ SearchForm_option.forEach((item) => {
   SearchForm.appendChild(option);
 });
 
-SearchForm.value = urlParams.get('type');
+const Params_type = urlParams.get('type');
+
+if (Params_type) {
+  SearchForm.value = Params_type;
+}
 
 SearchDIV.appendChild(SearchBtn);
 SearchDIV.appendChild(Search);
