@@ -30,6 +30,7 @@
   height: 30px;
   background-color: transparent;
   color: white;
+  outline: none;
 }
 
 #header_option {
