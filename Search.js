@@ -26,50 +26,54 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function search(query, data, searchtype) {
-      
-      resultList.innerHTML = '';
-      const keywords = splitSearchQuery(query);
-      console.log('searchtype:', searchtype);
-console.log('filterMethod:', filterMethod);
-console.log('useOrSearch:', useOrSearch);
-console.log('keywords:', keywords);
+  resultList.innerHTML = '';
+  const keywords = splitSearchQuery(query);
+  if (keywords.length === 0) {
+    resultList.innerHTML = '<p>検索ワードを入力してください</p>';
+    return;
+  }
 
-      if (keywords.length === 0) {
-        resultList.innerHTML = '<p>検索ワードを入力してください</p>';
-        return;
-      }
+  const useOrSearch = searchtype === 'or';
 
-      const useOrSearch = searchtype === 'or'; // OR検索ならtrue
-      const filteredData = data.filter(item => {
-        return useOrSearch
-          ? keywords.some(keyword => matchesKeyword(item, keyword)) // OR検索
-          : keywords.every(keyword => matchesKeyword(item, keyword)); // AND検索
-      });
+  const filteredData = data.filter(item => 
+    useOrSearch
+      ? keywords.some(keyword =>
+          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.content.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
+        )
+      : keywords.every(keyword =>
+          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.content.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
+        )
+  );
 
-      if (filteredData.length === 0) {
-        resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
-        return;
-      }
+  if (filteredData.length === 0) {
+    resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
+    return;
+  }
 
-      filteredData.forEach(result => {
-        const div = document.createElement('div');
-        div.classList.add('result-item');
-        const tags = (result.tags && result.tags.length > 0)
-          ? result.tags.map(tag => `<a href="#" class="tag-link">${tag}</a>`).join(', ')
-          : 'なし';
+  filteredData.forEach(result => {
+    const div = document.createElement('div');
+    div.classList.add('result-item');
+    const tags = (result.tags && result.tags.length > 0)
+      ? result.tags.map(tag => `<a href="#" class="tag-link">${tag}</a>`).join(', ')
+      : 'なし';
 
-        div.innerHTML = `
-          <h3><a href="https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(result.url)}" target="_blank" class="preview-link">${result.title}</a></h3>
-          <p>${result.content}</p>
-          <p><b>タグ:</b> ${tags}</p>
-        `;
+    div.innerHTML = `
+      <h3><a href="https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(result.url)}" target="_blank" class="preview-link">${result.title}</a></h3>
+      <p>${result.content}</p>
+      <p><b>タグ:</b> ${tags}</p>
+    `;
 
-        resultList.appendChild(div);
-      });
+    resultList.appendChild(div);
+  });
 
-      setupPreviewHover();
-      setupTagClick();
-    }
+  setupPreviewHover();
+  setupTagClick();
+}
+
 
     function matchesKeyword(item, keyword) {
       keyword = keyword.toLowerCase();
