@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = event.detail.searchInput;
     const urlParams = new URLSearchParams(window.location.search);
     const searchtext = urlParams.get('q');
+    const searchtype = urlParams.get('type');
     const searchQuery = decodeURIComponent(searchtext);
     const resultList = document.getElementById('searchResults');
     searchInput.value = searchQuery;
@@ -17,24 +18,28 @@ document.addEventListener('DOMContentLoaded', function () {
         data = await response.json();
         console.log('データ取得成功:', data);
 
-        if (searchQuery) search(searchQuery, data);
+        if (searchQuery) search(searchQuery, data, searchtype);
       } catch (error) {
         console.error(error);
         resultList.innerHTML = '<p>データを取得できませんでした</p>';
       }
     }
 
-    function search(query, data) {
+    function search(query, data, searchtype) {
       resultList.innerHTML = '';
-      if (!query.trim()) {
-        resultList.innerHTML = '<p>検索ワードを入力してください</p>';
-        return;
+      const keywords = splitSearchQuery(query);
+      if (keywords.length === 0) {
+      resultList.innerHTML = '<p>検索ワードを入力してください</p>';
+      return;
       }
 
+      const filterMethod = useOrSearch ? 'some' : 'every';
       const filteredData = data.filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase()) ||
-        item.content.toLowerCase().includes(query.toLowerCase()) ||
-        item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+        keywords[filterMethod](keyword =>
+          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.content.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
+        )
       );
 
       if (filteredData.length === 0) {
@@ -70,6 +75,11 @@ document.addEventListener('DOMContentLoaded', function () {
           window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(tag)}`;
         });
       });
+    }
+
+    function splitSearchQuery(query) {
+      const keywords = query.split(/[& ]+/);
+      return keywords.filter(keyword => keyword.trim() !== '');
     }
 
     function setupPreviewHover() {
