@@ -93,7 +93,7 @@ Search.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     const value = Search.value;
     if (value.trim().length > 0) {
-      window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(value)}`;
+      window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(value)}&type=${SearchForm.value}`;
     }
   }
 });
@@ -102,7 +102,13 @@ Search.addEventListener('keydown', function (event) {
 SearchBtn.addEventListener('click', function () {
   const value = Search.value;
   if (value.trim().length > 0) {
-    window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(value)}`;
+    window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(value)}&type=${SearchForm.value}`;
+  }
+});
+
+SearchForm.addEventListener('change', () => {
+  if (window.location.pathname === 'scratchblog/Search.html') {
+    urlParams.set('type', SearchForm.value);
   }
 });
 
