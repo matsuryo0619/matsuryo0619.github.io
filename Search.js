@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tagElement.addEventListener('click', function (event) {
           event.preventDefault();
           const tag = event.target.textContent;
-          window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${tag}`;
+          window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(tag)}`;
         });
       });
     }
