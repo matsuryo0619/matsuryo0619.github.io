@@ -1,4 +1,4 @@
-//URLパラメータ
+// URLパラメータ
 const urlParams = new URLSearchParams(window.location.search);
 
 // ヘッダーを作成
@@ -26,15 +26,15 @@ const SearchBtn = document.createElement('i');
 SearchBtn.classList.add('fa-solid', 'fa-magnifying-glass');
 SearchBtn.id = 'header_SearchBtn';
 
-//サイト内検索方法
+// サイト内検索方法
 const SearchForm = document.createElement('select');
 SearchForm.id = 'header_option';
 
-//サイト内検索方法オプション
+// サイト内検索方法オプション
 const SearchForm_option = [
   { value: 'AND', text: 'すべて' },
   { value: 'OR', text: 'いずれか' }
-]
+];
 
 SearchForm_option.forEach((item) => {
   const option = document.createElement('option');
@@ -86,37 +86,40 @@ header_margin.textContent = 'ヘッダー間隔';
 header_margin.id = 'header_margin';
 document.body.prepend(header_margin);
 
-// ヘッダーイベント
+// ヘッダーロゴのクリックイベント
 Logo.addEventListener('click', function () {
   window.location.href = 'https://matsuryo0619.github.io/scratchblog/Home.html';
 });
 
+// 検索URLを生成する関数
+function SearchURL(value) {
+  return `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(value)}&type=${SearchForm.value}`;
+}
+
 // 検索バーにEnterが押された時の処理
 Search.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
-    const value = Search.value;
-    if (value.trim().length > 0) {
-      window.location.href = SearchURL();
+    const value = Search.value.trim();
+    if (value.length > 0) {
+      window.location.href = SearchURL(value);
     }
   }
 });
 
 // 検索ボタンが押されたときの処理
 SearchBtn.addEventListener('click', function () {
-  const value = Search.value;
-  if (value.trim().length > 0) {
-    window.location.href = SearchURL();
+  const value = Search.value.trim();
+  if (value.length > 0) {
+    window.location.href = SearchURL(value);
   }
 });
 
-function SearchURL() {
-  return `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(value)}&type=${SearchForm.value}`;
-}
-
+// 検索方法が変更されたときの処理
 SearchForm.addEventListener('change', () => {
   if (window.location.pathname === '/scratchblog/Search.html') {
+    const value = Search.value.trim();
     urlParams.set('type', SearchForm.value);
-    location.reload();
+    window.location.href = SearchURL(value);
   }
 });
 
