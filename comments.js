@@ -81,9 +81,14 @@ document.addEventListener('PageFinish', function() {
     submitInput.id = "submitbutton";
     submitInput.value = "送信";
     form.appendChild(submitInput);
-    
+
+    const comments_text = document.createElement('h3');
+    comments_text.textContent = 'コメント';
+
+    //コメントエリア
     const div = document.createElement('div');
     div.id = 'commentsArea';
+    div.appendChild(comments_text);
     div.appendChild(form);
 
     // フォームを追加
