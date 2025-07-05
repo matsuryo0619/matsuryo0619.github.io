@@ -4,7 +4,7 @@ pages:
     data: "2025-2-22"
     public: true
     content: |
-      <div class='Mainmenu' t>
+      <div class='Mainmenu' data-ml='セーブコード'>
         <h3 t>セーブコード</h3>
         <input type='text' id='Savecode_input' placeholder='セーブコードを入力してね!' t>
         <div id='Player_progress' t></div>
