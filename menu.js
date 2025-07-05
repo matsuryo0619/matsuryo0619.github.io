@@ -1,6 +1,8 @@
 document.addEventListener('PageFinish', function() {
   const index = document.createElement('div');
   index.id = 'index';
+  index.style.position = 'absolute';
+  index.style.cursor = 'move';
   document.body.appendChild(index);
   const indextitle = document.createElement('p');
   indextitle.textContent = '目次';
