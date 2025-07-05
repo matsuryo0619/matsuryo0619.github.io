@@ -6,10 +6,24 @@
     <script src='fileload.js'></script>
     <script src='comments.js' defer></script>
     <script src="https://d3js.org/d3.v6.min.js" charset="utf-8"></script>
+    <script src='https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js'></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const PageFinish = new CustomEvent('PageFinish');
         document.dispatchEvent(PageFinish);
+      });
+
+      document.addEventListener('PageFinish', () => {
+        fetch('https://matsuryo0619.github.io/scratchblog/article.yaml')
+        .then(response => response.text())
+        .then(yamlData => {
+          const pagesData = jsyaml.load(yamlData);
+          // 動的にキーを作成
+          const pagekey = `art${sitedata}`;
+          // ページデータを取得
+          const pageData = pagesData.pages[pagekey];
+        })
+        .catch(error => console.error('YAML読み込みエラー', error));
       });
     </script>
     <style>
