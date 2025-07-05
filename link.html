@@ -4,24 +4,25 @@
     <title>スゴスク! - リンク</title>
     <meta charset='UTF-8'>
     <style>
-      html, body {
-        display: flex;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-      }
-      
       button {
         display: inline-block;
+      }
+
+      div {
+        position: absolute;
+        right: 50%;
+        top: 50%;
       }
     </style>
   </head>
   <body>
+    <div>
     <h1>以下のリンクを開きます｡よろしいですか?</h1>
     <p id='link'></p>
     <br>
     <button id='none'>いいえ</button>
     <button id='yes'>はい</button>
+    </div>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
 
