@@ -168,7 +168,7 @@ document.addEventListener('PageFinish', function() {
           const timestamp = entry["タイムスタンプ"];
           const commentsText = entry["コメント"];
 
-          if (name === "匿名" || !/^[a-zA-Z\s]+$/.test(name)) {
+          if (name === "匿名" || !/^[a-zA-Z0-9_-]+$/.test(name)) {
             text += `
               ${filteredData.length - index} 名前: ${name} ${timestamp} 
               <pre class='Comment_text'>${commentsText}</pre>
