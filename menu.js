@@ -2,6 +2,8 @@ document.addEventListener('PageFinish', function() {
   const index = document.createElement('div');
   index.id = 'index';
   index.style.position = 'absolute';
+  index.style.top = '10%';
+  index.style.left = '10%';
   index.style.cursor = 'move';
   document.body.appendChild(index);
   const indextitle = document.createElement('p');
