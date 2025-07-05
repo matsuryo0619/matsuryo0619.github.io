@@ -84,6 +84,8 @@ document.addEventListener('PageFinish', function() {
 
     const comments_text = document.createElement('h3');
     comments_text.textContent = 'コメント';
+    const comments_allshow = document.createElement('a');
+    comments_allshow.href = `https://matsuryo0619.github.io/scratchblog/comments.html?data=${getUrlParameter('data')}`;
 
     //コメントエリア
     const div = document.createElement('div');
