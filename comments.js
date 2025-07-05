@@ -82,17 +82,19 @@ document.addEventListener('PageFinish', function() {
     submitInput.value = "送信";
     form.appendChild(submitInput);
 
+    const comments_div = document.createElement('div');
     const comments_text = document.createElement('h3');
     comments_text.textContent = 'コメント';
     const comments_allshow = document.createElement('a');
     comments_allshow.href = `https://matsuryo0619.github.io/scratchblog/comments.html?data=${getUrlParameter('data')}`;
     comments_allshow.textContent = 'すべて表示';
-    comments_text.appendChild(comments_allshow);
+    comments_div.appendChild(comments_text);
+    comments_div.appendChild(comments_allshow);
 
     //コメントエリア
     const div = document.createElement('div');
     div.id = 'commentsArea';
-    div.appendChild(comments_text);
+    div.appendChild(comments_div);
     div.appendChild(form);
 
     // フォームを追加
