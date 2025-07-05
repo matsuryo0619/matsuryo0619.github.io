@@ -132,7 +132,7 @@ document.addEventListener('PageFinish', function() {
   // コメント表示エリア
   const comments = document.createElement('div');
   comments.id = 'comments';
-  document.getElementById('Rough_menu').appendChild(comments);
+  document.getElementById('commentsArea').appendChild(comments);
 
   // d3.v6のfetchを使用してCSVを読み込み
   fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A1:D")
