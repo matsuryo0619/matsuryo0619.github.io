@@ -25,6 +25,11 @@
           const pagekey = `art${sitedata}`;
           // ページデータを取得
           const pageData = pagesData.pages[pagekey];
+          
+          const a = document.createElement('a');
+          a.href = `https://matsuryo0619.github.io/scratchblog/article/article/html?data=${sitedata}`;
+          a.textContent = pageData.title;
+          document.getElementById('Rough_menu').appendChild(a);
         })
         .catch(error => console.error('YAML読み込みエラー', error));
       });
