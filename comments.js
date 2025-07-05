@@ -81,10 +81,14 @@ document.addEventListener('PageFinish', function() {
     submitInput.id = "submitbutton";
     submitInput.value = "送信";
     form.appendChild(submitInput);
+    
+    const div = document.createElement('div');
+    div.id = 'commentsArea';
+    div.appendChild(form);
 
     // フォームを追加
     const content = document.getElementById('Rough_menu');
-    content.appendChild(form);
+    content.appendChild(div);
 
     // 送信ボタンを無効にする
     document.getElementById("submitbutton").disabled = true;
