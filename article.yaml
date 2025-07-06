@@ -9,6 +9,9 @@ pages:
         <input type='text' id='Savecode_input' placeholder='セーブコードを入力してね!' t>
         <div id='Player_progress' t></div>
       </div>
+      <div class='Mainmenu' data-ml='技術'>
+        <h3>技術</h3>
+      </div>
     style: |
       #Savecode_input {
         
