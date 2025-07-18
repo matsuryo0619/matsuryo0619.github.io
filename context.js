@@ -74,9 +74,17 @@ const conditionalMenus = [
         console.log(SelectedText);
         if(SelectedText.length === 0) return;
         const query = encodeURIComponent(SelectedText);
-        window.location.href = `https://search.yahoo.co.jp/search?p=${query}`;
+        window.open(`https://search.yahoo.co.jp/search?p=${query}`);
         }
         },
+        { type: 'btn', text: 'Bing', onclick:
+        () => {
+        console.log(SelectedText);
+        if(SelectedText.length === 0) return;
+        const query = encodeURIComponent(SelectedText);
+        window.open(`https://www.bing.com/search?q=${query}`);
+        }
+        }
       ]
     }
   },
