@@ -33,8 +33,6 @@ function buildMenu(container, items) {
       btn.style.padding = "8px";
       btn.style.cursor = "pointer";
       btn.style.borderBottom = "1px solid #ddd";
-      btn.onmouseover = () => (btn.style.backgroundColor = "#eee");
-      btn.onmouseout = () => (btn.style.backgroundColor = "white");
       btn.onclick = (e) => {
         e.stopPropagation();
         item.onclick();
