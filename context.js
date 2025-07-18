@@ -29,6 +29,7 @@ function buildMenu(container, items) {
   items.forEach((item) => {
     if (item.type === "btn") {
       const btn = document.createElement("div");
+      btn.classList.add('border');
       btn.textContent = item.text;
       btn.style.padding = "8px";
       btn.style.cursor = "pointer";
