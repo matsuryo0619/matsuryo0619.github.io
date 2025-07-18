@@ -66,9 +66,17 @@ const conditionalMenus = [
         console.log(SelectedText);
         if(SelectedText.length === 0) return;
         const query = encodeURIComponent(SelectedText);
-        window.location.href = `https://google.com/search?q=${query}`;
+        window.open(`https://google.com/search?q=${query}`);
         }
+        },
+        { type: 'btn', text: 'Yahoo!', onclick:
+        () => {
+        console.log(SelectedText);
+        if(SelectedText.length === 0) return;
+        const query = encodeURIComponent(SelectedText);
+        window.location.href = `https://search.yahoo.co.jp/search?p=${query}`;
         }
+        },
       ]
     }
   },
