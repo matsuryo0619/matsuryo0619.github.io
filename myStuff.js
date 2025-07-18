@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     data.forEach(item => {
       const projectDiv = document.createElement('div');
       projectDiv.classList.add('projectList');
+      projectDiv.classList.add('border');
 
       // 修正した部分
       projectDiv.innerHTML = `
