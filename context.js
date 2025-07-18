@@ -14,11 +14,11 @@ document.body.appendChild(menu);
 const menus = [
   {
     type: 'parent',
-    text: 'リンク',
+    text: 'サイト',
     children: [
       {
         type: 'btn',
-        text: 'このサイトのリンクを保存',
+        text: 'リンクを保存',
         onclick: () => {
           if (!navigator.clipboard) {
             console.log('クリップボードに対応していません');
@@ -32,6 +32,13 @@ const menus = [
               console.log('コピーできませんでした');
             }
           );
+        }
+      },
+      {
+        type: 'btn',
+        text: '再読み込み',
+        onclick: () => {
+          window.location.reload();
         }
       }
     ]
