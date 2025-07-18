@@ -64,7 +64,6 @@ function buildMenu(container, items) {
       btn.textContent = item.text;
       btn.style.padding = "8px";
       btn.style.cursor = "pointer";
-      btn.style.borderBottom = "1px solid #ddd";
       btn.onclick = (e) => {
         e.stopPropagation();
         item.onclick();
