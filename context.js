@@ -4,7 +4,6 @@ menu.classList.add("border");
 menu.style.position = "absolute";
 menu.style.minWidth = "200px";
 menu.style.backgroundColor = "white";
-menu.style.border = "1px solid black";
 menu.style.display = "none";
 menu.style.zIndex = 9999;
 menu.style.padding = "5px";
@@ -47,7 +46,6 @@ function buildMenu(container, items) {
       parentDiv.textContent = item.text + " ▶";
       parentDiv.style.padding = "8px";
       parentDiv.style.cursor = "pointer";
-      parentDiv.style.borderBottom = "1px solid #ddd";
       parentDiv.style.position = "relative";
 
       // サブメニュー用のdiv作成
@@ -57,7 +55,6 @@ function buildMenu(container, items) {
       subMenu.style.left = "100%";
       subMenu.style.minWidth = "150px";
       subMenu.style.backgroundColor = "white";
-      subMenu.style.border = "1px solid black";
       subMenu.style.display = "none";
       subMenu.style.zIndex = 10000;
 
