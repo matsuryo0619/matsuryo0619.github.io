@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const searchtext = urlParams.get('q');
     const searchtype = urlParams.get('type'); // OR or AND の検索タイプ
-    const searchQuery = searchtext ? decodeURIComponent(searchtext) : '';
+    const searchQuery = searchtext ? searchtext : '';
     const resultList = document.getElementById('searchResults');
     searchInput.value = searchQuery;
     document.title = `${searchQuery} - スゴスク!`;
