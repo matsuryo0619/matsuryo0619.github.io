@@ -17,5 +17,14 @@ document.oncontextmenu = function () {
 };
 
 document.addEventListener('contextmenu', (event) => {
-  menu.style.display = '';
+  if (!menu.contais(event.target)) {
+    menu.style.display = 'none';
+    return false;
+  }
+
+  const MouseX = event.clientX;
+  const MouseY = event.clientY;
+  
+  menu.style.left = `${MouseX}px`;
+  menu.style.top = `${MouseY}px`
 });
