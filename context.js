@@ -16,6 +16,7 @@ document.addEventListener('contextmenu', (event) => {
   menu.style.left = `${event.clientX}px`;
   menu.style.top = `${event.clientY}px`;
   menu.style.display = 'block';
+  menu.style.zIndex = 9999;
 });
 
 document.addEventListener('click', (event) => {
