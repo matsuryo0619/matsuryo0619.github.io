@@ -10,63 +10,61 @@ menu.style.padding = "5px";
 
 document.body.appendChild(menu);
 
-// ✅ メニューを関数で返す
-function menus() {
-  const selection = window.getSelection().toString();
-
-  if (selection) {
-    // 選択文字あり用のメニュー
-    return [
+// ★ 常に表示されるメニュー
+const menus = [
+  {
+    type: 'parent',
+    text: 'リンク',
+    children: [
       {
-        type: "btn",
-        text: `「${selection}」をコピー`,
+        type: 'btn',
+        text: 'このサイトのリンクを保存',
         onclick: () => {
-          navigator.clipboard.writeText(selection).then(
+          if (!navigator.clipboard) {
+            console.log('クリップボードに対応していません');
+            return;
+          }
+          navigator.clipboard.writeText(window.location.href).then(
             () => {
-              console.log("コピー完了！");
+              console.log('コピー完了');
             },
             () => {
-              console.log("コピー失敗...");
+              console.log('コピーできませんでした');
             }
           );
-        },
-      },
-    ];
-  } else {
-    // 通常メニュー
-    return [
-      {
-        type: "parent",
-        text: "リンク",
-        children: [
-          {
-            type: "btn",
-            text: "このサイトのリンクを保存",
-            onclick: () => {
-              if (!navigator.clipboard) {
-                console.log("クリップボードに対応していません");
-                return;
-              }
-
-              navigator.clipboard.writeText(window.location.href).then(
-                () => {
-                  console.log("コピー完了");
-                },
-                () => {
-                  console.log("コピーできませんでした");
-                }
-              );
-            },
-          },
-        ],
-      },
-    ];
+        }
+      }
+    ]
   }
-}
+];
+
+// ★ 条件付きメニュー（表示条件に合えば追加される）
+const conditionalMenus = [
+  {
+    condition: () => window.getSelection().toString().trim().length > 0,
+    item: {
+      type: 'btn',
+      text: '選択したテキストをアラート表示',
+      onclick: () => {
+        alert(window.getSelection().toString().trim());
+      }
+    }
+  },
+  {
+    condition: () => window.getSelection().toString().trim().length > 10,
+    item: {
+      type: 'btn',
+      text: '長いテキストを選択中！',
+      onclick: () => {
+        alert("長すぎるんじゃい！");
+      }
+    }
+  }
+];
 
 function buildMenu(container, items) {
-  container.innerHTML = ""; // 中身クリア
-  container.classList.add("border");
+  container.innerHTML = "";
+  container.classList.add('border');
 
   items.forEach((item) => {
     if (item.type === "btn") {
@@ -118,8 +116,20 @@ document.oncontextmenu = () => false;
 document.addEventListener("contextmenu", (event) => {
   event.preventDefault();
 
-  const menuItems = menus(); // 選択状態によってメニューを決定！
-  buildMenu(menu, menuItems);
+  // メニュー構成: 固定メニュー + 条件付きメニューの中で条件を満たすやつ
+  const itemsToShow = [...menus];
+
+  conditionalMenus.forEach(({ condition, item }) => {
+    try {
+      if (condition()) {
+        itemsToShow.push(item);
+      }
+    } catch (e) {
+      console.warn("条件エラー:", e);
+    }
+  });
+
+  buildMenu(menu, itemsToShow);
 
   menu.style.left = `${event.clientX}px`;
   menu.style.top = `${event.clientY}px`;
