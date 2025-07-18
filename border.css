@@ -1,5 +1,6 @@
 /* .borderクラスがある要素 */
 .border {
+    padding: 3px;
     background: linear-gradient(
         90deg,
         #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd, #ff6b6b
