@@ -10,7 +10,34 @@ menu.style.padding = "5px";
 
 document.body.appendChild(menu);
 
-const menus = [];
+const menus = [
+  {
+    type: 'parent',
+    text: 'リンク',
+    children: [
+      {
+        type: 'btn',
+        text: 'このサイトのリンクを保存',
+        onclick: () => {
+          if (!navigator.clipboard) {
+            console.log('クリップボードに対応していません');
+            return;
+          }
+
+          navigator.clipboard.writeText(window.location.href).then(
+            () => {
+              console.log('コピー完了');
+            },
+            () => {
+              console.log('コピーできませんでした');
+            }
+          );
+        }
+      }
+    ]
+  }
+];
+
 
 function buildMenu(container, items) {
   container.innerHTML = ""; // 中身クリア
