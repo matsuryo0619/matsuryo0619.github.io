@@ -23,7 +23,7 @@ document.addEventListener('contextmenu', (event) => {
   
     menu.style.left = `${MouseX}px`;
     menu.style.top = `${MouseY}px`
-    menu.style.display = '';
+    menu.style.display = 'block';
   }
 });
 
