@@ -16,7 +16,6 @@ const menus = [
     text: "ファイル",
     children: [
       {type: 'parent', text: 'うんこ', children: [ {type: 'btn', text: 'ちんこ', onclick: () => alert('ちんこ') } ] } ]
-    ],
   },
   { type: "btn", text: "ヘルプ", onclick: () => alert("ヘルプ表示") },
 ];
