@@ -10,38 +10,63 @@ menu.style.padding = "5px";
 
 document.body.appendChild(menu);
 
-const menus = [
-  {
-    type: 'parent',
-    text: 'リンク',
-    children: [
-      {
-        type: 'btn',
-        text: 'このサイトのリンクを保存',
-        onclick: () => {
-          if (!navigator.clipboard) {
-            console.log('クリップボードに対応していません');
-            return;
-          }
+// ✅ メニューを関数で返す
+function menus() {
+  const selection = window.getSelection().toString();
 
-          navigator.clipboard.writeText(window.location.href).then(
+  if (selection) {
+    // 選択文字あり用のメニュー
+    return [
+      {
+        type: "btn",
+        text: `「${selection}」をコピー`,
+        onclick: () => {
+          navigator.clipboard.writeText(selection).then(
             () => {
-              console.log('コピー完了');
+              console.log("コピー完了！");
             },
             () => {
-              console.log('コピーできませんでした');
+              console.log("コピー失敗...");
             }
           );
-        }
-      }
-    ]
-  }
-];
+        },
+      },
+    ];
+  } else {
+    // 通常メニュー
+    return [
+      {
+        type: "parent",
+        text: "リンク",
+        children: [
+          {
+            type: "btn",
+            text: "このサイトのリンクを保存",
+            onclick: () => {
+              if (!navigator.clipboard) {
+                console.log("クリップボードに対応していません");
+                return;
+              }
 
+              navigator.clipboard.writeText(window.location.href).then(
+                () => {
+                  console.log("コピー完了");
+                },
+                () => {
+                  console.log("コピーできませんでした");
+                }
+              );
+            },
+          },
+        ],
+      },
+    ];
+  }
+}
 
 function buildMenu(container, items) {
   container.innerHTML = ""; // 中身クリア
-  container.classList.add('border');
+  container.classList.add("border");
 
   items.forEach((item) => {
     if (item.type === "btn") {
@@ -63,7 +88,6 @@ function buildMenu(container, items) {
       parentDiv.style.cursor = "pointer";
       parentDiv.style.position = "relative";
 
-      // サブメニュー用のdiv作成
       const subMenu = document.createElement("div");
       subMenu.style.position = "absolute";
       subMenu.style.top = "0";
@@ -94,7 +118,8 @@ document.oncontextmenu = () => false;
 document.addEventListener("contextmenu", (event) => {
   event.preventDefault();
 
-  buildMenu(menu, menus);
+  const menuItems = menus(); // 選択状態によってメニューを決定！
+  buildMenu(menu, menuItems);
 
   menu.style.left = `${event.clientX}px`;
   menu.style.top = `${event.clientY}px`;
