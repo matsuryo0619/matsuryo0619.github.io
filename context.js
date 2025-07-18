@@ -44,22 +44,12 @@ const conditionalMenus = [
     condition: () => window.getSelection().toString().trim().length > 0,
     item: {
       type: 'btn',
-      text: '選択したテキストをアラート表示',
+      text: '選択したテキストを検索...',
       onclick: () => {
-        alert(window.getSelection().toString().trim());
+        window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${window.getSelection().toString().trim}&type=AND`;
       }
     }
   },
-  {
-    condition: () => window.getSelection().toString().trim().length > 10,
-    item: {
-      type: 'btn',
-      text: '長いテキストを選択中！',
-      onclick: () => {
-        alert("長すぎるんじゃい！");
-      }
-    }
-  }
 ];
 
 function buildMenu(container, items) {
