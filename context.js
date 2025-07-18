@@ -46,7 +46,7 @@ const conditionalMenus = [
       type: 'btn',
       text: '選択したテキストを検索...',
       onclick: () => {
-        window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${window.getSelection().toString().trim}&type=AND`;
+        window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(window.getSelection().toString().trim())}&type=AND`;
       }
     }
   },
