@@ -10,15 +10,7 @@ menu.style.padding = "5px";
 
 document.body.appendChild(menu);
 
-const menus = [
-  {
-    type: "parent",
-    text: "ファイル",
-    children: [
-      {type: 'parent', text: 'うんこ', children: [ {type: 'btn', text: 'ちんこ', onclick: () => alert('ちんこ') } ] } ]
-  },
-  { type: "btn", text: "ヘルプ", onclick: () => alert("ヘルプ表示") },
-];
+const menus = [];
 
 function buildMenu(container, items) {
   container.innerHTML = ""; // 中身クリア
