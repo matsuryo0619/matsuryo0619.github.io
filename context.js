@@ -98,7 +98,6 @@ const conditionalMenus = [
               () => {
                 console.log('コピーできませんでした');
               });
-      ]
     }
   },
 ];
