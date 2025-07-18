@@ -17,7 +17,7 @@ document.oncontextmenu = function () {
 };
 
 document.addEventListener('contextmenu', (event) => {
-  if (!menu.contais(event.target)) {
+  if (!menu.contains(event.target)) {
     menu.style.display = 'none';
     return false;
   }
