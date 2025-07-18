@@ -125,6 +125,7 @@ function buildMenu(container, items) {
       const parentDiv = document.createElement("div");
       parentDiv.textContent = item.text + " ▶";
       parentDiv.style.padding = "8px";
+      parentDiv.style.cursor = 'default';
       parentDiv.style.position = "relative";
 
       const subMenu = document.createElement("div");
