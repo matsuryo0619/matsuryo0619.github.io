@@ -24,11 +24,11 @@ const menus = [
 
 function buildMenu(container, items) {
   container.innerHTML = ""; // 中身クリア
+  container.classList.add('border');
 
   items.forEach((item) => {
     if (item.type === "btn") {
       const btn = document.createElement("div");
-      btn.classList.add('border');
       btn.textContent = item.text;
       btn.style.padding = "8px";
       btn.style.cursor = "pointer";
