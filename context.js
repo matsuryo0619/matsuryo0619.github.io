@@ -1,7 +1,7 @@
 const menu = document.createElement("div");
 menu.id = "context";
 menu.classList.add("border");
-menu.style.position = "absolute";
+menu.style.position = "fixed";
 menu.style.minWidth = "200px";
 menu.style.backgroundColor = "white";
 menu.style.display = "none";
