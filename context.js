@@ -87,19 +87,22 @@ const conditionalMenus = [
           }
           }
         ]},
-        { type: 'btn', text: 'コピー', onclick: 
+        { type: 'btn', text: 'コピー', onclick:
           () => {
             console.log(SelectedText);
             if (SelectedText.length === 0) return;
             navigator.clipboard.writeText(SelectedText).then(
               () => {
                 console.log('コピー完了');
-              }, 
+              },
               () => {
                 console.log('コピーできませんでした');
               });
     }
-  },
+  }
+      ]
+    }
+  }
 ];
 
 function buildMenu(container, items) {
