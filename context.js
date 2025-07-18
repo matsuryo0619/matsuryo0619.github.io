@@ -4,6 +4,7 @@ menu.classList.add('border');
 menu.style.position = 'absolute';
 menu.style.width = '200px';
 menu.style.height = '300px';
+menu.style.display = 'none';
 
 const menus = [
   {type: 'btn', text: ''}
@@ -16,4 +17,5 @@ document.oncontextmenu = function () {
 };
 
 document.addEventListener('contextmenu', (event) => {
+  menu.style.display = '';
 });
