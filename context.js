@@ -50,14 +50,26 @@ const conditionalMenus = [
   {
     condition: () => window.getSelection().toString().trim().length > 0,
     item: {
-      type: 'btn',
-      text: '選択したテキストを検索...',
-      onclick: () => {
+      type: 'parent',
+      text: '選択したテキストを検索',
+      children: [
+        { type: 'btn', text: 'スゴスク!', onclick:
+        () => {
         console.log(SelectedText);
         if(SelectedText.length === 0) return;
         const query = encodeURIComponent(SelectedText);
         window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${query}&type=AND`;
-      }
+        }
+        },
+        { type: 'btn', text: 'Google', onclick:
+        () => {
+        console.log(SelectedText);
+        if(SelectedText.length === 0) return;
+        const query = encodeURIComponent(SelectedText);
+        window.location.href = `https://google.com/search?q=${query}`;
+        }
+        }
+      ]
     }
   },
 ];
