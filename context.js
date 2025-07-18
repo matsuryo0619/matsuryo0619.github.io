@@ -6,6 +6,10 @@ menu.style.width = '200px';
 menu.style.height = '300px';
 menu.style.display = 'none';
 
+const menus = [
+  
+];
+
 document.body.appendChild(menu);
 
 document.oncontextmenu = () => false;
