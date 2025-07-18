@@ -46,7 +46,9 @@ const conditionalMenus = [
       type: 'btn',
       text: '選択したテキストを検索...',
       onclick: () => {
-        window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(window.getSelection().toString().trim())}&type=AND`;
+        if(selectedText.length === 0) return;
+        const query = encodeURIComponent(selectedText);
+        window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${query}&type=AND`;
       }
     }
   },
@@ -103,7 +105,10 @@ function buildMenu(container, items) {
 
 document.oncontextmenu = () => false;
 
+let SelectedText;
+
 document.addEventListener("contextmenu", (event) => {
+  SelectedText = window.getSelection().toString().trim();
   event.preventDefault();
 
   // メニュー構成: 固定メニュー + 条件付きメニューの中で条件を満たすやつ
