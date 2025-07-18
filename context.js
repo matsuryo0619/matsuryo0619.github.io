@@ -53,9 +53,9 @@ const conditionalMenus = [
       type: 'btn',
       text: '選択したテキストを検索...',
       onclick: () => {
-        console.log(selectedText);
-        if(selectedText.length === 0) return;
-        const query = encodeURIComponent(selectedText);
+        console.log(SelectedText);
+        if(SelectedText.length === 0) return;
+        const query = encodeURIComponent(SelectedText);
         window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${query}&type=AND`;
       }
     }
