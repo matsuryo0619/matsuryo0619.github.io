@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
   filteredData.forEach(result => {
     const div = document.createElement('div');
     div.classList.add('result-item');
+    div.classList.add('border');
     const tags = (result.tags && result.tags.length > 0)
       ? result.tags.map(tag => `<a href="#" class="tag-link">${tag}</a>`).join(', ')
       : 'なし';
