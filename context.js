@@ -80,13 +80,28 @@ const conditionalMenus = [
               }
             },
             {
-              type: 'btn',
+              type: 'parent',
               text: 'Google',
-              onclick: () => {
-                const query = encodeURIComponent(SelectedText);
-                if (!query) return;
-                window.open(`https://google.com/search?q=${query}`);
-              }
+              children: [
+                {
+                  type: 'btn',
+                  text: 'Google',
+                  onclick: () => {
+                    const query = encodeURIComponent(SelectedText);
+                    if (!query) return;
+                    window.open(`https://google.com/search?q=${query}`);
+                  }
+                },
+                {
+                  type: 'btn',
+                  text: 'Youtube',
+                  onclick: () => {
+                    const query = encodeURIComponent(SelectedText);
+                    if (!query) return;
+                    window.open(`https://www.youtube.com/results?search_query=${query}`);
+                  }
+                }
+              ]
             },
             {
               type: 'btn',
