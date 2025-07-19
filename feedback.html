@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html lang='ja'>
   <head>
-    <title>フィードバック - スゴスク!</title>
+    <title>スゴスク!</title>
     <meta charset='UTF-8'>
+    <script src='fileload.js'></script>
     <script src='comments.js' defer></script>
-    <script src='fileload.js' defer></script>
     <script src="https://d3js.org/d3.v6.min.js" charset="utf-8"></script>
     <script src='https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js'></script>
-    <link rel='stylesheet' href='comment.css'>
-    <style type='text/css'>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const PageFinish = new CustomEvent('PageFinish');
+        document.dispatchEvent(PageFinish);
+      });
+
+      document.addEventListener('PageFinish', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sitedata = urlParams.get('data');
+        
+        fetch('https://matsuryo0619.github.io/scratchblog/article.yaml')
+        .then(response => response.text())
+        .then(yamlData => {
+          const pagesData = jsyaml.load(yamlData);
+          // 動的にキーを作成
+          const pagekey = `art${sitedata}`;
+          // ページデータを取得
+          const pageData = pagesData.pages[pagekey];
+          
+          const a = document.createElement('a');
+          a.href = `https://matsuryo0619.github.io/scratchblog/article/article.html?data=${sitedata}`;
+          a.textContent = pageData.title;
+          document.getElementById('Rough_menu').prepend(a);
+        })
+        .catch(error => console.error('YAML読み込みエラー', error));
+      });
+    </script>
+    <style>
       form {
         display: none;
       }
@@ -28,3 +54,4 @@
   <body>
     <div id='Rough_menu'></div>
   </body>
+</html>
