@@ -116,7 +116,7 @@ const conditionalMenus = [
       type: 'btn',
       text: '貼り付け',
       onclick: () => {
-        const el = document.adtiveElement;
+        const el = document.activeElement;
         const text = navigator.clipboard.readText()
           .then(text => {
             el.value += text;
