@@ -43,7 +43,7 @@ const menus = [
       }
     ]
   },
-  { type: 'btn', text: 'フィードバック', onclick: () => { window.location.href = 'https://matsuryo0619.github.com/scratchblog/feedback.html'; } }
+  { type: 'btn', text: 'フィードバック', onclick: () => { window.location.href = 'https://matsuryo0619.github.io/scratchblog/feedback.html'; } }
 ];
 
 // ★ 条件付きメニュー（表示条件に合えば追加される）
