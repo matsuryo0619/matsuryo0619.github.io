@@ -64,7 +64,7 @@ document.addEventListener('PageFinish', function() {
       const lineCount = this.value.split('\n').length;
 
       // 行数に24pxを掛け算し、最大200pxに制限
-      this.style.height = `${Math.min(lineCount * 24, 200)}px`;
+      this.style.height = `${Math.min(lineCount * 20, 200)}px`;
     });
 
     // URLパラメータを hidden フィールドに追加
