@@ -122,7 +122,8 @@ const conditionalMenus = [
             el.value += text;
           })
           .catch(err => {
-            
+            console.log('読み取れませんでした');
+          });
 ];
 
 function buildMenu(container, items) {
