@@ -134,6 +134,7 @@ const conditionalMenus = [
         try {
           const text = await navigator.clipboard.readText();
           el.value += text;
+          console.log('貼り付けました');
         } catch (err) {
           console.log('読み取れませんでした');
         }
