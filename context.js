@@ -103,7 +103,26 @@ const conditionalMenus = [
         }
       ]
     }
-  }
+  },
+  {
+    condition: () => {
+      const el = document.activeElement;
+      return (
+        el.tagName === 'TEXTAREA' ||
+        (el.tagName === 'INPUT' && el.type === 'text')
+      );
+    },
+    item: {
+      type: 'btn',
+      text: '貼り付け',
+      onclick: () => {
+        const el = document.adtiveElement;
+        const text = navigator.clipboard.readText()
+          .then(text => {
+            el.value += text;
+          })
+          .catch(err => {
+            
 ];
 
 function buildMenu(container, items) {
