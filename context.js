@@ -46,7 +46,6 @@ const menus = [
   { type: 'btn', text: 'フィードバック', onclick: () => { window.location.href = 'https://matsuryo0619.github.io/scratchblog/feedback.html'; } }
 ];
 
-// ★ 条件付きメニュー（表示条件に合えば追加される）
 const conditionalMenus = [
   {
     condition: () => window.getSelection().toString().trim().length > 0,
@@ -54,42 +53,56 @@ const conditionalMenus = [
       type: 'parent',
       text: '選択したテキストを操作',
       children: [
-        { type: 'parent', text: '検索', children: [
-          { type: 'btn', text: 'スゴスク!', onclick:
-          () => {
-          console.log(SelectedText);
-          if(SelectedText.length === 0) return;
-          const query = encodeURIComponent(SelectedText);
-          window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${query}&type=AND`;
-          }
-          },
-          { type: 'btn', text: 'Google', onclick:
-          () => {
-          console.log(SelectedText);
-          if(SelectedText.length === 0) return;
-          const query = encodeURIComponent(SelectedText);
-          window.open(`https://google.com/search?q=${query}`);
-          }
-          },
-          { type: 'btn', text: 'Yahoo!', onclick:
-          () => {
-          console.log(SelectedText);
-          if(SelectedText.length === 0) return;
-          const query = encodeURIComponent(SelectedText);
-          window.open(`https://search.yahoo.co.jp/search?p=${query}`);
-          }
-          },
-          { type: 'btn', text: 'Bing', onclick:
-          () => {
-          console.log(SelectedText);
-          if(SelectedText.length === 0) return;
-          const query = encodeURIComponent(SelectedText);
-          window.open(`https://www.bing.com/search?q=${query}`);
-          }
-          }
-        ]},
-        { type: 'btn', text: 'コピー', onclick:
-          () => {
+        {
+          type: 'parent',
+          text: '検索',
+          children: [
+            {
+              type: 'btn',
+              text: 'スゴスク!',
+              onclick: () => {
+                console.log(SelectedText);
+                if (SelectedText.length === 0) return;
+                const query = encodeURIComponent(SelectedText);
+                window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${query}&type=AND`;
+              }
+            },
+            {
+              type: 'btn',
+              text: 'Google',
+              onclick: () => {
+                console.log(SelectedText);
+                if (SelectedText.length === 0) return;
+                const query = encodeURIComponent(SelectedText);
+                window.open(`https://google.com/search?q=${query}`);
+              }
+            },
+            {
+              type: 'btn',
+              text: 'Yahoo!',
+              onclick: () => {
+                console.log(SelectedText);
+                if (SelectedText.length === 0) return;
+                const query = encodeURIComponent(SelectedText);
+                window.open(`https://search.yahoo.co.jp/search?p=${query}`);
+              }
+            },
+            {
+              type: 'btn',
+              text: 'Bing',
+              onclick: () => {
+                console.log(SelectedText);
+                if (SelectedText.length === 0) return;
+                const query = encodeURIComponent(SelectedText);
+                window.open(`https://www.bing.com/search?q=${query}`);
+              }
+            }
+          ]
+        },
+        {
+          type: 'btn',
+          text: 'コピー',
+          onclick: () => {
             console.log(SelectedText);
             if (SelectedText.length === 0) return;
             navigator.clipboard.writeText(SelectedText).then(
@@ -98,7 +111,8 @@ const conditionalMenus = [
               },
               () => {
                 console.log('コピーできませんでした');
-              });
+              }
+            );
           }
         }
       ]
@@ -115,18 +129,19 @@ const conditionalMenus = [
     item: {
       type: 'btn',
       text: '貼り付け',
-      onclick: () => {
+      onclick: async () => {
         const el = document.activeElement;
-        const text = navigator.clipboard.readText()
-          .then(text => {
-            el.value += text;
-          })
-          .catch(err => {
-            console.log('読み取れませんでした');
-          });
+        try {
+          const text = await navigator.clipboard.readText();
+          el.value += text;
+        } catch (err) {
+          console.log('読み取れませんでした');
+        }
       }
     }
+  }
 ];
+
 
 function buildMenu(container, items) {
   container.innerHTML = "";
