@@ -72,6 +72,15 @@ const conditionalMenus = [
             },
             {
               type: 'btn',
+              text: 'Scratch',
+              onclick: () => {
+                const query = encodeURIComponent(SelectedText);
+                if (!query) return;
+                window.open(`https://scratch.mit.edu/search?q=${query}`);
+              }
+            },
+            {
+              type: 'btn',
               text: 'Google',
               onclick: () => {
                 const query = encodeURIComponent(SelectedText);
