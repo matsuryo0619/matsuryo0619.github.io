@@ -10,7 +10,11 @@ menu.style.padding = "5px";
 
 document.body.appendChild(menu);
 
-// ★ 常に表示されるメニュー
+let lastFocusedElement = null;
+document.addEventListener("mousedown", (e) => {
+  lastFocusedElement = document.activeElement;
+});
+
 const menus = [
   {
     type: 'parent',
@@ -25,25 +29,25 @@ const menus = [
             return;
           }
           navigator.clipboard.writeText(window.location.href).then(
-            () => {
-              console.log('コピー完了');
-            },
-            () => {
-              console.log('コピーできませんでした');
-            }
+            () => console.log('コピー完了'),
+            () => console.log('コピーできませんでした')
           );
         }
       },
       {
         type: 'btn',
         text: '再読み込み',
-        onclick: () => {
-          window.location.reload();
-        }
+        onclick: () => window.location.reload()
       }
     ]
   },
-  { type: 'btn', text: 'フィードバック', onclick: () => { window.location.href = 'https://matsuryo0619.github.io/scratchblog/feedback.html'; } }
+  {
+    type: 'btn',
+    text: 'フィードバック',
+    onclick: () => {
+      window.location.href = 'https://matsuryo0619.github.io/scratchblog/feedback.html';
+    }
+  }
 ];
 
 const conditionalMenus = [
@@ -61,9 +65,8 @@ const conditionalMenus = [
               type: 'btn',
               text: 'スゴスク!',
               onclick: () => {
-                console.log(SelectedText);
-                if (SelectedText.length === 0) return;
                 const query = encodeURIComponent(SelectedText);
+                if (!query) return;
                 window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${query}&type=AND`;
               }
             },
@@ -71,9 +74,8 @@ const conditionalMenus = [
               type: 'btn',
               text: 'Google',
               onclick: () => {
-                console.log(SelectedText);
-                if (SelectedText.length === 0) return;
                 const query = encodeURIComponent(SelectedText);
+                if (!query) return;
                 window.open(`https://google.com/search?q=${query}`);
               }
             },
@@ -81,9 +83,8 @@ const conditionalMenus = [
               type: 'btn',
               text: 'Yahoo!',
               onclick: () => {
-                console.log(SelectedText);
-                if (SelectedText.length === 0) return;
                 const query = encodeURIComponent(SelectedText);
+                if (!query) return;
                 window.open(`https://search.yahoo.co.jp/search?p=${query}`);
               }
             },
@@ -91,9 +92,8 @@ const conditionalMenus = [
               type: 'btn',
               text: 'Bing',
               onclick: () => {
-                console.log(SelectedText);
-                if (SelectedText.length === 0) return;
                 const query = encodeURIComponent(SelectedText);
+                if (!query) return;
                 window.open(`https://www.bing.com/search?q=${query}`);
               }
             }
@@ -103,15 +103,10 @@ const conditionalMenus = [
           type: 'btn',
           text: 'コピー',
           onclick: () => {
-            console.log(SelectedText);
-            if (SelectedText.length === 0) return;
+            if (!SelectedText) return;
             navigator.clipboard.writeText(SelectedText).then(
-              () => {
-                console.log('コピー完了');
-              },
-              () => {
-                console.log('コピーできませんでした');
-              }
+              () => console.log('コピー完了'),
+              () => console.log('コピーできませんでした')
             );
           }
         }
@@ -120,20 +115,19 @@ const conditionalMenus = [
   },
   {
     condition: () => {
-      const el = document.activeElement;
       return (
-        el.tagName === 'TEXTAREA' ||
-        (el.tagName === 'INPUT' && el.type === 'text')
+        lastFocusedElement &&
+        (lastFocusedElement.tagName === 'TEXTAREA' ||
+          (lastFocusedElement.tagName === 'INPUT' && lastFocusedElement.type === 'text'))
       );
     },
     item: {
       type: 'btn',
       text: '貼り付け',
       onclick: async () => {
-        const el = document.activeElement;
         try {
           const text = await navigator.clipboard.readText();
-          el.value += text;
+          lastFocusedElement.value += text;
           console.log('貼り付けました');
         } catch (err) {
           console.log('読み取れませんでした');
@@ -142,7 +136,6 @@ const conditionalMenus = [
     }
   }
 ];
-
 
 function buildMenu(container, items) {
   container.innerHTML = "";
@@ -164,52 +157,42 @@ function buildMenu(container, items) {
       const parentDiv = document.createElement("div");
       parentDiv.textContent = item.text + " ▶";
       parentDiv.style.padding = "8px";
-      parentDiv.style.cursor = 'default'; // 親メニュー項目にマウスを合わせた時のカーソル
+      parentDiv.style.cursor = 'default';
       parentDiv.style.position = "relative";
 
       const subMenu = document.createElement("div");
       subMenu.style.position = "absolute";
-      subMenu.style.top = "0"; // 初期値は0
-      subMenu.style.left = "100%"; // 初期値は右側
+      subMenu.style.top = "0";
+      subMenu.style.left = "100%";
       subMenu.style.minWidth = "155px";
       subMenu.style.backgroundColor = "white";
       subMenu.style.display = "none";
       subMenu.style.zIndex = 10000;
 
       buildMenu(subMenu, item.children);
-
       parentDiv.appendChild(subMenu);
 
       parentDiv.onmouseenter = () => {
         subMenu.style.display = "block";
-
-        // サブメニューのサイズ、親メニューの位置、ビューポートのサイズを取得
         const subMenuWidth = subMenu.offsetWidth;
         const subMenuHeight = subMenu.offsetHeight;
-        const parentRect = parentDiv.getBoundingClientRect(); // 親メニューの位置とサイズ
+        const parentRect = parentDiv.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
 
-        // X軸方向の調整 (サブメニューが画面右からはみ出すか)
         if (parentRect.right + subMenuWidth > viewportWidth) {
-          // はみ出す場合、親メニューの左側に表示
           subMenu.style.left = `-${subMenuWidth}px`;
         } else {
-          // はみ出さない場合、通常通り親メニューの右側に表示
           subMenu.style.left = "100%";
         }
 
-        // Y軸方向の調整 (サブメニューが画面下からはみ出すか)
         if (parentRect.top + subMenuHeight > viewportHeight) {
-          // はみ出す場合、上方向に調整して画面内に収める
-          // ただし、親メニューの上端より上にいかないようにする
-          let newTop = viewportHeight - subMenuHeight - parentRect.top - 5; // 画面下端から5px余裕を持たせる
-          if (newTop < -parentRect.top) { // 画面上端より上にはみ出さないように
-             newTop = -parentRect.top + 5; // 画面上端から5px余裕を持たせる
+          let newTop = viewportHeight - subMenuHeight - parentRect.top - 5;
+          if (newTop < -parentRect.top) {
+            newTop = -parentRect.top + 5;
           }
           subMenu.style.top = `${newTop}px`;
         } else {
-          // はみ出さない場合、通常通り親要素の上端に合わせる
           subMenu.style.top = "0";
         }
       };
@@ -223,63 +206,44 @@ function buildMenu(container, items) {
   });
 }
 
-document.oncontextmenu = () => false; // デフォルトの右クリックメニューを無効化
+document.oncontextmenu = () => false;
 
-let SelectedText; // 選択されたテキストを保持する変数
+let SelectedText;
 
 document.addEventListener("contextmenu", (event) => {
-  SelectedText = window.getSelection().toString().trim(); // 選択テキストを取得
-  event.preventDefault(); // デフォルトのイベント（ブラウザメニュー表示）をキャンセル
+  SelectedText = window.getSelection().toString().trim();
+  event.preventDefault();
 
-  // 表示するメニュー項目を決定 (固定メニュー + 条件付きメニュー)
   const itemsToShow = [...menus];
   conditionalMenus.forEach(({ condition, item }) => {
     try {
-      if (condition()) {
-        itemsToShow.push(item);
-      }
+      if (condition()) itemsToShow.push(item);
     } catch (e) {
       console.warn("条件エラー:", e);
     }
   });
 
-  buildMenu(menu, itemsToShow); // メニューを構築
+  buildMenu(menu, itemsToShow);
 
-  // --- メインメニューの表示位置調整 ---
-  const menuWidth = menu.offsetWidth;  // メニューの幅を取得
-  const menuHeight = menu.offsetHeight; // メニューの高さを取得
+  const menuWidth = menu.offsetWidth;
+  const menuHeight = menu.offsetHeight;
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
 
-  const viewportWidth = window.innerWidth;    // ビューポート（画面）の幅
-  const viewportHeight = window.innerHeight;  // ビューポート（画面）の高さ
+  let posX = event.clientX;
+  let posY = event.clientY;
 
-  let posX = event.clientX; // クリックされたX座標
-  let posY = event.clientY; // クリックされたY座標
+  if (posX + menuWidth > viewportWidth) posX = viewportWidth - menuWidth - 5;
+  if (posX < 0) posX = 5;
+  if (posY + menuHeight > viewportHeight) posY = viewportHeight - menuHeight - 5;
+  if (posY < 0) posY = 5;
 
-  // X軸方向の調整 (メインメニューが画面右からはみ出すか)
-  if (posX + menuWidth > viewportWidth) {
-    posX = viewportWidth - menuWidth - 5; // 画面右端から少し（5px）内側に表示
-  }
-  // X軸方向の調整 (メインメニューが画面左からはみ出すか)
-  if (posX < 0) {
-    posX = 5; // 画面左端から少し（5px）内側に表示
-  }
-
-  // Y軸方向の調整 (メインメニューが画面下からはみ出すか)
-  if (posY + menuHeight > viewportHeight) {
-    posY = viewportHeight - menuHeight - 5; // 画面下端から少し（5px）内側に表示
-  }
-  // Y軸方向の調整 (メインメニューが画面上からはみ出すか)
-  if (posY < 0) {
-    posY = 5; // 画面上端から少し（5px）内側に表示
-  }
-
-  menu.style.left = `${posX}px`; // 調整されたX座標を設定
-  menu.style.top = `${posY}px`;  // 調整されたY座標を設定
-  menu.style.display = "block";  // メニューを表示
+  menu.style.left = `${posX}px`;
+  menu.style.top = `${posY}px`;
+  menu.style.display = "block";
 });
 
 document.addEventListener("click", (event) => {
-  // メニュー要素、またはその子孫要素がクリックされた場合はメニューを閉じない
   if (!menu.contains(event.target)) {
     menu.style.display = "none";
   }
