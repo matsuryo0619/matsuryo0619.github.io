@@ -112,7 +112,9 @@ pages:
     public: true
     type: "teach"
     content: |
-
+      <div class="Mainmenu" data-ml="Scratchについて">
+        <h3>Scratchについて</h3>
+        <
     style: |
 
     action: |
