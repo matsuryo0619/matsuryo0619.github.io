@@ -3,6 +3,7 @@ pages:
     title: "2D RPG風ゲーム 1"
     data: "2025-2-22"
     public: true
+    type: "article"
     content: |
       <div class='Mainmenu' data-ml='セーブコード'>
         <h3 t>セーブコード</h3>
@@ -98,9 +99,21 @@ pages:
     title: "にゃんこ大戦争 バトルシステム2"
     data: "2025-3-9"
     public: true
+    type: "article"
     content: |
 
     style: |
 
     action: |
-    
+      
+  art3:
+    title: "スクラッチ講座 No.1"
+    data: "2025-7-25"
+    puclic: true
+    type: "teach"
+    content: |
+
+    style: |
+
+    action: |
+      
