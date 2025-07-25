@@ -114,8 +114,13 @@ pages:
     content: |
       <div class="Mainmenu" data-ml="Scratchについて">
         <h3>Scratchについて</h3>
-        こんにちは､
-        です
+        <pre>
+          こんにちは､<a href='https://matsuryo0619.github.io/scratchblog/link.html?link=https%3A%2F%2Fscratch.mit.edu%2Fusers%2Fmatsumotoryoukotyann' target='_blank'>matsumotoryoukotyannです
+          このシリーズでは､
+          ｢Scratchって何？｣、
+          ｢Scratchってどうやったらいいの？｣
+          という方への講座となります
+        </pre>
     style: |
 
     action: |
