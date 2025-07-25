@@ -134,10 +134,16 @@ pages:
           プログラミングをやってみたいという方に推奨できます
         </pre>
       </div>
+      <div class="Mainmenu" data-ml="はじめてみよう！">
+        <h3>はじめてみよう！</h3>
+        <pre>
+          では､早速始めてみましょう
+          <a href="https://scratch.mit.edu/editor" target="_blank">こちら</a>を開いてください
+        </pre>
+      </div>
       <div class="scratchblocks">
         隠す
       </div>
     style: |
-
     action: |
       scratchblocks.renderMatching('.scratchblocks', {languages: ["ja"], style: "scratch3" });
