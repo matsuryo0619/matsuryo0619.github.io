@@ -140,4 +140,4 @@ pages:
     style: |
 
     action: |
-      scratchblocks.renderMatching('.scratchblocks', {languages: "ja", style: "scratch3" });
+      scratchblocks.renderMatching('.scratchblocks', {languages: ["ja"], style: "scratch3" });
