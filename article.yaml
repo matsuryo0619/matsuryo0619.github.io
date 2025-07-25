@@ -112,8 +112,8 @@ pages:
     public: true
     type: "teach"
     content: |
-      <div class="Mainmenu" data-ml="Scratchについて">
-        <h3>Scratchについて</h3>
+      <div class="Mainmenu" data-ml="シリーズについて">
+        <h3>シリーズについて</h3>
         <pre>
           こんにちは､<a href='https://matsuryo0619.github.io/scratchblog/link.html?link=https%3A%2F%2Fscratch.mit.edu%2Fusers%2Fmatsumotoryoukotyann' target='_blank'>matsumotoryoukotyann</a>です
           このシリーズでは､
