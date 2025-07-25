@@ -133,6 +133,11 @@ pages:
           Scratchは､テキストプログラミングとは違い､ブロックをはめ込んで作っていくので
           プログラミングをやってみたいという方に推奨できます
         </pre>
+      </div>
+      <div class="scratchblocks">
+        hide
+      </div>
     style: |
 
     action: |
+      scratchblocks.renderMatching('.scratchblock', {languages: "ja", style: "scratch3" });
