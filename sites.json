@@ -24,5 +24,10 @@
     "content": "スクラッチ講座 第1弾",
     "tags": ["Pages", "teach", "Scratch", "article"],
     "url": "article/article.html?data=3"
+  }, {
+    "title": "Scratch講座 番外編 アカウントの作り方",
+    "content": "スクラッチ講座 番外編 Scratchアカウントの作り方です",
+    "tags": ["Pages", "teach", "Scratch", "article", "account"],
+    "url": "article/article.html?data=4"
   }
 ]
