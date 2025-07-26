@@ -163,6 +163,7 @@ pages:
 
           試しに､以下のようなコードを組んでみてください
           <div class="scratchblocks">
+            @greenFlag が押されたとき
             x座標を(10)、y座標を(10)にする
           </div>
         </pre>
