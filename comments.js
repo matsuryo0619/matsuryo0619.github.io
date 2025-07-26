@@ -186,7 +186,7 @@ document.addEventListener('PageFinish', function() {
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
           window.scrollTo({
-            top: rect.top + scrollTop - 35,
+            top: rect.top + scrollTop - 40,
             behavior: 'smooth'
           });
         }
