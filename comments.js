@@ -168,17 +168,22 @@ document.addEventListener('PageFinish', function() {
           const timestamp = entry["タイムスタンプ"];
           const commentsText = entry["コメント"];
 
+          // 名前リンク用URL
+          const userLink = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}`;
+
+          let nameHTML;
           if (name === "匿名" || !/^[a-zA-Z0-9_-]+$/.test(name)) {
-            text += `
-              ${filteredData.length - index} 名前: ${name} ${timestamp} 
-              <pre class='Comment_text'>${commentsText}</pre>
-            `;
+            nameHTML = `${filteredData.length - index} 名前: ${name} ${timestamp}`;
           } else {
-            text += `
-              ${filteredData.length - index} 名前: <a href="https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}" target="_blank">${name}</a> ${timestamp} 
-              <pre class='Comment_text'>${commentsText}</pre>
-            `;
+            nameHTML = `${filteredData.length - index} 名前: <a href="${userLink}" target="_blank">${name}</a> ${timestamp}`;
           }
+
+          text += `
+            <div class="Comment_block">
+              ${nameHTML}
+              <pre class='Comment_text'>${commentsText}</pre>
+            </div>
+          `;
         });
       }
 
