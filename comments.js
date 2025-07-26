@@ -143,18 +143,28 @@ document.addEventListener('PageFinish', function() {
           const timestamp = entry["タイムスタンプ"];
           const commentsText = entry["コメント"];
 
+          const commentNumber = filteredData.length - index;
+          const commentId = `comments_No${index + 1}`;
+          const fullUrl = `${location.origin}${location.pathname}?data=${getUrlParameter('data')}&comments=${index + 1}`;
+
+          // 名前リンク用URL
           const userLink = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}`;
 
           let nameHTML;
           if (name === "匿名" || !/^[a-zA-Z0-9_-]+$/.test(name)) {
-            nameHTML = `${filteredData.length - index} 名前: ${name} ${timestamp}`;
+            nameHTML = `${commentNumber} 名前: ${name} ${timestamp}`;
           } else {
-            nameHTML = `${filteredData.length - index} 名前: <a href="${userLink}" target="_blank">${name}</a> ${timestamp}`;
+            nameHTML = `${commentNumber} 名前: <a href="${userLink}" target="_blank">${name}</a> ${timestamp}`;
           }
 
+          // コピーリンクボタンHTML
+          const copyLinkHTML = `
+            <button class="copy-link" data-url="${fullUrl}" style="margin-left: 10px;">🔗 コピー</button>
+          `;
+
           text += `
-            <div class="Comment_block" id="comments_No${index + 1}">
-              ${nameHTML}
+            <div class="Comment_block" id="${commentId}">
+              ${nameHTML} ${copyLinkHTML}
               <pre class='Comment_text'>${commentsText}</pre>
             </div>
           `;
@@ -196,4 +206,18 @@ document.addEventListener('PageFinish', function() {
       console.error("コメントデータの読み込みに失敗しました:", error);
       document.getElementById("comments").innerHTML = "<p>コメントの取得に失敗しました</p>";
     });
+      
+    document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('copy-link')) {
+      const url = e.target.getAttribute('data-url');
+      navigator.clipboard.writeText(url).then(() => {
+        e.target.textContent = '✅ コピー済み';
+        setTimeout(() => {
+          e.target.textContent = '🔗 コピー';
+        }, 2000);
+      }).catch(() => {
+        alert("コピーに失敗しました");
+      });
+    }
+  });
 });
