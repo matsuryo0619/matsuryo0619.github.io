@@ -17,7 +17,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const sitedata = urlParams.get('data');
         
-        fetch('https://matsuryo0619.github.io/scratchblog/article.yaml')
+        fetch('https://matsuryo0619.github.io/scratchblog/Article.yaml')
         .then(response => response.text())
         .then(yamlData => {
           const pagesData = jsyaml.load(yamlData);
