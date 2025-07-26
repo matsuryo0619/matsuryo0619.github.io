@@ -141,7 +141,7 @@ pages:
           <a href="https://scratch.mit.edu/projects/editor" target="_blank">こちら</a>を開いてください
 
           すると、左側に
-          <p class="scratchblocks">(10)歩歩く</p>や<p class="scratchblocks">x座標を ()、y座標を ()にする</p>
+          <span class="scratchblocks">(10)歩歩く</span>や<span class="scratchblocks">x座標を ()、y座標を ()にする</span>
           などのものが､たくさんあると思います
         </pre>
       </div>
