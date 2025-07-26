@@ -144,7 +144,7 @@ document.addEventListener('PageFinish', function() {
           const commentsText = entry["コメント"];
 
           const commentNumber = filteredData.length - index;
-          const commentId = `comments_No${index + 1}`;
+          const commentId = `comments_No${commentNumber}`;
           const fullUrl = `${location.origin}${location.pathname}?data=${getUrlParameter('data')}&comments=${index + 1}`;
 
           // 名前リンク用URL
