@@ -159,7 +159,7 @@ document.addEventListener('PageFinish', function() {
 
           // コピーリンクボタンHTML
           const copyLinkHTML = `
-            <button class="copy-link" data-url="${fullUrl}" style="margin-left: 10px;">🔗 コピー</button>
+            <span class="copy-link" data-url="${fullUrl}" style="margin-left: 10px;">🔗 コピー</span>
           `;
 
           text += `
