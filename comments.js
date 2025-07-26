@@ -145,7 +145,7 @@ document.addEventListener('PageFinish', function() {
 
           const commentNumber = filteredData.length - index;
           const commentId = `comments_No${commentNumber}`;
-          const fullUrl = `${location.origin}${location.pathname}?data=${getUrlParameter('data')}&comments=${index + 1}`;
+          const fullUrl = `${location.origin}${location.pathname}?data=${getUrlParameter('data')}&comments=${commentNumber}`;
 
           // 名前リンク用URL
           const userLink = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}`;
