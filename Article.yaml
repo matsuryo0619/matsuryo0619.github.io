@@ -150,6 +150,22 @@ pages:
           ブロックを組み立てることができるようになります
         </pre>
       </div>
+      <div class="Mainmenu" data-ml="座標とは？">
+        <pre>
+          では、ブロックに書いてある座標とはなんでしょうか
+          座標とは、画面上の位置のことです
+          Scratchでは、中央を0とします
+
+          X座標は､横軸を、Y座標は縦軸を意味します
+          X座標は､左に行けば行くほど数が小さくなり､右に行けば行くほど数が大きくなります
+          Y座標は､下に行けば行くほど数が小さくなり､上に行けば行くほど数が大きくなります
+
+          試しに､以下のようなコードを組んでみてください
+          <div class="scratchblocks">
+            x座標を(10)、y座標を(10)にする
+          </div>
+        </pre>
+      </div>
     style: |
     action: |
       scratchblocks.renderMatching('.scratchblocks', {languages: ["ja"], style: "scratch3" });
