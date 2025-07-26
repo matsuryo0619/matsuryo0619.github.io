@@ -183,3 +183,18 @@ pages:
     style: |
     action: |
       scratchblocks.renderMatching('.scratchblocks', {languages: ["ja"], style: "scratch3" });
+  art4:
+    title: "スクラッチ講座 番外編-1 アカウントの作り方"
+    data: "2025-7-25"
+    public: true
+    type: "teach"
+    content: |
+      <div class="Mainmenu" data-ml="アカウントの作り方">
+        <h3>アカウントの作り方</h3>
+        <pre>
+          こんにちは､<a href='https://matsuryo0619.github.io/scratchblog/link.html?link=https%3A%2F%2Fscratch.mit.edu%2Fusers%2Fmatsumotoryoukotyann' target='_blank'>matsumotoryoukotyann</a>です
+          こんかいは､Scratch講座 番外編ということで､Scratchアカウントの作り方を紹介していきたいと思います
+        </pre>
+      </div>
+    style: |
+    action: |
