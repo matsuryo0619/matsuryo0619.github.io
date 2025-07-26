@@ -1,9 +1,7 @@
 document.addEventListener('PageFinish', function() {
-  // NGワードのリスト
   const NGComments = ["死ね", "バカ", ".exe"];
   const regex = new RegExp(NGComments.join("|"));
 
-  // コメントチェック関数
   function test(wcheck) {
     if (wcheck.match(regex) != null) {
       alert("ERROR: コメントにNGワードが含まれています");
@@ -12,13 +10,11 @@ document.addEventListener('PageFinish', function() {
     return true;
   }
 
-  // URLパラメータを取得する関数
   function getUrlParameter(name) {
     const params = new URLSearchParams(window.location.search);
     return params.get(name) || "";
   }
 
-  // Googleフォームを作成する関数
   function createGoogleForm() {
     const formId = "1FAIpQLSeJi8SiLCAtUaep3Z7wGK0H2OZosK_YEaRMo7vxB_VEFrWq8g";
     const formUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
@@ -28,7 +24,6 @@ document.addEventListener('PageFinish', function() {
     form.method = "post";
     form.id = 'Comment_form';
 
-    // 名前入力欄
     const nameParagraph = document.createElement("p");
     const nameInput = document.createElement("input");
     nameInput.name = "entry.691642850";
@@ -41,8 +36,7 @@ document.addEventListener('PageFinish', function() {
     nameInput.addEventListener('focus', function() {
       this.select();
     });
-    
-    // コメント入力欄
+
     const commentParagraph = document.createElement("p");
     const commentTextarea = document.createElement("textarea");
     commentTextarea.name = "entry.1605539997";
@@ -56,18 +50,12 @@ document.addEventListener('PageFinish', function() {
     commentParagraph.appendChild(commentTextarea);
     form.appendChild(commentParagraph);
 
-    // コメントエリアの高さを自動調整
     commentTextarea.addEventListener('input', function() {
-      this.style.height = 'auto'; // 高さをリセット
-
-      // 改行 (\n) で行数をカウント
+      this.style.height = 'auto';
       const lineCount = this.value.split('\n').length;
-
-      // 行数に24pxを掛け算し、最大200pxに制限
       this.style.height = `${Math.min(lineCount * 20, 200)}px`;
     });
 
-    // URLパラメータを hidden フィールドに追加
     const dataValue = getUrlParameter("data");
     const hiddenInput = document.createElement("input");
     hiddenInput.type = "hidden";
@@ -75,7 +63,6 @@ document.addEventListener('PageFinish', function() {
     hiddenInput.value = "art" + dataValue;
     form.appendChild(hiddenInput);
 
-    // 送信ボタン
     const submitInput = document.createElement("input");
     submitInput.type = "submit";
     submitInput.id = "submitbutton";
@@ -91,33 +78,27 @@ document.addEventListener('PageFinish', function() {
     comments_div.appendChild(comments_text);
     comments_div.appendChild(comments_allshow);
 
-    //コメントエリア
     const div = document.createElement('div');
     div.id = 'commentsArea';
     div.appendChild(comments_div);
     div.appendChild(form);
 
-    // フォームを追加
     const content = document.getElementById('Rough_menu');
     content.appendChild(div);
 
-    // 送信ボタンを無効にする
     document.getElementById("submitbutton").disabled = true;
 
-    // テキストエリアの入力があればボタンを有効にする
     commentTextarea.addEventListener('input', function() {
       submitInput.disabled = commentTextarea.value.trim() === "";
     });
 
-    // フォーム送信時のカスタム処理
     form.onsubmit = function(event) {
-      event.preventDefault(); // デフォルトの送信処理をキャンセル
+      event.preventDefault();
 
       if (!test(commentTextarea.value)) return false;
 
       submitInput.disabled = true;
 
-      // ここでフォームを送信
       const iframe = document.createElement("iframe");
       iframe.name = "hidden_iframe";
       iframe.style.display = "none";
@@ -126,7 +107,6 @@ document.addEventListener('PageFinish', function() {
       form.target = "hidden_iframe";
       form.submit();
 
-      // 送信後、1秒待ってページをリロードし、スクロール位置を復元
       const scrollY = window.scrollY;
       setTimeout(() => {
         location.reload();
@@ -137,15 +117,12 @@ document.addEventListener('PageFinish', function() {
     };
   }
 
-  // フォーム生成
   createGoogleForm();
 
-  // コメント表示エリア
   const comments = document.createElement('div');
   comments.id = 'comments';
   document.getElementById('commentsArea').appendChild(comments);
 
-  // d3.v6のfetchを使用してCSVを読み込み
   fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A1:D")
     .then(response => response.text())
     .then(function(csvText) {
@@ -154,13 +131,11 @@ document.addEventListener('PageFinish', function() {
 
       const This_siteID = 'art' + getUrlParameter("data");
 
-      // art1 だけをフィルタリング
       const filteredData = data.filter(entry => entry["サイトID"] === This_siteID);
 
       let text = "";
 
       if (filteredData.length === 0) {
-        // コメントがなかった場合
         text = "<p>コメントはまだありません</p>";
       } else {
         filteredData.forEach((entry, index) => {
@@ -168,7 +143,6 @@ document.addEventListener('PageFinish', function() {
           const timestamp = entry["タイムスタンプ"];
           const commentsText = entry["コメント"];
 
-          // 名前リンク用URL
           const userLink = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}`;
 
           let nameHTML;
@@ -192,17 +166,31 @@ document.addEventListener('PageFinish', function() {
 
       comments.querySelectorAll('.Comment_text').forEach(comment => {
         comment.querySelectorAll('a').forEach(anchor => {
-          // 各 a 要素の href 属性の先頭に追加
           let url = anchor.href;
-
           if (!/^https?:\/\//.test(url)) {
             url = 'https://' + url;
           }
-          
           anchor.href = 'https://matsuryo0619.github.io/scratchblog/link.html?link=' + encodeURIComponent(url);
           anchor.target = '_blank';
         });
       });
+
+      // ★ コメント番号付きで自動スクロールする処理
+      const params = new URLSearchParams(window.location.search);
+      const commentNo = params.get('comments');
+
+      if (commentNo !== null && /^\d+$/.test(commentNo)) {
+        const target = document.getElementById(`comments_No${commentNo}`);
+        if (target) {
+          const rect = target.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+          window.scrollTo({
+            top: rect.top + scrollTop - 25,
+            behavior: 'smooth'
+          });
+        }
+      }
     })
     .catch(function(error) {
       console.error("コメントデータの読み込みに失敗しました:", error);
