@@ -139,10 +139,11 @@ pages:
         <pre>
           では､早速始めてみましょう
           <a href="https://scratch.mit.edu/projects/editor" target="_blank">こちら</a>を開いてください
+
+          すると、左側に
+          <p class~"scratchblocks">(10)歩歩く</p>や<p class="scratchblocks">x座標を ()、y座標を ()にする</p>
+          などのものが､たくさんあると思います
         </pre>
-      </div>
-      <div class="scratchblocks">
-        隠す
       </div>
     style: |
     action: |
