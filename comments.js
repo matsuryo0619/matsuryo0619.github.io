@@ -179,7 +179,7 @@ document.addEventListener('PageFinish', function() {
           }
 
           text += `
-            <div class="Comment_block">
+            <div class="Comment_block" id="comments_No${index}">
               ${nameHTML}
               <pre class='Comment_text'>${commentsText}</pre>
             </div>
