@@ -13,7 +13,8 @@ const reqjs = [
   {src: 'header', defer: true},
   {src: 'context', defer: true},
   {src: 'footer', defer: true},
-  {src: 'main', defer: false}
+  {src: 'main', defer: false},
+  {src: 'https://cdn.jsdelivr.net/npm/marked/marked.min', defer: true}
 ];
 
 // CSSを読み込む
