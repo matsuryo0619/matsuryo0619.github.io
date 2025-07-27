@@ -11,14 +11,16 @@ window.addEventListener('headerSearchCreated', async () => {
         
         const form = document.createElement('form');
         form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSczgHouSE1zLsfoT7M7O9p3iReQt1p9t3tlXIoxBMqShvrz1g/formResponse';
-        form.mothed = 'post';
+        form.method = 'post';
         form.id = 'accounts_form';
 
         const AccountName_P = document.createElement('p');
         const AccountName = document.createElement('input');
+        AccountName.type = 'text';
+        AccountName.autocomplete = 'username';
         AccountName.name = 'entry.1357779689';
         AccountName.placeholder = 'アカウント名';
-        AccountName.requied = true;
+        AccountName.required = true;
         AccountName.id = 'Account_Name';
         AccountName_P.appendChild(AccountName);
         form.appendChild(AccountName_P);
@@ -28,12 +30,14 @@ window.addEventListener('headerSearchCreated', async () => {
 
         const AccountPass_P = document.createElement('p');
         const AccountPass = document.createElement('input');
+        AccountPass.type = 'password';
+        AccountPass.autocomplete = 'new-password';
         AccountPass.name = 'entry.1714274511';
         AccountPass.placeholder = 'Password';
-        AccountPass.requied = true;
+        AccountPass.required = true;
         AccountPass.id = 'Accounts_wcheck';
         AccountPass_P.appendChild(AccountPass);
-        form.appendChild(AccountPass);
+        form.appendChild(AccountPass_P);
 
         const Submit = document.createElement('input');
         Submit.type = "submit";
