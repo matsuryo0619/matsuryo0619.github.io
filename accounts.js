@@ -4,9 +4,8 @@ window.addEventListener('headerSearchCreated', async () => {
   const login = document.getElementById('header_Tologin');
   const urlParams = new URLSearchParams(window.location.search);
 
-  // GoogleスプレッドシートのCSVエクスポートURLをここに設定するよ！
-  // ★重要★ スプレッドシートの公開設定を「ウェブに公開」にしてね！
-  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1E0MjL8CXf-_pF3Lf1K1-w0pMx3EEaLO_zimIPpIkkPk/export?format=csv&range=A2:D';
+  // GoogleスプレッドシートのCSVエクスポートURL（ヘッダー行も含める）
+  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1E0MjL8CXf-_pF3Lf1K1-w0pMx3EEaLO_zimIPpIkkPk/export?format=csv&range=A1:D';
 
   if (!localStorage.getItem('account')) {
     accounts_parent.style.display = 'none';
@@ -32,10 +31,70 @@ window.addEventListener('headerSearchCreated', async () => {
         hashedPasswordInput.name = 'entry.1949907076'; 
         form.appendChild(hashedPasswordInput);
 
-        form.onsubmit = async function(event) {
-          event.preventDefault(); // デフォルトのフォーム送信を一旦停止！
+        // 重複チェック関数（改善版）
+        async function checkDuplicateAccount(username) {
+          try {
+            // キャッシュバスティングのためタイムスタンプを追加
+            const timestamp = new Date().getTime();
+            const csvUrl = `${GOOGLE_SHEET_CSV_URL}&_t=${timestamp}`;
+            
+            const existingAccounts = await d3.csv(csvUrl);
+            
+            // デバッグ用：取得したデータの構造を確認
+            if (existingAccounts.length > 0) {
+              console.log('取得したCSVデータの列名:', Object.keys(existingAccounts[0]));
+              console.log('最初の行データ:', existingAccounts[0]);
+            }
+            
+            // 複数の列名パターンに対応
+            const possibleAccountNameColumns = [
+              'アカウント名',
+              'ユーザー名', 
+              'Account Name',
+              'Username'
+            ];
+            
+            let accountNameColumn = null;
+            let isDuplicate = false;
+            
+            // 適切な列名を見つける
+            if (existingAccounts.length > 0) {
+              const availableColumns = Object.keys(existingAccounts[0]);
+              
+              // 定義された列名から一致するものを探す
+              accountNameColumn = possibleAccountNameColumns.find(col => 
+                availableColumns.includes(col)
+              );
+              
+              // 列名が見つからない場合は、2番目の列を使用（インデックス1）
+              if (!accountNameColumn && availableColumns.length >= 2) {
+                accountNameColumn = availableColumns[1];
+                console.log(`列名が見つからないため、2番目の列を使用: ${accountNameColumn}`);
+              }
+              
+              // 重複チェック実行
+              if (accountNameColumn) {
+                isDuplicate = existingAccounts.some(row => {
+                  const existingUsername = row[accountNameColumn];
+                  return existingUsername && 
+                         existingUsername.toString().trim().toLowerCase() === username.trim().toLowerCase();
+                });
+              }
+            }
+            
+            return isDuplicate;
+          } catch (error) {
+            console.error('重複チェックエラー:', error);
+            console.error('エラーの詳細:', error.message);
+            // エラーが発生した場合は安全のため重複ありとして扱う
+            throw new Error('アカウント名の重複チェックに失敗しました。しばらく待ってから再試行してください。');
+          }
+        }
 
-          const AccountNameInput = document.getElementById('Account_Name'); // ユーザー名入力フィールドを取得
+        form.onsubmit = async function(event) {
+          event.preventDefault(); 
+
+          const AccountNameInput = document.getElementById('Account_Name');
           const AccountPassInput = document.getElementById('Accounts_wcheck');
           const password = AccountPassInput.value;
           const username = AccountNameInput.value;
@@ -45,23 +104,47 @@ window.addEventListener('headerSearchCreated', async () => {
             return false;
           }
 
-          document.getElementById("submitbutton").disabled = true; // 送信ボタンを無効化！
+          // アカウント名の形式チェック
+          if (username.length < 3 || username.length > 20) {
+            alert('アカウント名は3文字以上20文字以下で入力してください！');
+            return false;
+          }
+
+          // 英数字とアンダースコアのみ許可
+          if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+            alert('アカウント名は英数字とアンダースコア(_)のみ使用できます！');
+            return false;
+          }
+
+          const submitButton = document.getElementById("submitbutton");
+          submitButton.disabled = true;
+          submitButton.value = "確認中...";
 
           try {
-            // ★D3.jsでGoogleスプレッドシートのCSVデータを読み込むよ！★
-            const existingAccounts = await d3.csv(GOOGLE_SHEET_CSV_URL);
-            
-            // スプレッドシートの2列目（インデックス1）にアカウント名が入っていると仮定して重複をチェックするね！
-            // もしスプレッドシートの列名が分かっているなら `row['アカウント名']` のように変更してもOKだよん
-            const isDuplicate = existingAccounts.some(row => row[Object.keys(row)[1]] === username);
+            // 重複チェックを実行
+            const isDuplicate = await checkDuplicateAccount(username);
 
             if (isDuplicate) {
               alert('そのアカウント名はすでに使われています。別のアカウント名を入力してください！');
-              document.getElementById("submitbutton").disabled = false;
-              return false; // 重複があったら送信中止！
+              submitButton.disabled = false;
+              submitButton.value = "登録";
+              return false;
             }
 
-            // ソルトを生成 (Web Cryptography APIを使って安全にランダムなバイトを生成)
+            // 再度重複チェック（ダブルチェック）
+            await new Promise(resolve => setTimeout(resolve, 500)); // 500ms待機
+            const isDuplicateSecond = await checkDuplicateAccount(username);
+            
+            if (isDuplicateSecond) {
+              alert('そのアカウント名はすでに使われています。別のアカウント名を入力してください！');
+              submitButton.disabled = false;
+              submitButton.value = "登録";
+              return false;
+            }
+
+            submitButton.value = "登録中...";
+
+            // ソルトを生成
             const saltBytes = window.crypto.getRandomValues(new Uint8Array(16));
             const salt = Array.from(saltBytes).map(b => b.toString(16).padStart(2, '0')).join('');
             saltInput.value = salt;
@@ -76,41 +159,75 @@ window.addEventListener('headerSearchCreated', async () => {
             const hashedPassword = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
             hashedPasswordInput.value = hashedPassword;
-            AccountPassInput.value = ''; // 元のパスワード入力フィールドはクリア！
+            AccountPassInput.value = '';
 
-            // iframeにGoogleフォームのレスポンスが読み込まれたら実行される処理だよん
+            // フォーム送信後の処理
             document.getElementById('hidden_iframe').onload = function() {
                 alert('アカウントの登録が完了しました！'); 
-                document.getElementById("submitbutton").disabled = false; 
+                submitButton.disabled = false;
+                submitButton.value = "登録";
                 form.reset(); 
                 
                 localStorage.setItem('account', username); 
-                window.location.href = 'https://matsuryo0619.github.io/scratchblog/Home.html'; // 絶対パスでリダイレクト！
+                window.location.href = 'https://matsuryo0619.github.io/scratchblog/Home.html';
             };
 
-            // フォームを最終的に送信するよ！
+            // フォームを送信
             form.submit(); 
 
           } catch (error) {
-            console.error('データの読み込みまたはハッシュ化エラー:', error);
-            alert('処理中にエラーが発生したよ。もう一度試してみてね！');
-            document.getElementById("submitbutton").disabled = false;
+            console.error('登録処理エラー:', error);
+            alert(error.message || '処理中にエラーが発生しました。もう一度試してみてください！');
+            submitButton.disabled = false;
+            submitButton.value = "登録";
             return false;
           }
         };
 
+        // フォーム要素の作成
         const AccountName_P = document.createElement('p');
         const AccountName = document.createElement('input');
         AccountName.type = 'text';
         AccountName.autocomplete = 'username';
         AccountName.name = 'entry.159289474'; 
-        AccountName.placeholder = 'アカウント名';
+        AccountName.placeholder = 'アカウント名（英数字とアンダースコアのみ）';
         AccountName.required = true;
         AccountName.id = 'Account_Name'; 
+        AccountName.maxLength = 20;
+        AccountName.minLength = 3;
         AccountName_P.appendChild(AccountName);
         form.appendChild(AccountName_P);
+        
         AccountName.addEventListener('focus', function() {
           this.select();
+        });
+
+        // リアルタイム重複チェック（オプション）
+        let checkTimeout;
+        AccountName.addEventListener('input', function() {
+          clearTimeout(checkTimeout);
+          const username = this.value.trim();
+          
+          if (username.length >= 3) {
+            checkTimeout = setTimeout(async () => {
+              try {
+                const isDuplicate = await checkDuplicateAccount(username);
+                if (isDuplicate) {
+                  this.style.borderColor = '#ff0000';
+                  this.title = 'このアカウント名は既に使用されています';
+                } else {
+                  this.style.borderColor = '#00ff00';
+                  this.title = 'このアカウント名は使用できます';
+                }
+              } catch (error) {
+                this.style.borderColor = '';
+                this.title = '';
+              }
+            }, 1000);
+          } else {
+            this.style.borderColor = '';
+            this.title = '';
+          }
         });
 
         const AccountPass_P = document.createElement('p');
@@ -121,6 +238,7 @@ window.addEventListener('headerSearchCreated', async () => {
         AccountPass.placeholder = 'Password';
         AccountPass.required = true;
         AccountPass.id = 'Accounts_wcheck';
+        AccountPass.minLength = 6;
         AccountPass_P.appendChild(AccountPass);
         form.appendChild(AccountPass_P);
 
