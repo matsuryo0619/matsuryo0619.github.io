@@ -54,7 +54,7 @@ SearchDIV.appendChild(Search);
 SearchDIV.appendChild(SearchForm);
 
 //アカウント
-const accounts_parent = document.createElement('div');
+export const accounts_parent = document.createElement('div');
 accounts_parent.id = 'header_accountsParent';
 
 const accounts_p = document.createElement('p');
