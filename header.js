@@ -61,17 +61,17 @@ const accounts_ul = document.createElement('ul');
 accounts_ul.id = 'header_accountsUl';
 acconuts_ul.style.listStyle = 'none';
 
-const accounts_li = document.createElement('li');
-accounts_li.textContent = 'アカウント設定';
-accounts_li.id = 'acconts_setting';
+const accounts_li = [
+  { text: "アカウント設定", id: "accounts_setting" },
+  { text: "ログアウト", id: "accounts_logout" }
+]
 
-accounts_ul.appendChild(accounts_li);
-
-const accounts_li = document.createElement('li');
-accounts_li.textContent = 'ログアウト';
-accounts_li.id = 'acconts_logout';
-
-accounts_ul.appendChild(accounts_li);
+accounts_li.forEach((item) => {
+  const li = document.createElement('li');
+  li.textContent = item.text;
+  li.id = item.id;
+  accounts_ul.appendChild(li);
+});
 
 // ボタンの親リスト
 const Button_parent = document.createElement('ul');
