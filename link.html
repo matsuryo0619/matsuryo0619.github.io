@@ -22,7 +22,7 @@
   <body>
     <div>
     <h1>以下のリンクを開きます｡よろしいですか?</h1>
-    <p id='comments'>安全ではない可能性があります</p>
+    <p id='warning'>安全ではない可能性があります</p>
     <p id='link'></p>
     <br>
     <button id='none'>いいえ</button>
@@ -30,6 +30,7 @@
     </div>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
+      const warning = document.getElementById('warning');
 
       // 'link' パラメータを取得
       let link = urlParams.get('link');
@@ -38,9 +39,9 @@
 
       let type = urlParams.get('type');
       if (type === 'nomal') {
-        document.querySelector('#comments').style.display = 'none';
+        warning.style.display = 'none';
       } else {
-        document.querySelector('#comments').style.display = 'block';
+        warning.style.display = 'block';
       }
 
       // ボタンのクリックイベント設定
