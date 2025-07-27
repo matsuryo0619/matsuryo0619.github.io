@@ -47,7 +47,7 @@
 
       function warningChange(text, color, link) {
         warning.innerHTML = `${text.replace(/\n/g, '<br>')}<br>また、当サイトはリンク先の安全性を保証しません。リンク先の閲覧・利用は自己責任でお願いします。`;
-        if (link.startsWith === 'http://') warning.innerHTML += `<br>リンク先は､保護されていない通信となっています あらかじめご確認ください`;
+        if (link.startsWith('http://')) warning.innerHTML += `<br>リンク先は､保護されていない通信となっています あらかじめご確認ください`;
         warning.style.color = color;
       }
 
