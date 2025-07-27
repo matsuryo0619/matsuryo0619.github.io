@@ -15,6 +15,7 @@ const reqjs = [
   {src: 'context', defer: true},
   {src: 'footer', defer: true},
   {src: 'main', defer: false},
+  {src: 'auth', defer: false},
   {src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js', defer: true},
   {src: 'https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js', defer: true}
 ];
