@@ -40,7 +40,7 @@ if (!window._isWindowOpenOverridden) {
 }
 
 // MutationObserverでaタグのhref書き換え
-const observer = new MutationObserver(() => {
+const Link_observer = new MutationObserver(() => {
   document.querySelectorAll('a').forEach((a) => {
     const link = a.getAttribute('href');
     if (
@@ -58,7 +58,7 @@ const observer = new MutationObserver(() => {
   });
 });
 
-observer.observe(document.body, {
+Link_observer.observe(document.body, {
   childList: true,
   subtree: true
 });
