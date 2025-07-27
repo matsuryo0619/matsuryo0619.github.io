@@ -10,6 +10,7 @@ window.addEventListener('headerSearchCreated', async () => {
       document.title = 'アカウントを作成 - スゴスク!';
       } else if (urlParams.get('type') === 'login') {
         document.title = 'ログイン - スゴスク!';
+      }
   } else {
     Make_accounts.style.display = 'none';
     login.style.display = 'none';
