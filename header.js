@@ -69,6 +69,7 @@ const accounts_li = [
   } },
   { text: "ログアウト", id: "accounts_logout", onclick: () => {
     localStorage.removeItem('account');
+    window.location.reload();
   } }
 ]
 
