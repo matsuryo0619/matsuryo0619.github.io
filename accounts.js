@@ -8,7 +8,7 @@ window.addEventListener('headerSearchCreated', async () => {
     }
   } else {
     Make_accounts.style.display = 'none';
-    
+    accounts_parent.querySelector('p').textContent = localStorage.getItem('account');
     if (window.location.origin + window.location.pathname === 'https://matsuryo0619.github.io/scratchblog/accounts.html') {
       document.title = 'アカウント設定 - スゴスク!';
     }
