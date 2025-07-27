@@ -40,6 +40,8 @@ window.addEventListener('headerSearchCreated', async () => {
         Submit.id = "submitbutton";
         Submit.value = "送信";
         form.appendChild(Submit);
+
+        document.body.appendChild(form);
       } else if (urlParams.get('type') === 'login') {
         document.title = 'ログイン - スゴスク!';
       }
