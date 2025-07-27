@@ -146,7 +146,7 @@ document.addEventListener('PageFinish', function() {
           let commentsText = entry["コメント"];
 
           commentsText = commentsText.replace(exp, function(url) {
-            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" data-linktype="comment">${url}</a>`;
           });
 
           const commentNumber = filteredData.length - index;
