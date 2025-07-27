@@ -64,8 +64,12 @@ const accounts_ul = document.createElement('div');
 accounts_ul.id = 'header_accountsUl';
 
 const accounts_li = [
-  { text: "アカウント設定", id: "accounts_setting" },
-  { text: "ログアウト", id: "accounts_logout" }
+  { text: "アカウント設定", id: "accounts_setting", onclick: () => {
+    window.location = 'https://matsuryo0619.github.io/scratchblog/accounts.html?';
+  } },
+  { text: "ログアウト", id: "accounts_logout", onclick: () => {
+    localStorage.removeItem('account');
+  } }
 ]
 
 accounts_li.forEach((item) => {
