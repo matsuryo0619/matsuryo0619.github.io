@@ -3,31 +3,31 @@
     "title": "ホーム",
     "content": "スゴスク!のホーム",
     "tags": ["Pages"],
-    "url": "Home.html"
+    "url": "/Home.html"
   }, {
     "title": "私の作品",
     "content": "サイト主が作成したプロジェクト一覧",
     "tags": ["Pages", "作品"],
-    "url": "myStuff.html"
+    "url": "/myStuff.html"
   }, {
     "title": "2D RPG風ゲーム 1",
     "content": "2D RPG風ゲーム 1 について",
     "tags": ["プロジェクト", "2D", "RPG",  "主", "作品"],
-    "url": "article/article.html?data=1"
+    "url": "/article/article.html?data=1"
   }, {
     "title": "にゃんこ大戦争 バトルシステム2",
     "content": "にゃんこ大戦争 バトルシステム2 について",
     "tags": ["プロジェクト", "にゃんこ大戦争", "主", "作品"],
-    "url": "article/article.html?data=2"
+    "url": "/article/article.html?data=2"
   }, {
     "title": "Scratch講座 No.1",
     "content": "スクラッチ講座 第1弾",
     "tags": ["Pages", "teach", "Scratch", "article"],
-    "url": "article/article.html?data=3"
+    "url": "/article/article.html?data=3"
   }, {
     "title": "Scratch講座 番外編 アカウントの作り方",
     "content": "スクラッチ講座 番外編 Scratchアカウントの作り方です",
     "tags": ["Pages", "teach", "Scratch", "article", "account"],
-    "url": "article/article.html?data=4"
+    "url": "/article/article.html?data=4"
   }
 ]
