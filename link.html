@@ -42,11 +42,12 @@
         warning.style.display = 'none';
       } else {
         warning.style.display = 'block';
-        if (type === 'comment') warningChange('このリンクはコメントに貼ってあったものです｡ 安全ではない可能性があります。', 'red');
+        if (type === 'comment') warningChange('このリンクはコメントに貼ってあったものです｡ 安全ではない可能性があります。', 'red', link);
       }
 
-      function warningChange(text, color) {
+      function warningChange(text, color, link) {
         warning.innerHTML = `${text.replace(/\n/g, '<br>')}<br>また、当サイトはリンク先の安全性を保証しません。リンク先の閲覧・利用は自己責任でお願いします。`;
+        if (link.startsWith === 'http://') warning.innerHTML += `<br>リンク先は､保護されていない通信となっています あらかじめご確認ください`;
         warning.style.color = color;
       }
 
