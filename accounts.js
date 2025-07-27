@@ -6,5 +6,10 @@ window.addEventListener('headerSearchCreated', async () => {
     if (window.location.origin + window.location.pathname === 'https://matsuryo0619.github.io/scratchblog/accounts.html') {
       document.title = 'アカウントを作成 - スゴスク!';
     }
+  } else {
+    Make_accounts.style.display = 'none';
+    if (window.location.origin + window.location.pathname === 'https://matsuryo0619.github.io/scratchblog/accounts.html') {
+      document.title = 'アカウント設定 - スゴスク!';
+    }
   }
 });
