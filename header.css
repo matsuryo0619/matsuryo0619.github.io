@@ -82,3 +82,13 @@
   padding: 10px;
   cursor: pointer;
 }
+
+#header_accountsUl span {
+  display: none;
+}
+
+#header_accountsUl p {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
