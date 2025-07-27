@@ -59,7 +59,7 @@ accounts_parent.id = 'header_accountsParent';
 
 const accounts_ul = document.createElement('ul');
 accounts_ul.id = 'header_accountsUl';
-acconuts_ul.style.listStyle = 'none';
+accounts_ul.style.listStyle = 'none';
 
 const accounts_li = [
   { text: "アカウント設定", id: "accounts_setting" },
@@ -102,7 +102,7 @@ ButtonList.forEach((data) => {
 header.appendChild(Logo);
 header.appendChild(SearchDIV);
 header.appendChild(Button_parent);
-header.appendChild(accounts_li);
+header.appendChild(accounts_ui);
 
 // ヘッダーをHTMLに追加
 document.body.appendChild(header);
