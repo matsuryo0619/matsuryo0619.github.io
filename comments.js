@@ -149,11 +149,7 @@ document.addEventListener('PageFinish', function() {
             return `<a href="${url}" target="_blank" rel="noopener noreferrer" data-linktype="comment">${url}</a>`;
           });
 
-          commentsText = commentsText.replace(/&/g, "&amp;")
-                             .replace(/</g, "&lt;")
-                             .replace(/>/g, "&gt;")
-                             .replace(/"/g, "&quot;")
-                             .replace(/'/g, "&#39;");
+          commentsText = commentsText.replace(/<\/?[^>]+(>|$)/g, "");
           const rawHtml = marked.parse(commentsText);
           const cleanText = DOMPurify.sanitize(rawHtml);
 
