@@ -84,14 +84,15 @@ Button_parent.style.listStyle = 'none';
 Button_parent.id = 'header_buttonlist';
 
 const ButtonList = [
-  { text: 'ホーム', src: 'Home.html' },
-  { text: '私の作品', src: 'myStuff.html' },
+  { text: 'ホーム', src: 'Home.html', id:},
+  { text: '私の作品', src: 'myStuff.html',},
   { text: 'アカウント作成', src: 'accounts.html' }
 ];
 
 ButtonList.forEach((data) => {
   const Button = document.createElement('li');
   Button.classList.add('header_List');
+  Button.id = `header_To${data.src.substring(0, data.src.indexOf('.'))}`
   Button.textContent = data.text;
   Button_parent.appendChild(Button);
 
