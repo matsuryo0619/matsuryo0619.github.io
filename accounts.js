@@ -32,10 +32,12 @@ window.addEventListener('headerSearchCreated', async () => {
           event.preventDefault(); // デフォルトのフォーム送信を一旦停止！
 
           const AccountPass = document.getElementById('Accounts_wcheck');
+          const AccountName = document.getElementById('Account_Name');
           const password = AccountPass.value;
+          const username = AccountName.value;
 
-          if (!password) {
-            alert('パスワードを入力してね！');
+          if (!password || !username) {
+            alert('どちらとも入力してください');
             return false;
           }
 
@@ -66,6 +68,8 @@ window.addEventListener('headerSearchCreated', async () => {
                 alert('アカウントの登録が完了しました！'); // 完了メッセージだよん
                 document.getElementById("submitbutton").disabled = false; // 送信ボタンを有効に戻すよ！
                 form.reset(); // フォームの中身をクリアするね！
+                localStorage.setItem('account', username)
+                window.location = 'matsuryo0619.github.io/scratchblog/Home.html';
                 // reset()で隠しフィールドがクリアされるので、必要なら onload の後に再度値をセットする必要があるかも
             };
 
