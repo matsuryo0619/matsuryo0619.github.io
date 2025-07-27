@@ -15,3 +15,46 @@ if (!window.location.search.includes('rand=')) {
     urlParams.set('rand', rand);
     window.location.href = `${window.location.pathname}?${urlParams.toString()}`;
 }
+
+// window.openのオーバーライド
+const originalOpen = window.open;
+window.open = function (url, windowName, windowFeatures) {
+  console.log('開こうとしてるURL:', url);
+
+  if (
+    url &&
+    !url.startsWith('https://matsuryo0619.github.io/scratchblog/') &&
+    !url.startsWith('#') &&
+    !url.startsWith('javascript:') &&
+    !url.startsWith('mailto:') &&
+    !url.startsWith('tel:')
+  ) {
+    url = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(url)}`;
+  }
+
+  return originalOpen.call(this, url, windowName, windowFeatures);
+};
+
+// MutationObserverでaタグのhref書き換え
+const observer = new MutationObserver(() => {
+  document.querySelectorAll('a').forEach((a) => {
+    const link = a.getAttribute('href');
+    if (
+      link &&
+      !a.dataset.rewritten &&
+      !link.startsWith('https://matsuryo0619.github.io/scratchblog/') &&
+      !link.startsWith('#') &&
+      !link.startsWith('javascript:') &&
+      !link.startsWith('mailto:') &&
+      !link.startsWith('tel:')
+    ) {
+      a.href = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(link)}`;
+      a.dataset.rewritten = 'true';
+    }
+  });
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
