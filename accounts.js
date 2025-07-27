@@ -4,6 +4,10 @@ window.addEventListener('headerSearchCreated', async () => {
   const login = document.getElementById('header_Tologin');
   const urlParams = new URLSearchParams(window.location.search);
 
+  // GoogleスプレッドシートのCSVエクスポートURLをここに設定するよ！
+  // ★重要★ スプレッドシートの公開設定を「ウェブに公開」にしてね！
+  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1E0MjL8CXf-_pF3Lf1K1-w0pMx3EEaLO_zimIPpIkkPk/export?format=csv&range=A2:D';
+
   if (!localStorage.getItem('account')) {
     accounts_parent.style.display = 'none';
     if (window.location.origin + window.location.pathname === 'https://matsuryo0619.github.io/scratchblog/accounts.html') {
@@ -19,66 +23,77 @@ window.addEventListener('headerSearchCreated', async () => {
         // ソルト用の隠し入力フィールドを追加
         const saltInput = document.createElement('input');
         saltInput.type = 'hidden';
-        saltInput.name = 'entry.155315392'; // ★ここをいただいたソルトのエントリーIDに修正したよ！★
+        saltInput.name = 'entry.155315392'; 
         form.appendChild(saltInput);
 
         // ハッシュ化されたパスワード用の隠し入力フィールドを追加
         const hashedPasswordInput = document.createElement('input');
         hashedPasswordInput.type = 'hidden';
-        hashedPasswordInput.name = 'entry.1949907076'; // ★ここをいただいたパスワードのエントリーIDに修正したよ！★
+        hashedPasswordInput.name = 'entry.1949907076'; 
         form.appendChild(hashedPasswordInput);
 
         form.onsubmit = async function(event) {
           event.preventDefault(); // デフォルトのフォーム送信を一旦停止！
 
-          const AccountPass = document.getElementById('Accounts_wcheck');
-          const AccountName = document.getElementById('Account_Name');
-          const password = AccountPass.value;
-          const username = AccountName.value;
+          const AccountNameInput = document.getElementById('Account_Name'); // ユーザー名入力フィールドを取得
+          const AccountPassInput = document.getElementById('Accounts_wcheck');
+          const password = AccountPassInput.value;
+          const username = AccountNameInput.value;
 
           if (!password || !username) {
-            alert('どちらとも入力してください');
+            alert('アカウント名とパスワードを両方入力してください！');
             return false;
           }
 
           document.getElementById("submitbutton").disabled = true; // 送信ボタンを無効化！
 
-          // ソルトを生成 (Web Cryptography APIを使って安全にランダムなバイトを生成)
-          const saltBytes = window.crypto.getRandomValues(new Uint8Array(16)); // 16バイトのランダムなソルト
-          const salt = Array.from(saltBytes).map(b => b.toString(16).padStart(2, '0')).join(''); // 16進数文字列に変換
-          saltInput.value = salt; // 生成したソルトを隠しフィールドに入れるよん
-
-          // パスワードとソルトを結合してハッシュ化
-          const combined = password + salt;
-          const encoder = new TextEncoder();
-          const data = encoder.encode(combined);
-          
           try {
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data); // SHA-256でハッシュ化！
+            // ★D3.jsでGoogleスプレッドシートのCSVデータを読み込むよ！★
+            const existingAccounts = await d3.csv(GOOGLE_SHEET_CSV_URL);
+            
+            // スプレッドシートの2列目（インデックス1）にアカウント名が入っていると仮定して重複をチェックするね！
+            // もしスプレッドシートの列名が分かっているなら `row['アカウント名']` のように変更してもOKだよん
+            const isDuplicate = existingAccounts.some(row => row[Object.keys(row)[1]] === username);
+
+            if (isDuplicate) {
+              alert('そのアカウント名はすでに使われています。別のアカウント名を入力してください！');
+              document.getElementById("submitbutton").disabled = false;
+              return false; // 重複があったら送信中止！
+            }
+
+            // ソルトを生成 (Web Cryptography APIを使って安全にランダムなバイトを生成)
+            const saltBytes = window.crypto.getRandomValues(new Uint8Array(16));
+            const salt = Array.from(saltBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+            saltInput.value = salt;
+
+            // パスワードとソルトを結合してハッシュ化
+            const combined = password + salt;
+            const encoder = new TextEncoder();
+            const dataToHash = encoder.encode(combined);
+            
+            const hashBuffer = await crypto.subtle.digest('SHA-256', dataToHash);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashedPassword = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // 16進数文字列に変換
+            const hashedPassword = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-            hashedPasswordInput.value = hashedPassword; // ハッシュ化されたパスワードを隠しフィールドに入れるよん
-
-            // 元のパスワード入力フィールドはクリア！
-            AccountPass.value = '';
+            hashedPasswordInput.value = hashedPassword;
+            AccountPassInput.value = ''; // 元のパスワード入力フィールドはクリア！
 
             // iframeにGoogleフォームのレスポンスが読み込まれたら実行される処理だよん
             document.getElementById('hidden_iframe').onload = function() {
-                alert('アカウントの登録が完了しました！'); // 完了メッセージだよん
-                document.getElementById("submitbutton").disabled = false; // 送信ボタンを有効に戻すよ！
-                form.reset(); // フォームの中身をクリアするね！
-                localStorage.setItem('account', username)
-                window.location = 'https://matsuryo0619.github.io/scratchblog/Home.html';
-                // reset()で隠しフィールドがクリアされるので、必要なら onload の後に再度値をセットする必要があるかも
+                alert('アカウントの登録が完了しました！'); 
+                document.getElementById("submitbutton").disabled = false; 
+                form.reset(); 
+                
+                localStorage.setItem('account', username); 
+                window.location.href = 'https://matsuryo0619.github.io/scratchblog/Home.html'; // 絶対パスでリダイレクト！
             };
 
             // フォームを最終的に送信するよ！
             form.submit(); 
 
           } catch (error) {
-            console.error('ハッシュ化エラー:', error);
-            alert('パスワードの処理中にエラーが発生したよ。もう一度試してみてね！');
+            console.error('データの読み込みまたはハッシュ化エラー:', error);
+            alert('処理中にエラーが発生したよ。もう一度試してみてね！');
             document.getElementById("submitbutton").disabled = false;
             return false;
           }
@@ -88,10 +103,10 @@ window.addEventListener('headerSearchCreated', async () => {
         const AccountName = document.createElement('input');
         AccountName.type = 'text';
         AccountName.autocomplete = 'username';
-        AccountName.name = 'entry.159289474'; // ★ここをいただいたアカウント名のエントリーIDに修正したよ！★
+        AccountName.name = 'entry.159289474'; 
         AccountName.placeholder = 'アカウント名';
         AccountName.required = true;
-        AccountName.id = 'Account_Name';
+        AccountName.id = 'Account_Name'; 
         AccountName_P.appendChild(AccountName);
         form.appendChild(AccountName_P);
         AccountName.addEventListener('focus', function() {
@@ -102,7 +117,7 @@ window.addEventListener('headerSearchCreated', async () => {
         const AccountPass = document.createElement('input');
         AccountPass.type = 'password';
         AccountPass.autocomplete = 'new-password';
-        AccountPass.name = 'entry.1949907076'; // ★元のパスワード入力欄もいただいたIDに修正したよ！★
+        AccountPass.name = 'entry.1949907076'; 
         AccountPass.placeholder = 'Password';
         AccountPass.required = true;
         AccountPass.id = 'Accounts_wcheck';
