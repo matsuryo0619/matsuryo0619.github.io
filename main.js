@@ -66,5 +66,5 @@ Link_observer.observe(document.body, {
 });
 
 function linktype(el) {
-    return el.getAttribute('data-linktype') || 'nomal';
+    return el.getAttribute('data-linktype') || 'normal';
 }
