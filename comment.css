@@ -49,7 +49,7 @@
   white-space: nowrap;
 }
 
-#comments p {
+#comments p, .Comment_text {
   margin-top: 0;
   margin-bottom: 0;
 }
