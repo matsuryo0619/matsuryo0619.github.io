@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
       : 'なし';
 
     div.innerHTML = `
-      <h3><a href="${result.url}" class="preview-link">${result.title}</a></h3>
+      <h3><a href="${result.url}" class="preview-link" data-important="true">${result.title}</a></h3>
       <p>${result.content}</p>
       <p><b>タグ:</b> ${tags}</p>
     `;
