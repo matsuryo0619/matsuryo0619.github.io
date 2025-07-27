@@ -102,7 +102,7 @@ ButtonList.forEach((data) => {
 header.appendChild(Logo);
 header.appendChild(SearchDIV);
 header.appendChild(Button_parent);
-header.appendChild(accounts_ui);
+header.appendChild(accounts_ul);
 
 // ヘッダーをHTMLに追加
 document.body.appendChild(header);
