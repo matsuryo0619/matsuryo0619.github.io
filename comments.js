@@ -149,7 +149,9 @@ document.addEventListener('PageFinish', function() {
             return `<a href="${url}" target="_blank" rel="noopener noreferrer" data-linktype="comment">${url}</a>`;
           });
 
-          commentsText = commentsText.replace(/<\/?[^>]+(>|$)/g, "");
+          // HTMLタグを削除する代わりに、HTMLエンティティとしてエスケープ
+          commentsText = commentsText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          
           const rawHtml = marked.parse(commentsText);
           const cleanText = DOMPurify.sanitize(rawHtml);
 
