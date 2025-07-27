@@ -11,6 +11,7 @@ window.addEventListener('headerSearchCreated', async () => {
       } else if (urlParams.get('type') === 'login') {
         document.title = 'ログイン - スゴスク!';
       }
+    }
   } else {
     Make_accounts.style.display = 'none';
     login.style.display = 'none';
