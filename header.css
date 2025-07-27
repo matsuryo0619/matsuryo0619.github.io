@@ -5,8 +5,8 @@
   width: 100%;
   height: 35px;
   display: flex;
-  align-items: center;  /* 垂直方向の中央揃え */
-  justify-content: center;  /* ヘッダー内の要素を中央寄せ */
+  align-items: center;
+  justify-content: center;
   background-color: #855CD6;
   padding: 10px 20px;
   z-index: 1000;
@@ -25,7 +25,7 @@
 
 #header_Search {
   width: 175px;
-  margin: 0 20px;  /* ロゴとボタンリストの間に余白 */
+  margin: 0 20px;
   border: none;
   height: 30px;
   background-color: transparent;
@@ -39,7 +39,7 @@
   outline: none;
   background-color: transparent;
   color: white;
-  margin-right: 5px;
+  margin-left: 5px;
 }
 
 #header_option option {
@@ -55,7 +55,7 @@
 }
 
 #header_buttonlist li {
-  margin: 0 10px;  /* ボタン間のスペースを調整 */
+  margin: 0 10px;
   cursor: pointer;
   padding: 10px;
 }
@@ -81,14 +81,33 @@
 #header_SearchBtn {
   padding: 10px;
   cursor: pointer;
+  color: white;
+}
+
+#header_accountsParent {
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+#header_accountsUl {
+  display: flex;
+  flex-direction: column;
 }
 
 #header_accountsUl span {
   display: none;
+  padding: 5px 0;
+  color: white;
 }
 
-#header_accountsUl p {
-  margin: 0;
-  padding: 0;
-  color: white;
+#header_accountsParent:hover {
+  background-color: hsl(260,46%,54%);
+}
+
+#header_accountsParent:hover #header_accountsUl span {
+  display: block;
 }
