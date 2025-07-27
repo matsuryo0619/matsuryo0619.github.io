@@ -17,23 +17,27 @@ if (!window.location.search.includes('rand=')) {
 }
 
 // window.openのオーバーライド
-const originalOpen = window.open;
-window.open = function (url, windowName, windowFeatures) {
-  console.log('開こうとしてるURL:', url);
+// window.openのオーバーライド（多重定義防止）
+if (!window._isWindowOpenOverridden) {
+  const originalOpen = window.open;
+  window.open = function (url, windowName, windowFeatures) {
+    console.log('開こうとしてるURL:', url);
 
-  if (
-    url &&
-    !url.startsWith('https://matsuryo0619.github.io/scratchblog/') &&
-    !url.startsWith('#') &&
-    !url.startsWith('javascript:') &&
-    !url.startsWith('mailto:') &&
-    !url.startsWith('tel:')
-  ) {
-    url = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(url)}`;
-  }
+    if (
+      url &&
+      !url.startsWith('https://matsuryo0619.github.io/scratchblog/') &&
+      !url.startsWith('#') &&
+      !url.startsWith('javascript:') &&
+      !url.startsWith('mailto:') &&
+      !url.startsWith('tel:')
+    ) {
+      url = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(url)}`;
+    }
 
-  return originalOpen.call(this, url, windowName, windowFeatures);
-};
+    return originalOpen.call(this, url, windowName, windowFeatures);
+  };
+  window._isWindowOpenOverridden = true;
+}
 
 // MutationObserverでaタグのhref書き換え
 const observer = new MutationObserver(() => {
