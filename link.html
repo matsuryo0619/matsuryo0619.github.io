@@ -47,7 +47,7 @@
 
       function warningChange(text, color, link) {
         warning.innerHTML = `${text.replace(/\n/g, '<br>')}<br>また、当サイトはリンク先の安全性を保証しません。リンク先の閲覧・利用は自己責任でお願いします。`;
-        if (link.startsWith('http://')) warning.innerHTML += `<br>リンク先は､<a href='https://support.google.com/chrome/answer/95617?hl=ja&co=GENIE.Platform%3DDesktop&sjid=14465702384509331895-NC#zippy=%2C保護されていない通信または危険%2C情報または保護されていない通信' target='_blank'>
+        if (link.startsWith('http://')) warning.innerHTML += `<br>リンク先は､<a href='https://support.google.com/chrome/answer/95617?hl=ja&co=GENIE.Platform%3DDesktop&sjid=14465702384509331895-NC#zippy=%2C%E4%BF%9D%E8%AD%B7%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84%E9%80%9A%E4%BF%A1%E3%81%BE%E3%81%9F%E3%81%AF%E5%8D%B1%E9%99%BA%2C%E6%83%85%E5%A0%B1%E3%81%BE%E3%81%9F%E3%81%AF%E4%BF%9D%E8%AD%B7%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84%E9%80%9A%E4%BF%A1' target='_blank'>
         保護されていない通信</a>となっています あらかじめご確認ください`;
         warning.style.color = color;
       }
