@@ -148,7 +148,7 @@ document.addEventListener('PageFinish', function() {
           const fullUrl = `${location.origin}${location.pathname}?data=${getUrlParameter('data')}&comments=${commentNumber}`;
 
           // 名前リンク用URL
-          const userLink = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(`https://scratch.mit.edu/users/${name}/`)}`;
+          const userLink = `https://scratch.mit.edu/users/${name}/`;
 
           let nameHTML;
           if (name === "匿名" || !/^[a-zA-Z0-9_-]+$/.test(name)) {
@@ -180,7 +180,7 @@ document.addEventListener('PageFinish', function() {
           if (!/^https?:\/\//.test(url)) {
             url = 'https://' + url;
           }
-          anchor.href = 'https://matsuryo0619.github.io/scratchblog/link.html?link=' + encodeURIComponent(url);
+          anchor.href = url;
           anchor.target = '_blank';
         });
       });
