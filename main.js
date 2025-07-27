@@ -54,7 +54,7 @@ const Link_observer = new MutationObserver(() => {
       !link.startsWith('mailto:') &&
       !link.startsWith('tel:')
     ) {
-      a.href = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(link)}`;
+      a.href = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(link)}&type=${linktype(a)}`;
       a.dataset.rewritten = 'true';
     }
   });
@@ -64,3 +64,7 @@ Link_observer.observe(document.body, {
   childList: true,
   subtree: true
 });
+
+function linktype(el) {
+    return el.getAttribute('data-type') || '';
+}
