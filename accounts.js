@@ -3,6 +3,8 @@ window.addEventListener('headerSearchCreated', async () => {
   const Make_accounts = document.getElementById('header_Toaccounts');
   if (!localStorage.getItem('account')) {
     accounts_parent.style.display = 'none';
+    if (window.location.origin + window.location.pathname === 'https://matsuryo0619.github.io/scratchblog/accounts.html') {
+      document.title = 'アカウントを作成 - スゴスク!';
+    }
   }
-  console.log(accounts_parent);
 });
