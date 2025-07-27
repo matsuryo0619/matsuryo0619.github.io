@@ -123,6 +123,8 @@ document.addEventListener('PageFinish', function() {
   comments.id = 'comments';
   document.getElementById('commentsArea').appendChild(comments);
 
+  const exp = /((?<!href="|href='|src="|src=')(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+
   fetch("https://docs.google.com/spreadsheets/d/14j4HxVdHec5ELwRGyZKpehI8hM8Jpa1AppqqK3pKUA4/export?format=csv&range=A1:D")
     .then(response => response.text())
     .then(function(csvText) {
@@ -141,13 +143,16 @@ document.addEventListener('PageFinish', function() {
         filteredData.forEach((entry, index) => {
           const name = entry["ペンネーム"];
           const timestamp = entry["タイムスタンプ"];
-          const commentsText = entry["コメント"];
+          let commentsText = entry["コメント"];
+
+          commentsText = commentsText.replace(exp, function(url) {
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+          });
 
           const commentNumber = filteredData.length - index;
           const commentId = `comments_No${commentNumber}`;
           const fullUrl = `${location.origin}${location.pathname}?data=${getUrlParameter('data')}&comments=${commentNumber}`;
 
-          // 名前リンク用URL
           const userLink = `https://scratch.mit.edu/users/${name}/`;
 
           let nameHTML;
@@ -157,7 +162,6 @@ document.addEventListener('PageFinish', function() {
             nameHTML = `${commentNumber} 名前: <a href="${userLink}" target="_blank">${name}</a> ${timestamp}`;
           }
 
-          // コピーリンクボタンHTML
           const copyLinkHTML = `
             <span class="copy-link" data-url="${fullUrl}" style="margin-left: 10px; cursor: pointer;">🔗 コピー</span>
           `;
@@ -185,7 +189,6 @@ document.addEventListener('PageFinish', function() {
         });
       });
 
-      // ★ コメント番号付きで自動スクロールする処理
       const params = new URLSearchParams(window.location.search);
       const commentNo = params.get('comments');
 
@@ -206,8 +209,8 @@ document.addEventListener('PageFinish', function() {
       console.error("コメントデータの読み込みに失敗しました:", error);
       document.getElementById("comments").innerHTML = "<p>コメントの取得に失敗しました</p>";
     });
-      
-    document.addEventListener('click', function(e) {
+
+  document.addEventListener('click', function(e) {
     if (e.target.classList.contains('copy-link')) {
       const url = e.target.getAttribute('data-url');
       navigator.clipboard.writeText(url).then(() => {
