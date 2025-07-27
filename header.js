@@ -84,8 +84,8 @@ Button_parent.style.listStyle = 'none';
 Button_parent.id = 'header_buttonlist';
 
 const ButtonList = [
-  { text: 'ホーム', src: 'Home.html', id:},
-  { text: '私の作品', src: 'myStuff.html',},
+  { text: 'ホーム', src: 'Home.html' },
+  { text: '私の作品', src: 'myStuff.html' },
   { text: 'アカウント作成', src: 'accounts.html' }
 ];
 
