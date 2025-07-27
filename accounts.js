@@ -38,7 +38,7 @@ window.addEventListener('headerSearchCreated', async () => {
         const Submit = document.createElement('input');
         Submit.type = "submit";
         Submit.id = "submitbutton";
-        Submit.value = "送信";
+        Submit.value = "登録";
         form.appendChild(Submit);
 
         document.body.appendChild(form);
