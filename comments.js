@@ -149,11 +149,18 @@ document.addEventListener('PageFinish', function() {
             return `<a href="${url}" target="_blank" rel="noopener noreferrer" data-linktype="comment">${url}</a>`;
           });
 
-          // HTMLタグを削除する代わりに、HTMLエンティティとしてエスケープ
-          commentsText = commentsText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-          
+          // 最初にMarkdownを処理
           const rawHtml = marked.parse(commentsText);
-          const cleanText = DOMPurify.sanitize(rawHtml);
+          
+          // DOMPurifyでサニタイズしつつ、HTMLタグをテキスト化
+          const cleanText = DOMPurify.sanitize(rawHtml, {
+            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'code', 'pre', 'a', 'ul', 'ol', 'li', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+            ALLOWED_ATTR: ['href', 'target', 'rel', 'data-linktype'],
+            RETURN_DOM_FRAGMENT: false,
+            RETURN_DOM: false
+          }).replace(/<(?!\/?(?:p|br|strong|em|code|pre|a|ul|ol|li|blockquote|h[1-6])(?:\s|>))[^>]*>/g, function(match) {
+            return match.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          });
 
           const commentNumber = filteredData.length - index;
           const commentId = `comments_No${commentNumber}`;
