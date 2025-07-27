@@ -93,13 +93,13 @@ const ButtonList = [
   { text: 'ホーム', src: 'Home.html' },
   { text: '私の作品', src: 'myStuff.html' },
   { text: 'アカウント作成', src: 'accounts.html?type=make' },
-  { text: 'サインイン', src: 'signin.html' }
+  { text: 'サインイン', src: 'accounts.html?type=signin', id: 'header_ToSignin' }
 ];
 
 ButtonList.forEach((data) => {
   const Button = document.createElement('li');
   Button.classList.add('header_List');
-  Button.id = `header_To${data.src.substring(0, data.src.indexOf('.'))}`
+  Button.id = data.id || `header_To${data.src.substring(0, data.src.indexOf('.'))}`
   Button.textContent = data.text;
   Button_parent.appendChild(Button);
 
