@@ -45,10 +45,11 @@ const Link_observer = new MutationObserver(() => {
     const link = a.getAttribute('href');
     if (
       link &&
+      a.getAttribute('data-important') &&
       !a.dataset.rewritten &&
       !link.startsWith('https://matsuryo0619.github.io/scratchblog/') &&
       !link.startsWith('#') &&
-      !link.startsWith('/') %%
+      !link.startsWith('/') &&
       !link.startsWith('javascript:') &&
       !link.startsWith('mailto:') &&
       !link.startsWith('tel:')
