@@ -57,9 +57,8 @@ SearchDIV.appendChild(SearchForm);
 const accounts_parent = document.createElement('div');
 accounts_parent.id = 'header_accountsParent';
 
-const accounts_ul = document.createElement('ul');
+const accounts_ul = document.createElement('div');
 accounts_ul.id = 'header_accountsUl';
-accounts_ul.style.listStyle = 'none';
 
 const accounts_li = [
   { text: "アカウント設定", id: "accounts_setting" },
@@ -67,7 +66,7 @@ const accounts_li = [
 ]
 
 accounts_li.forEach((item) => {
-  const li = document.createElement('li');
+  const li = document.createElement('span');
   li.textContent = item.text;
   li.id = item.id;
   accounts_ul.appendChild(li);
