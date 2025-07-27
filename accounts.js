@@ -169,6 +169,9 @@ window.addEventListener('headerSearchCreated', async () => {
                 form.reset(); 
                 
                 localStorage.setItem('account', username); 
+                const sessionToken = secureAuth.generateSessionToken(); // トークン作成
+                secureAuth.setAuthData(username, sessionToken);         // トークン保存
+
                 window.location.href = 'https://matsuryo0619.github.io/scratchblog/Home.html';
             };
 
