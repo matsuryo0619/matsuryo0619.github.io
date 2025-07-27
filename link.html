@@ -46,7 +46,7 @@
       }
 
       function warningChange(text, color) {
-        warning.textContent = `${text}\nまた､当サイトはリンク先の安全性を保証しません。リンク先の閲覧・利用は自己責任でお願いします。`;
+        warning.innerHTML = `${text.replace(/\n/g, '<br>')}<br>また、当サイトはリンク先の安全性を保証しません。リンク先の閲覧・利用は自己責任でお願いします。`;
         warning.style.color = color;
       }
 
