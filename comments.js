@@ -149,6 +149,9 @@ document.addEventListener('PageFinish', function() {
             return `<a href="${url}" target="_blank" rel="noopener noreferrer" data-linktype="comment">${url}</a>`;
           });
 
+          const rawHtml = marked.parse(commentsText);
+          const cleanText = DOMPurify.sanitize(rawHtml);
+
           const commentNumber = filteredData.length - index;
           const commentId = `comments_No${commentNumber}`;
           const fullUrl = `${location.origin}${location.pathname}?data=${getUrlParameter('data')}&comments=${commentNumber}`;
@@ -169,7 +172,7 @@ document.addEventListener('PageFinish', function() {
           text += `
             <div class="Comment_block" id="${commentId}">
               ${nameHTML} ${copyLinkHTML}
-              <pre class='Comment_text'>${commentsText}</pre>
+              <pre class='Comment_text'>${cleanText}</pre>
             </div>
           `;
         });
