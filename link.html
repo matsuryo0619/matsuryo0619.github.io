@@ -42,6 +42,12 @@
         warning.style.display = 'none';
       } else {
         warning.style.display = 'block';
+        if (type === 'comment') warningChange('このリンクはコメントに貼ってあったものです｡ 安全ではない可能性があります', 'red');
+      }
+
+      function warningChange(text, color) {
+        warning.textContent = text;
+        warning.style.color = color;
       }
 
       // ボタンのクリックイベント設定
