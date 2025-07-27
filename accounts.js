@@ -69,7 +69,7 @@ window.addEventListener('headerSearchCreated', async () => {
                 document.getElementById("submitbutton").disabled = false; // 送信ボタンを有効に戻すよ！
                 form.reset(); // フォームの中身をクリアするね！
                 localStorage.setItem('account', username)
-                window.location = 'matsuryo0619.github.io/scratchblog/Home.html';
+                window.location = 'https://matsuryo0619.github.io/scratchblog/Home.html';
                 // reset()で隠しフィールドがクリアされるので、必要なら onload の後に再度値をセットする必要があるかも
             };
 
