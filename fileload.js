@@ -10,11 +10,11 @@ const reqcss = [
 
 // JSファイルのリスト
 const reqjs = [
+  {src: 'accounts', defer: true},
   {src: 'header', defer: true},
   {src: 'context', defer: true},
   {src: 'footer', defer: true},
   {src: 'main', defer: false},
-  {src: 'accounts', defer: true},
   {src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js', defer: true},
   {src: 'https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js', defer: true}
 ];
