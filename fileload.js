@@ -48,7 +48,7 @@ reqjs.forEach((file) => {
   if (file.defer) {
     script.defer = true;
   }
-  script.module = true;
+  script.type = 'module';
   document.head.appendChild(script);
 });
 
