@@ -65,7 +65,7 @@ accounts_ul.id = 'header_accountsUl';
 
 const accounts_li = [
   { text: "アカウント設定", id: "accounts_setting" },
-  { text: "ログアウト", id: "accounts_logout" }
+  { text: "ログアウト", id: "accounts_logout" },
 ]
 
 accounts_li.forEach((item) => {
@@ -85,7 +85,8 @@ Button_parent.id = 'header_buttonlist';
 
 const ButtonList = [
   { text: 'ホーム', src: 'Home.html' },
-  { text: '私の作品', src: 'myStuff.html' }
+  { text: '私の作品', src: 'myStuff.html' },
+  { text: 'アカウント作成', src: 'accounts.html' }
 ];
 
 ButtonList.forEach((data) => {
