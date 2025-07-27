@@ -16,22 +16,20 @@ window.addEventListener('headerSearchCreated', async () => {
         form.id = 'accounts_form';
         form.target = 'hidden_iframe'; 
         
-        // ★ここからパスワードハッシュ化のロジックを追加するよん！★
         // ソルト用の隠し入力フィールドを追加
         const saltInput = document.createElement('input');
         saltInput.type = 'hidden';
-        saltInput.name = 'entry.951058468'; // ソルトを送信するエントリーID
+        saltInput.name = 'entry.155315392'; // ★ここをいただいたソルトのエントリーIDに修正したよ！★
         form.appendChild(saltInput);
 
-        // パスワード用の隠し入力フィールドを追加 (ハッシュ化されたパスワードを送信するため)
+        // ハッシュ化されたパスワード用の隠し入力フィールドを追加
         const hashedPasswordInput = document.createElement('input');
         hashedPasswordInput.type = 'hidden';
-        // 元のパスワード入力フィールドと同じ名前で送信されるようにする（Googleフォームの指定に合わせてね）
-        hashedPasswordInput.name = 'entry.1714274511'; 
+        hashedPasswordInput.name = 'entry.1949907076'; // ★ここをいただいたパスワードのエントリーIDに修正したよ！★
         form.appendChild(hashedPasswordInput);
 
         form.onsubmit = async function(event) {
-          event.preventDefault(); // デフォルトのフォーム送信を一旦停止するよ！
+          event.preventDefault(); // デフォルトのフォーム送信を一旦停止！
 
           const AccountPass = document.getElementById('Accounts_wcheck');
           const password = AccountPass.value;
@@ -43,9 +41,9 @@ window.addEventListener('headerSearchCreated', async () => {
 
           document.getElementById("submitbutton").disabled = true; // 送信ボタンを無効化！
 
-          // ソルトを生成 (ここではシンプルな例としてUUIDを使うけど、よりセキュアなランダムバイト推奨だよん)
-          // 実際の運用では、`window.crypto.getRandomValues(new Uint8Array(16))` などを使ってね！
-          const salt = crypto.randomUUID(); // ランダムなソルトを生成！
+          // ソルトを生成 (Web Cryptography APIを使って安全にランダムなバイトを生成)
+          const saltBytes = window.crypto.getRandomValues(new Uint8Array(16)); // 16バイトのランダムなソルト
+          const salt = Array.from(saltBytes).map(b => b.toString(16).padStart(2, '0')).join(''); // 16進数文字列に変換
           saltInput.value = salt; // 生成したソルトを隠しフィールドに入れるよん
 
           // パスワードとソルトを結合してハッシュ化
@@ -60,7 +58,7 @@ window.addEventListener('headerSearchCreated', async () => {
 
             hashedPasswordInput.value = hashedPassword; // ハッシュ化されたパスワードを隠しフィールドに入れるよん
 
-            // 元のパスワード入力フィールドはクリアしとくのが安全だよ！
+            // 元のパスワード入力フィールドはクリア！
             AccountPass.value = '';
 
             // iframeにGoogleフォームのレスポンスが読み込まれたら実行される処理だよん
@@ -68,8 +66,7 @@ window.addEventListener('headerSearchCreated', async () => {
                 alert('アカウントの登録が完了しました！'); // 完了メッセージだよん
                 document.getElementById("submitbutton").disabled = false; // 送信ボタンを有効に戻すよ！
                 form.reset(); // フォームの中身をクリアするね！
-                // ただし、reset()だとhiddenフィールドもクリアされちゃうから、
-                // 必要に応じて個別に値設定し直すか、hiddenフィールドをresetの対象外にする工夫が必要かも！
+                // reset()で隠しフィールドがクリアされるので、必要なら onload の後に再度値をセットする必要があるかも
             };
 
             // フォームを最終的に送信するよ！
@@ -82,13 +79,12 @@ window.addEventListener('headerSearchCreated', async () => {
             return false;
           }
         };
-        // ★ここまで★
 
         const AccountName_P = document.createElement('p');
         const AccountName = document.createElement('input');
         AccountName.type = 'text';
         AccountName.autocomplete = 'username';
-        AccountName.name = 'entry.1357779689';
+        AccountName.name = 'entry.159289474'; // ★ここをいただいたアカウント名のエントリーIDに修正したよ！★
         AccountName.placeholder = 'アカウント名';
         AccountName.required = true;
         AccountName.id = 'Account_Name';
@@ -102,7 +98,7 @@ window.addEventListener('headerSearchCreated', async () => {
         const AccountPass = document.createElement('input');
         AccountPass.type = 'password';
         AccountPass.autocomplete = 'new-password';
-        AccountPass.name = 'entry.1714274511'; // ここがハッシュ化される前のパスワードの入力欄だよ
+        AccountPass.name = 'entry.1949907076'; // ★元のパスワード入力欄もいただいたIDに修正したよ！★
         AccountPass.placeholder = 'Password';
         AccountPass.required = true;
         AccountPass.id = 'Accounts_wcheck';
