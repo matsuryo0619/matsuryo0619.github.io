@@ -48,3 +48,8 @@
   font-size: 90%;
   white-space: nowrap;
 }
+
+#comments p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
