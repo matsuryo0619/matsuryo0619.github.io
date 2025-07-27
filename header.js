@@ -77,6 +77,7 @@ accounts_li.forEach((item) => {
   li.textContent = item.text;
   li.id = item.id;
   accounts_ul.appendChild(li);
+  if (item.onclick && typeof item.onclick === 'function') li.onclick = item.onclick;
 });
 
 accounts_parent.appendChild(accounts_p);
