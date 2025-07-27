@@ -53,3 +53,8 @@
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.Comment_block {
+  padding: 0 !important;
+  margin-bottom: 0;
+}
