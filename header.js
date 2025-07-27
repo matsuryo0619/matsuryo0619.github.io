@@ -53,6 +53,26 @@ SearchDIV.appendChild(SearchBtn);
 SearchDIV.appendChild(Search);
 SearchDIV.appendChild(SearchForm);
 
+//アカウント
+const accounts_parent = document.createElement('div');
+accounts_parent.id = 'header_accountsParent';
+
+const accounts_ul = document.createElement('ul');
+accounts_ul.id = 'header_accountsUl';
+acconuts_ul.style.listStyle = 'none';
+
+const accounts_li = document.createElement('li');
+accounts_li.textContent = 'アカウント設定';
+accounts_li.id = 'acconts_setting';
+
+accounts_ul.appendChild(accounts_li);
+
+const accounts_li = document.createElement('li');
+accounts_li.textContent = 'ログアウト';
+accounts_li.id = 'acconts_logout';
+
+accounts_ul.appendChild(accounts_li);
+
 // ボタンの親リスト
 const Button_parent = document.createElement('ul');
 Button_parent.style.listStyle = 'none';
@@ -82,6 +102,7 @@ ButtonList.forEach((data) => {
 header.appendChild(Logo);
 header.appendChild(SearchDIV);
 header.appendChild(Button_parent);
+header.appendChild(accounts_li);
 
 // ヘッダーをHTMLに追加
 document.body.appendChild(header);
