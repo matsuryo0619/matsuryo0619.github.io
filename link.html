@@ -22,7 +22,7 @@
   <body>
     <div id='link_div'>
     <h1>以下のリンクを開きます｡よろしいですか?</h1>
-    <p id='warning'>安全ではない可能性があります</p>
+    <p id='warning'>当サイトはリンク先の安全性を保証しません。リンク先の閲覧・利用は自己責任でお願いします。</p>
     <p id='link'></p>
     <br>
     <button id='none'>いいえ</button>
@@ -42,11 +42,11 @@
         warning.style.display = 'none';
       } else {
         warning.style.display = 'block';
-        if (type === 'comment') warningChange('このリンクはコメントに貼ってあったものです｡ 安全ではない可能性があります', 'red');
+        if (type === 'comment') warningChange('このリンクはコメントに貼ってあったものです｡ 安全ではない可能性があります。', 'red');
       }
 
       function warningChange(text, color) {
-        warning.textContent = text;
+        warning.textContent = `${text}\nまた､当サイトはリンク先の安全性を保証しません。リンク先の閲覧・利用は自己責任でお願いします。`;
         warning.style.color = color;
       }
 
