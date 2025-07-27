@@ -22,6 +22,7 @@
   <body>
     <div>
     <h1>以下のリンクを開きます｡よろしいですか?</h1>
+    <p id='comments'>安全ではない可能性があります</p>
     <p id='link'></p>
     <br>
     <button id='none'>いいえ</button>
@@ -34,6 +35,13 @@
       let link = urlParams.get('link');
       link = decodeURIComponent(link);
       document.getElementById('link').textContent = link;
+
+      let type = urlParams.get('type');
+      if (type !=== 'nomal') {
+        document.querySelector('#comments').style.display = 'none';
+      } else {
+        document.querySelector('#comments').style.display = 'block';
+      }
 
       // ボタンのクリックイベント設定
       const buttons = document.querySelectorAll('button');
