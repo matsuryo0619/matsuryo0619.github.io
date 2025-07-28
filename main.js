@@ -1,3 +1,9 @@
+const originalClear = secureAuth.clearAuthData.bind(secureAuth);
+secureAuth.clearAuthData = function(...args) {
+  alert('clearAuthData() called!', new Error().stack);
+  return originalClear(...args);
+}
+
 //ヘッダー･フッターが無い場合
 setTimeout(function() {
     const header = document.getElementById('header');  
