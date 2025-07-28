@@ -293,7 +293,6 @@ window.addEventListener('headerSearchCreated', async () => {
             const sessionToken = secureAuth.generateSessionToken();
             secureAuth.setAuthData(accountData.username, sessionToken);
             
-            alert('ログインしました！');
             window.location.replace('https://matsuryo0619.github.io/scratchblog/Home.html');
             
           } catch (error) {
