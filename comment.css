@@ -63,3 +63,14 @@
   margin: 0;
   padding: 0;
 }
+
+#comments ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+#comments li {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
