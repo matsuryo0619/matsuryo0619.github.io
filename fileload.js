@@ -12,7 +12,7 @@ const reqcss = [
 const reqjs = [
   {src: 'auth.min', module: false},
   {src: 'accounts', module: true},
-  {src: 'header', defer: true},
+  {src: 'header', module: true},
   {src: 'context', defer: true},
   {src: 'footer', defer: true},
   {src: 'main', defer: false},
