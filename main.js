@@ -71,7 +71,7 @@ function linktype(el) {
 
 if (window.secureAuth) {
   // すでにauthがあれば処理
-  handleAuthReady();
+  const authResult = await secureAuth.quickAuthCheck();
 }
 
 window.addEventListener('authSystemReady', async () => {
