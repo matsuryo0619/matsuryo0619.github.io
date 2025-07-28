@@ -10,6 +10,7 @@ const reqcss = [
 
 // JSファイルのリスト
 const reqjs = [
+  {src: 'auth', defer: false},
   {src: 'accounts', defer: true},
   {src: 'header', defer: true},
   {src: 'context', defer: true},
