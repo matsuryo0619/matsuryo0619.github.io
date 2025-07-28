@@ -69,11 +69,11 @@ function linktype(el) {
     return el.getAttribute('data-linktype') || 'normal';
 }
 
-document.addEventListener('authSystemReady', () => {
-  secureAuth.loadAuthData(); // ← これ必要
-  const isLoggedIn = secureAuth.quickAuthCheck();
+document.addEventListener('authSystemReady', async () => {
+  secureAuth.loadAuthData();
+  const authResult = await secureAuth.quickAuthCheck();
 
-  if (!isLoggedIn) {
+  if (!authResult.isValid) {
     window.location.href = "accounts.html?type=login";
   } else {
     console.log("ログイン状態OK！");
