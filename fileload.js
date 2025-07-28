@@ -10,6 +10,7 @@ const reqcss = [
 
 // JSファイルのリスト
 const reqjs = [
+  {src: 'https://d3js.org/d3.v6.min.js', charset: 'utf-8'},
   {src: 'auth.min', module: false},
   {src: 'accounts', module: true},
   {src: 'header', module: true},
@@ -48,6 +49,7 @@ reqjs.forEach((file) => {
 
   if (file.defer) script.defer = true;
   if (file.module) script.type = 'module';
+  if (file.charset) script.charset = file.charset;
   document.head.appendChild(script);
 });
 
