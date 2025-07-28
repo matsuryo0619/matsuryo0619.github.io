@@ -58,3 +58,8 @@
   padding: 0 !important;
   margin-bottom: 0;
 }
+
+#comments h1 {
+  margin: 0;
+  padding: 0;
+}
