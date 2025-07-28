@@ -93,7 +93,7 @@ const ButtonList = [
   { text: 'ホーム', src: 'Home.html' },
   { text: '私の作品', src: 'myStuff.html' },
   { text: 'アカウント作成', src: 'accounts.html?type=make' },
-  { text: 'サインイン', src: 'accounts.html?type=login', id: 'header_Tologin' }
+  { text: 'ログイン', src: 'accounts.html?type=login', id: 'header_Tologin' }
 ];
 
 ButtonList.forEach((data) => {
