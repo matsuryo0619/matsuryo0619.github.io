@@ -75,7 +75,6 @@ const isAccountPage = path.includes('accounts.html');
 async function checkAuth() {
   const authResult = await secureAuth.quickAuthCheck();
   if (!authResult.isValid) {
-    alert(`遷移するよ! :${isAccountPage}`);
     window.location.href = "accounts.html?type=login";
   } else {
     console.log("ログイン状態OK！ ユーザー名:", authResult.username);
