@@ -10,8 +10,8 @@ const reqcss = [
 
 // JSファイルのリスト
 const reqjs = [
-  {src: 'https://d3js.org/d3.v6.min.js', charset: 'utf-8'},
-  {src: 'auth.min', module: false},
+  {src: 'https://d3js.org/d3.v6.min.js', charset: 'utf-8', defer: true},
+  {src: 'auth.min', module: false, defer: true},
   {src: 'accounts', module: true},
   {src: 'header', module: true},
   {src: 'context', defer: true},
