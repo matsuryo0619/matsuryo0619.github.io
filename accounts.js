@@ -172,7 +172,7 @@ window.addEventListener('headerSearchCreated', async () => {
                 const sessionToken = secureAuth.generateSessionToken(); // トークン作成
                 secureAuth.setAuthData(username, sessionToken);         // トークン保存
 
-                window.location.href = 'https://matsuryo0619.github.io/scratchblog/Home.html';
+                window.location.replace('https://matsuryo0619.github.io/scratchblog/Home.html');
             };
 
             // フォームを送信
