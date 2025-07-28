@@ -68,3 +68,14 @@ Link_observer.observe(document.body, {
 function linktype(el) {
     return el.getAttribute('data-linktype') || 'normal';
 }
+
+document.addEventListener('authSystemReady', () => {
+  secureAuth.loadAuthData(); // ← これ必要
+  const isLoggedIn = secureAuth.quickAuthCheck();
+
+  if (!isLoggedIn) {
+    window.location.href = "accounts.html?type=login";
+  } else {
+    console.log("ログイン状態OK！");
+  }
+});
