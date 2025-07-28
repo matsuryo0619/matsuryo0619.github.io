@@ -293,6 +293,7 @@ window.addEventListener('headerSearchCreated', async () => {
             const sessionToken = secureAuth.generateSessionToken();
             secureAuth.setAuthData(accountData.username, sessionToken);
             
+            alert('ログインしました！');
             window.location.replace('https://matsuryo0619.github.io/scratchblog/Home.html');
             
           } catch (error) {
@@ -312,10 +313,64 @@ window.addEventListener('headerSearchCreated', async () => {
         usernameInput.required = true;
         usernameInput.id = 'Login_Username';
         usernameP.appendChild(usernameInput);
+        
+        // アカウント存在確認メッセージ表示用
+        const usernameMessage = document.createElement('div');
+        usernameMessage.id = 'username_message';
+        usernameMessage.style.fontSize = '14px';
+        usernameMessage.style.marginTop = '5px';
+        usernameMessage.style.minHeight = '20px';
+        usernameP.appendChild(usernameMessage);
+        
         loginForm.appendChild(usernameP);
         
         usernameInput.addEventListener('focus', function() {
           this.select();
+        });
+        
+        // リアルタイムアカウント存在確認
+        let usernameCheckTimeout;
+        usernameInput.addEventListener('input', function() {
+          clearTimeout(usernameCheckTimeout);
+          const username = this.value.trim();
+          const messageDiv = document.getElementById('username_message');
+          
+          if (username.length === 0) {
+            messageDiv.textContent = '';
+            this.style.borderColor = '';
+            return;
+          }
+          
+          if (username.length < 3) {
+            messageDiv.textContent = 'アカウント名は3文字以上で入力してください';
+            messageDiv.style.color = '#888';
+            this.style.borderColor = '';
+            return;
+          }
+          
+          // 入力中表示
+          messageDiv.textContent = '確認中...';
+          messageDiv.style.color = '#888';
+          this.style.borderColor = '';
+          
+          usernameCheckTimeout = setTimeout(async () => {
+            try {
+              const accountData = await getAccountData(username);
+              if (accountData) {
+                messageDiv.textContent = '✓ アカウントが見つかりました';
+                messageDiv.style.color = '#00aa00';
+                this.style.borderColor = '#00aa00';
+              } else {
+                messageDiv.textContent = '✗ アカウントは存在しません';
+                messageDiv.style.color = '#ff0000';
+                this.style.borderColor = '#ff0000';
+              }
+            } catch (error) {
+              messageDiv.textContent = '確認できませんでした';
+              messageDiv.style.color = '#ff6600';
+              this.style.borderColor = '';
+            }
+          }, 800);
         });
         
         // パスワード入力フィールド
