@@ -75,15 +75,15 @@ const isAccountPage = path.includes('accounts.html');
 async function checkAuth() {
   const authResult = await secureAuth.quickAuthCheck();
   if (!authResult.isValid) {
-    window.location.href = "accounts.html?type=login";
+    if (!isAccountPage) {
+      window.location.href = "accounts.html?type=login";
+    }
   } else {
     console.log("ログイン状態OK！ ユーザー名:", authResult.username);
   }
 }
 
-if (!isAccountPage) {
-  if (window.secureAuth) {
+if (window.secureAuth) {
     checkAuth();
-  }
-  window.addEventListener('authSystemReady', checkAuth);
 }
+window.addEventListener('authSystemReady', checkAuth);
