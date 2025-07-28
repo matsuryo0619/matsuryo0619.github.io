@@ -69,6 +69,11 @@ function linktype(el) {
     return el.getAttribute('data-linktype') || 'normal';
 }
 
+if (window.secureAuth) {
+  // すでにauthがあれば処理
+  handleAuthReady();
+}
+
 window.addEventListener('authSystemReady', async () => {
   const authResult = await secureAuth.quickAuthCheck();
 
