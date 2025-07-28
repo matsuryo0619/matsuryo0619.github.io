@@ -69,19 +69,19 @@ function linktype(el) {
     return el.getAttribute('data-linktype') || 'normal';
 }
 
-if (window.secureAuth) {
-  // すでにauthがあれば処理
+async function checkAuth() {
   const authResult = await secureAuth.quickAuthCheck();
-}
-
-window.addEventListener('authSystemReady', async () => {
-  const authResult = await secureAuth.quickAuthCheck();
-
   if (!authResult.isValid) {
-    // 認証失敗
     window.location.href = "accounts.html?type=login";
   } else {
-    // 認証成功
     console.log("ログイン状態OK！ ユーザー名:", authResult.username);
   }
+}
+
+if (window.secureAuth) {
+  checkAuth();
+}
+
+window.addEventListener('authSystemReady', () => {
+  checkAuth();
 });
