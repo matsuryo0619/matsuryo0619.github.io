@@ -4,6 +4,8 @@ secureAuth.clearAuthData = function(...args) {
   return originalClear(...args);
 }
 
+alert('authData at load:', localStorage.getItem('authData'));
+
 //ヘッダー･フッターが無い場合
 setTimeout(function() {
     const header = document.getElementById('header');  
