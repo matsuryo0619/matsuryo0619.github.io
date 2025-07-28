@@ -10,8 +10,8 @@ const reqcss = [
 
 // JSファイルのリスト
 const reqjs = [
-  {src: 'auth.min', defer: false},
-  {src: 'accounts', defer: true},
+  {src: 'auth.min', module: false},
+  {src: 'accounts', module: true},
   {src: 'header', defer: true},
   {src: 'context', defer: true},
   {src: 'footer', defer: true},
@@ -46,10 +46,8 @@ reqjs.forEach((file) => {
     script.src = `https://matsuryo0619.github.io/scratchblog/${file.src}.js`;
   }
 
-  if (file.defer) {
-    script.defer = true;
-  }
-  script.type = 'module';
+  if (file.defer) script.defer = true;
+  if (file.module) script.type = 'module';
   document.head.appendChild(script);
 });
 
