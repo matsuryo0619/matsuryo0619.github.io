@@ -78,10 +78,12 @@ async function checkAuth() {
   }
 }
 
-if (window.secureAuth) {
-  checkAuth();
-}
+const path = window.location.pathname;
+const isAccountPage = path.includes('accounts.html');
 
-window.addEventListener('authSystemReady', () => {
-  checkAuth();
-});
+if (!isAccountPage) {
+  if (window.secureAuth) {
+    checkAuth();
+  }
+  window.addEventListener('authSystemReady', checkAuth);
+}
