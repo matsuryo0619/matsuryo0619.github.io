@@ -58,12 +58,21 @@ window.addEventListener('headerSearchCreated', async () => {
           event.preventDefault();
           const AccountNameInput = document.getElementById('Account_Name');
           const AccountPassInput = document.getElementById('Accounts_wcheck');
+          const AccountPassConfirmInput = document.getElementById('Accounts_wcheck_confirm');
           const password = AccountPassInput.value;
+          const confirmPassword = AccountPassConfirmInput.value;
           const username = AccountNameInput.value;
-          if (!password || !username) {
-            alert('アカウント名とパスワードを両方入力してください！');
+          
+          if (!password || !username || !confirmPassword) {
+            alert('すべての項目を入力してください！');
             return false;
           }
+          
+          if (password !== confirmPassword) {
+            alert('パスワードが一致しません！');
+            return false;
+          }
+          
           if (username.length < 3 || username.length > 20) {
             alert('アカウント名は3文字以上20文字以下で入力してください！');
             return false;
@@ -72,6 +81,11 @@ window.addEventListener('headerSearchCreated', async () => {
             alert('アカウント名は英数字とアンダースコア(_)のみ使用できます！');
             return false;
           }
+          if (password.length < 6) {
+            alert('パスワードは6文字以上で入力してください！');
+            return false;
+          }
+          
           const submitButton = document.getElementById("submitbutton");
           submitButton.disabled = true;
           submitButton.value = "確認中...";
@@ -103,6 +117,7 @@ window.addEventListener('headerSearchCreated', async () => {
             const hashedPassword = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
             hashedPasswordInput.value = hashedPassword;
             AccountPassInput.value = '';
+            AccountPassConfirmInput.value = '';
             document.getElementById('hidden_iframe').onload = function() {
               alert('アカウントの登録が完了しました！');
               submitButton.disabled = false;
@@ -132,6 +147,9 @@ window.addEventListener('headerSearchCreated', async () => {
         AccountName.id = 'Account_Name';
         AccountName.maxLength = 20;
         AccountName.minLength = 3;
+        // パスワードマネージャー用の属性追加
+        AccountName.setAttribute('data-1p-ignore', 'false');
+        AccountName.setAttribute('data-lpignore', 'false');
         AccountName_P.appendChild(AccountName);
         form.appendChild(AccountName_P);
         AccountName.addEventListener('focus', function() {
@@ -163,20 +181,142 @@ window.addEventListener('headerSearchCreated', async () => {
           }
         });
         const AccountPass_P = document.createElement('p');
+        AccountPass_P.style.position = 'relative';
         const AccountPass = document.createElement('input');
         AccountPass.type = 'password';
         AccountPass.autocomplete = 'new-password';
         AccountPass.name = 'entry.1949907076';
-        AccountPass.placeholder = 'Password';
+        AccountPass.placeholder = 'パスワード（6文字以上）';
         AccountPass.required = true;
         AccountPass.id = 'Accounts_wcheck';
         AccountPass.minLength = 6;
+        // パスワードマネージャー用の属性追加
+        AccountPass.setAttribute('data-1p-ignore', 'false');
+        AccountPass.setAttribute('data-lpignore', 'false');
+        // コピペ禁止
+        AccountPass.addEventListener('copy', e => e.preventDefault());
+        AccountPass.addEventListener('paste', e => e.preventDefault());
+        AccountPass.addEventListener('cut', e => e.preventDefault());
+        AccountPass.addEventListener('contextmenu', e => e.preventDefault());
+        AccountPass.style.paddingRight = '40px';
         AccountPass_P.appendChild(AccountPass);
+        
+        // パスワード表示切り替えボタン
+        const togglePassword1 = document.createElement('button');
+        togglePassword1.type = 'button';
+        togglePassword1.textContent = '👁';
+        togglePassword1.style.position = 'absolute';
+        togglePassword1.style.right = '10px';
+        togglePassword1.style.top = '50%';
+        togglePassword1.style.transform = 'translateY(-50%)';
+        togglePassword1.style.border = 'none';
+        togglePassword1.style.background = 'transparent';
+        togglePassword1.style.cursor = 'pointer';
+        togglePassword1.style.fontSize = '16px';
+        togglePassword1.title = 'パスワードを表示/非表示';
+        AccountPass_P.appendChild(togglePassword1);
+        
+        togglePassword1.addEventListener('click', function() {
+          if (AccountPass.type === 'password') {
+            AccountPass.type = 'text';
+            this.textContent = '🙈';
+          } else {
+            AccountPass.type = 'password';
+            this.textContent = '👁';
+          }
+        });
+        
         form.appendChild(AccountPass_P);
+        
+        // パスワード確認入力フィールド
+        const AccountPassConfirm_P = document.createElement('p');
+        AccountPassConfirm_P.style.position = 'relative';
+        const AccountPassConfirm = document.createElement('input');
+        AccountPassConfirm.type = 'password';
+        AccountPassConfirm.autocomplete = 'new-password';
+        AccountPassConfirm.placeholder = 'パスワード確認';
+        AccountPassConfirm.required = true;
+        AccountPassConfirm.id = 'Accounts_wcheck_confirm';
+        AccountPassConfirm.minLength = 6;
+        // パスワードマネージャー用の属性追加
+        AccountPassConfirm.setAttribute('data-1p-ignore', 'false');
+        AccountPassConfirm.setAttribute('data-lpignore', 'false');
+        // コピペ禁止
+        AccountPassConfirm.addEventListener('copy', e => e.preventDefault());
+        AccountPassConfirm.addEventListener('paste', e => e.preventDefault());
+        AccountPassConfirm.addEventListener('cut', e => e.preventDefault());
+        AccountPassConfirm.addEventListener('contextmenu', e => e.preventDefault());
+        AccountPassConfirm.style.paddingRight = '40px';
+        AccountPassConfirm_P.appendChild(AccountPassConfirm);
+        
+        // パスワード確認表示切り替えボタン
+        const togglePassword2 = document.createElement('button');
+        togglePassword2.type = 'button';
+        togglePassword2.textContent = '👁';
+        togglePassword2.style.position = 'absolute';
+        togglePassword2.style.right = '10px';
+        togglePassword2.style.top = '50%';
+        togglePassword2.style.transform = 'translateY(-50%)';
+        togglePassword2.style.border = 'none';
+        togglePassword2.style.background = 'transparent';
+        togglePassword2.style.cursor = 'pointer';
+        togglePassword2.style.fontSize = '16px';
+        togglePassword2.title = 'パスワードを表示/非表示';
+        AccountPassConfirm_P.appendChild(togglePassword2);
+        
+        togglePassword2.addEventListener('click', function() {
+          if (AccountPassConfirm.type === 'password') {
+            AccountPassConfirm.type = 'text';
+            this.textContent = '🙈';
+          } else {
+            AccountPassConfirm.type = 'password';
+            this.textContent = '👁';
+          }
+        });
+        
+        // パスワード一致確認メッセージ表示用
+        const passwordMessage = document.createElement('div');
+        passwordMessage.id = 'password_message';
+        passwordMessage.style.fontSize = '14px';
+        passwordMessage.style.marginTop = '5px';
+        passwordMessage.style.minHeight = '20px';
+        AccountPassConfirm_P.appendChild(passwordMessage);
+        
+        form.appendChild(AccountPassConfirm_P);
+        
+        // パスワード一致確認
+        function checkPasswordMatch() {
+          const password = AccountPass.value;
+          const confirmPassword = AccountPassConfirm.value;
+          const messageDiv = document.getElementById('password_message');
+          
+          if (confirmPassword.length === 0) {
+            messageDiv.textContent = '';
+            AccountPassConfirm.style.borderColor = '';
+            return true;
+          }
+          
+          if (password === confirmPassword) {
+            messageDiv.textContent = '✓ パスワードが一致しています';
+            messageDiv.style.color = '#00aa00';
+            AccountPassConfirm.style.borderColor = '#00aa00';
+            return true;
+          } else {
+            messageDiv.textContent = '✗ パスワードが一致しません';
+            messageDiv.style.color = '#ff0000';
+            AccountPassConfirm.style.borderColor = '#ff0000';
+            return false;
+          }
+        }
+        
+        AccountPass.addEventListener('input', checkPasswordMatch);
+        AccountPassConfirm.addEventListener('input', checkPasswordMatch);
         const Submit = document.createElement('input');
         Submit.type = "submit";
         Submit.id = "submitbutton";
         Submit.value = "登録";
+        // パスワードマネージャーがフォーム送信を検知できるように
+        Submit.setAttribute('data-1p-ignore', 'false');
         form.appendChild(Submit);
         document.body.appendChild(form);
         const iframe = document.createElement('iframe');
@@ -312,6 +452,9 @@ window.addEventListener('headerSearchCreated', async () => {
         usernameInput.placeholder = 'アカウント名';
         usernameInput.required = true;
         usernameInput.id = 'Login_Username';
+        // パスワードマネージャー用の属性追加
+        usernameInput.setAttribute('data-1p-ignore', 'false');
+        usernameInput.setAttribute('data-lpignore', 'false');
         usernameP.appendChild(usernameInput);
         
         // アカウント存在確認メッセージ表示用
@@ -381,6 +524,9 @@ window.addEventListener('headerSearchCreated', async () => {
         passwordInput.placeholder = 'パスワード';
         passwordInput.required = true;
         passwordInput.id = 'Login_Password';
+        // パスワードマネージャー用の属性追加
+        passwordInput.setAttribute('data-1p-ignore', 'false');
+        passwordInput.setAttribute('data-lpignore', 'false');
         passwordP.appendChild(passwordInput);
         loginForm.appendChild(passwordP);
         
@@ -389,6 +535,8 @@ window.addEventListener('headerSearchCreated', async () => {
         loginSubmit.type = "submit";
         loginSubmit.id = "login_submitbutton";
         loginSubmit.value = "ログイン";
+        // パスワードマネージャーがフォーム送信を検知できるように
+        loginSubmit.setAttribute('data-1p-ignore', 'false');
         loginForm.appendChild(loginSubmit);
         
         // アカウント作成リンク
