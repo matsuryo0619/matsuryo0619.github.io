@@ -69,7 +69,10 @@ const accounts_li = [
   } },
   { text: "ログアウト", id: "accounts_logout", onclick: () => {
     localStorage.removeItem('account');
-    window.location = 'https://matsuryo0619.github.io/scratchblog/Home.html';
+    if (typeof secureAuth !== 'undefined') {
+      secureAuth.clearAuthData()
+    }
+    window.location.replace('https://matsuryo0619.github.io/scratchblog/Home.html');
   } }
 ]
 
