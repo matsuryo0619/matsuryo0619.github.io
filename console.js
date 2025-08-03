@@ -1,22 +1,17 @@
 const consoleLog = console.log;
 
 console.log = (...args) => {
-  if (args[0]) {
-    
+  if (!args[0]) {
+    return;
   }
 
-  let logString = '';
-  let styles = [];
+  let logString = `%c${args[1]}`;
+  let styledArgs = ['font-size: 30px; font-weight: bold;'];
 
-  for (let i = 1; i < args.length; i++) {
-    if (i === 1) {
-      logString += `%c${args[i]}`;
-      styles.push('font-size: 30px; font-weight: bold;');
-    } else {
-      logString += `\n%c${args[i]}`;
-      styles.push('font-size: 15px; font-weight: normal;');
-    }
+  for (let i = 2; i < args.length; i++) {
+    logString += `\n%c${args[i]}`;
+    styledArgs.push('font-size: 15px; font-weight: normal;');
   }
 
-  consoleLog(logString, ...styles);
+  consoleLog(logString, ...styledArgs, ...args.slice(2));
 };
