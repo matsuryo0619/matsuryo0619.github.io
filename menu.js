@@ -1,5 +1,5 @@
 document.addEventListener('PageFinish', function() {
-  const index = document.createElement('div');
+  const index = document.createElement('nav');
   index.id = 'index';
   index.style.position = 'fixed';
   index.style.top = '10%';
