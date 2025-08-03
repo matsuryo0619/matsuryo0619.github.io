@@ -17,13 +17,13 @@ if (!window._isWindowOpenOverridden) {
 
     if (
       url &&
-      !url.startsWith('https://matsuryo0619.github.io/scratchblog/') &&
+      !url.startsWith('https://matsuryo0619.github.io/') &&
       !url.startsWith('#') &&
       !url.startsWith('javascript:') &&
       !url.startsWith('mailto:') &&
       !url.startsWith('tel:')
     ) {
-      url = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(url)}`;
+      url = `https://matsuryo0619.github.io/link.html?link=${encodeURIComponent(url)}`;
     }
 
     return originalOpen.call(this, url, windowName, windowFeatures);
@@ -39,14 +39,14 @@ const Link_observer = new MutationObserver(() => {
       link &&
       !a.getAttribute('data-important') &&
       !a.dataset.rewritten &&
-      !link.startsWith('https://matsuryo0619.github.io/scratchblog/') &&
+      !link.startsWith('https://matsuryo0619.github.io/') &&
       !link.startsWith('#') &&
       !link.startsWith('/') &&
       !link.startsWith('javascript:') &&
       !link.startsWith('mailto:') &&
       !link.startsWith('tel:')
     ) {
-      a.href = `https://matsuryo0619.github.io/scratchblog/link.html?link=${encodeURIComponent(link)}&type=${linktype(a)}`;
+      a.href = `https://matsuryo0619.github.io/link.html?link=${encodeURIComponent(link)}&type=${linktype(a)}`;
       a.dataset.rewritten = 'true';
     }
   });
