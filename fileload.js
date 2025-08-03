@@ -57,5 +57,5 @@ reqjs.forEach((file) => {
 // サイトアイコンを設定
 const icon = document.createElement('link');
 icon.rel = 'icon';
-icon.href = 'https://matsuryo0619.github.io/scratchblog/img/icon.png'; // アイコンのURLを設定
+icon.href = 'https://matsuryo0619.github.io/img/icon.png'; // アイコンのURLを設定
 document.head.appendChild(icon);
