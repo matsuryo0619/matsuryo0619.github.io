@@ -31,7 +31,7 @@ reqcss.forEach((word) => {
   if (word.startsWith('http')) {
     link.href = word;
   } else {
-    link.href = `https://matsuryo0619.github.io/scratchblog/${word}.css`;
+    link.href = `https://matsuryo0619.github.io/${word}.css`;
   }
   
   document.head.appendChild(link);
@@ -45,7 +45,7 @@ reqjs.forEach((file) => {
   if (file.src.startsWith('http')) {
     script.src = file.src;
   } else {
-    script.src = `https://matsuryo0619.github.io/scratchblog/${file.src}.js`;
+    script.src = `https://matsuryo0619.github.io/${file.src}.js`;
   }
 
   if (file.defer) script.defer = true;
