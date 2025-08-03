@@ -25,12 +25,12 @@ const menus = [
         text: 'リンクを保存',
         onclick: () => {
           if (!navigator.clipboard) {
-            console.log('クリップボードに対応していません');
+            console.log(false, 'クリップボードに対応していません');
             return;
           }
           navigator.clipboard.writeText(window.location.href).then(
-            () => console.log('コピー完了'),
-            () => console.log('コピーできませんでした')
+            () => console.log(true, 'コピー完了'),
+            () => console.log(true, 'コピーできませんでした')
           );
         }
       },
@@ -129,8 +129,8 @@ const conditionalMenus = [
           onclick: () => {
             if (!SelectedText) return;
             navigator.clipboard.writeText(SelectedText).then(
-              () => console.log('コピー完了'),
-              () => console.log('コピーできませんでした')
+              () => console.log(true, 'コピー完了'),
+              () => console.log(true, 'コピーできませんでした')
             );
           }
         }
