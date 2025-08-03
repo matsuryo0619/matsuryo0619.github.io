@@ -2,7 +2,7 @@ const consoleLog = console.log;
 
 console.log = (...args) => {
   if (args[0]) {
-    return;
+    
   }
 
   let logString = '';
