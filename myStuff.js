@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!response.ok) throw new Error('データ取得に失敗しました');
 
       const data = await response.json();
-      console.log('データ取得成功', data);
+      console.log(false, 'データ取得成功', data);
 
       dataDisplay(data);
     } catch (error) {
