@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!response.ok) throw new Error('データ取得に失敗しました');
 
         data = await response.json();
-        console.log('データ取得成功:', data);
+        console.log(false, 'データ取得成功:', data);
 
         if (searchQuery) search(searchQuery, data, searchtype);
       } catch (error) {
@@ -29,17 +29,17 @@ document.addEventListener('DOMContentLoaded', function () {
   resultList.innerHTML = '';
   const keywords = splitSearchQuery(query);
 
-  console.log('🔍 検索ワード:', keywords);
-  console.log('🔍 検索タイプ（searchtype）:', searchtype);
+  console.log(false, '🔍 検索ワード:', keywords);
+  console.log(false, '🔍 検索タイプ（searchtype）:', searchtype);
 
   if (keywords.length === 0) {
-    console.log('⚠️ 検索ワードが空です');
+    console.log(false, '⚠️ 検索ワードが空です');
     resultList.innerHTML = '<p>検索ワードを入力してください</p>';
     return;
   }
 
   const mode = searchtype.toLowerCase();
-  console.log('🔄 検索モード:', mode === 'or' ? 'OR検索' : 'AND検索');
+  console.log(false, '🔄 検索モード:', mode === 'or' ? 'OR検索' : 'AND検索');
 
   const filteredData = data.filter(item => {
     let matchedWords = []; // どのキーワードがヒットしたか記録するリスト
@@ -65,18 +65,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // **ログ出力**
-    console.log('📝 チェック中:', item.title, '| マッチ:', isMatch);
+    console.log(false, '📝 チェック中:', item.title, '| マッチ:', isMatch);
     if (matchedWords.length > 0) {
-      console.log('  ↳ ヒット:', matchedWords.join('、 '));
+      console.log(false, '  ↳ ヒット:', matchedWords.join('、 '));
     }
 
     return isMatch;
   });
 
-  console.log('📌 フィルタ後のデータ:', filteredData);
+  console.log(false, '📌 フィルタ後のデータ:', filteredData);
 
   if (filteredData.length === 0) {
-    console.log('⚠️ 検索結果なし');
+    console.log(false, '⚠️ 検索結果なし');
     resultList.innerHTML = '<p>結果が見つかりませんでした</p>';
     return;
   }
