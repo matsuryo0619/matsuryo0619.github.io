@@ -1,8 +1,8 @@
 const consoleLog = console.log;
 
 console.log = (...args) => {
-  if (!args[0]) {
-    return;
+  if (args[0]) {
+    
   }
 
   let logString = `%c${args[1]}`;
