@@ -1,5 +1,13 @@
 pages:
   art1:
+    title: "アカウント コメント欄"
+    data: "2025-8-3"
+    public: true
+    type: "article"
+    content: |
+    style: |
+    action: |
+  art2:
     title: "2D RPG風ゲーム 1"
     data: "2025-2-22"
     public: true
@@ -95,7 +103,7 @@ pages:
 
       // 初回ロード時にも進行状況を更新
       Change_progress();
-  art2: 
+  art3: 
     title: "にゃんこ大戦争 バトルシステム2"
     data: "2025-3-9"
     public: true
@@ -106,7 +114,7 @@ pages:
 
     action: |
       
-  art3:
+  art4:
     title: "スクラッチ講座 No.1"
     data: "2025-7-25"
     public: true
@@ -184,7 +192,7 @@ pages:
     style: |
     action: |
       scratchblocks.renderMatching('.scratchblocks', {languages: ["ja"], style: "scratch3" });
-  art4:
+  art5:
     title: "スクラッチ講座 番外編-1 アカウントの作り方"
     data: "2025-7-25"
     public: true
