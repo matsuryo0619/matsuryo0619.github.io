@@ -21,7 +21,7 @@ if (!window.location.search.includes('rand=')) {
 if (!window._isWindowOpenOverridden) {
   const originalOpen = window.open;
   window.open = function (url, windowName, windowFeatures) {
-    console.log('開こうとしてるURL:', url);
+    console.log(false, "開こうとしてるURL:", url);
 
     if (
       url &&
@@ -79,7 +79,7 @@ async function checkAuth() {
       window.location.href = "accounts.html?type=login";
     }
   } else {
-    console.log("ログイン状態OK！ ユーザー名:", authResult.username);
+    console.log(false, "ログイン状態OK！ ユーザー名:", authResult.username);
   }
 }
 
