@@ -1,2 +1,4 @@
-# 解説サイト編集ファイル
- - [YAML](https://github.com/matsuryo0619/scratchblog/blob/main/article.yaml)
+# Scratchblog
+[作成者のアカウントへ](https://scratch.mit.edu/users/matsumotoryoukotyann)
+
+このブログは､[Scratch](https://scratch.mit.edu)の作品などを紹介するサイトです
