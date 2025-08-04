@@ -45,7 +45,7 @@ const menus = [
     type: 'btn',
     text: 'フィードバック',
     onclick: () => {
-      window.location.href = 'https://matsuryo0619.github.io/scratchblog/feedback.html';
+      window.location.href = 'https://matsuryo0619.github.io/feedback';
     }
   }
 ];
