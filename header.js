@@ -72,7 +72,7 @@ const accounts_li = [
     if (typeof secureAuth !== 'undefined') {
       secureAuth.clearAuthData()
     }
-    window.location.replace('https://matsuryo0619.github.io/index.html');
+    window.location.replace('https://matsuryo0619.github.io');
   } }
 ]
 
@@ -132,7 +132,7 @@ document.body.prepend(header_margin);
 
 // ヘッダーロゴのクリックイベント
 Logo.addEventListener('click', function () {
-  window.location.href = 'https://matsuryo0619.github.io/index.html';
+  window.location.href = 'https://matsuryo0619.github.io';
 });
 
 // 検索URLを生成する関数
