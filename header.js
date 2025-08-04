@@ -102,7 +102,12 @@ const ButtonList = [
 ButtonList.forEach((data) => {
   const Button = document.createElement('li');
   Button.classList.add('header_List');
-  Button.id = data.id || `header_To${data.src.substring(0, data.src.indexOf('.') === -1 ? data.src.length : data.src.indexOf('.'))}`;
+  Button.id = data.id || `header_To${data.src.substring(0, Math.min(
+  ...['.', '?']
+    .map(c => data.src.indexOf(c))
+    .filter(i => i !== -1)
+    .concat(data.src.length)
+  ))}`;
   Button.textContent = data.text;
   Button_parent.appendChild(Button);
 
