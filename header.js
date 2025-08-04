@@ -65,7 +65,7 @@ accounts_ul.id = 'header_accountsUl';
 
 const accounts_li = [
   { text: "アカウント設定", id: "accounts_setting", onclick: () => {
-    window.location = 'https://matsuryo0619.github.io/accounts.html?';
+    window.location = 'https://matsuryo0619.github.io/accounts?';
   } },
   { text: "ログアウト", id: "accounts_logout", onclick: () => {
     localStorage.removeItem('account');
@@ -95,8 +95,8 @@ Button_parent.id = 'header_buttonlist';
 const ButtonList = [
   { text: 'ホーム', src: 'index.html' },
   { text: '私の作品', src: 'myStuff.html' },
-  { text: 'アカウント作成', src: 'accounts.html?type=make' },
-  { text: 'ログイン', src: 'accounts.html?type=login', id: 'header_Tologin' }
+  { text: 'アカウント作成', src: 'accounts?type=make' },
+  { text: 'ログイン', src: 'accounts?type=login', id: 'header_Tologin' }
 ];
 
 ButtonList.forEach((data) => {
