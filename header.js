@@ -160,7 +160,7 @@ SearchBtn.addEventListener('click', function () {
 
 // 検索方法が変更されたときの処理
 SearchForm.addEventListener('change', () => {
-  if (window.location.pathname === '/search') {
+  if (window.location.pathname === '/search/') {
     const value = Search.value.trim();
     urlParams.set('type', SearchForm.value);
     window.location.href = SearchURL(value);
