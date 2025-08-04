@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function fetchData() {
       let data = [];
       try {
-        const response = await fetch('sites.json');
+        const response = await fetch('../sites.json');
         if (!response.ok) throw new Error('データ取得に失敗しました');
 
         data = await response.json();
