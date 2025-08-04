@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
       : 'なし';
 
     div.innerHTML = `
-      <h3><a href="${result.url}" class="preview-link" data-important="true">${result.title}</a></h3>
+      <h3><a href="../${result.url}" class="preview-link" data-important="true">${result.title}</a></h3>
       <p>${result.content}</p>
       <p><b>タグ:</b> ${tags}</p>
     `;
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
           tagElement.addEventListener('click', function (event) {
             event.preventDefault();
             const tag = event.target.textContent;
-            window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${encodeURIComponent(tag)}&type=${searchtype}`;
+            window.location.href = `https://matsuryo0619.github.io/search/?q=${encodeURIComponent(tag)}&type=${searchtype}`;
           });
         }
       });
