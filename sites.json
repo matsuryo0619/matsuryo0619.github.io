@@ -13,21 +13,21 @@
     "title": "2D RPG風ゲーム 1",
     "content": "2D RPG風ゲーム 1 について",
     "tags": ["プロジェクト", "2D", "RPG",  "主", "作品"],
-    "url": "article/article.html?data=2"
+    "url": "article/?data=2"
   }, {
     "title": "にゃんこ大戦争 バトルシステム2",
     "content": "にゃんこ大戦争 バトルシステム2 について",
     "tags": ["プロジェクト", "にゃんこ大戦争", "主", "作品"],
-    "url": "article/article.html?data=3"
+    "url": "article/?data=3"
   }, {
     "title": "Scratch講座 No.1",
     "content": "スクラッチ講座 第1弾",
     "tags": ["Pages", "teach", "Scratch", "article", "スクラッチ"],
-    "url": "article/article.html?data=4"
+    "url": "article/?data=4"
   }, {
     "title": "Scratch講座 番外編 アカウントの作り方",
     "content": "スクラッチ講座 番外編 Scratchアカウントの作り方です",
     "tags": ["Pages", "teach", "Scratch", "article", "account", "スクラッチ"],
-    "url": "article/article.html?data=5"
+    "url": "article/?data=5"
   }
 ]
