@@ -23,7 +23,7 @@ if (!window._isWindowOpenOverridden) {
       !url.startsWith('mailto:') &&
       !url.startsWith('tel:')
     ) {
-      url = `https://matsuryo0619.github.io/link.html?link=${encodeURIComponent(url)}`;
+      url = `https://matsuryo0619.github.io/link?link=${encodeURIComponent(url)}`;
     }
 
     return originalOpen.call(this, url, windowName, windowFeatures);
@@ -46,7 +46,7 @@ const Link_observer = new MutationObserver(() => {
       !link.startsWith('mailto:') &&
       !link.startsWith('tel:')
     ) {
-      a.href = `https://matsuryo0619.github.io/link.html?link=${encodeURIComponent(link)}&type=${linktype(a)}`;
+      a.href = `https://matsuryo0619.github.io/link?link=${encodeURIComponent(link)}&type=${linktype(a)}`;
       a.dataset.rewritten = 'true';
     }
   });
@@ -62,7 +62,7 @@ function linktype(el) {
 }
 
 const path = window.location.pathname;
-const isAccountPage = path.includes('accounts.html');
+const isAccountPage = path.includes('accounts');
 
 async function checkAuth() {
   const authResult = await secureAuth.quickAuthCheck();
