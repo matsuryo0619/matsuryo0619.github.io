@@ -137,7 +137,7 @@ Logo.addEventListener('click', function () {
 
 // 検索URLを生成する関数
 function SearchURL(value) {
-  return `https://matsuryo0619.github.io/Search/?q=${encodeURIComponent(value)}&type=${SearchForm.value}`;
+  return `https://matsuryo0619.github.io/search/?q=${encodeURIComponent(value)}&type=${SearchForm.value}`;
 }
 
 // 検索バーにEnterが押された時の処理
@@ -160,7 +160,7 @@ SearchBtn.addEventListener('click', function () {
 
 // 検索方法が変更されたときの処理
 SearchForm.addEventListener('change', () => {
-  if (window.location.pathname === '/Search') {
+  if (window.location.pathname === '/search') {
     const value = Search.value.trim();
     urlParams.set('type', SearchForm.value);
     window.location.href = SearchURL(value);
