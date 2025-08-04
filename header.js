@@ -94,7 +94,7 @@ Button_parent.id = 'header_buttonlist';
 
 const ButtonList = [
   { text: 'ホーム', src: 'index.html' },
-  { text: '私の作品', src: 'myStuff.html' },
+  { text: '私の作品', src: 'myStuff' },
   { text: 'アカウント作成', src: 'accounts?type=make' },
   { text: 'ログイン', src: 'accounts?type=login', id: 'header_Tologin' }
 ];
