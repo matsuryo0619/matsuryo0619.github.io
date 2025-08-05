@@ -207,3 +207,11 @@ pages:
       </div>
     style: |
     action: |
+  art6:
+    title: "Lighter +"
+    data: "2025-8-5"
+    public: false
+    type: "article"
+    content: |
+    style: |
+    action: |
