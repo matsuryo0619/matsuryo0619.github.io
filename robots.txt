@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://matsuryo0619.github.io/scratchblog/sitemap.xml
+Sitemap: https://matsuryo0619.github.io/sitemap.xml
