@@ -56,6 +56,11 @@ getRecentArticles({type: 'teach', count: 4}).then(pages => {
     const div = document.createElement('div');
     div.style.opacity = 0;
     div.classList.add('teaches_site');
+    
+    const title = document.createElement('h3');
+    title.classList.add('teaches_title');
+    title.textContent = page.title;
+    div.appendChild(title);
     teaches.appendChild(div);
     setTimeout(() => {
       div.style.opacity = 1;
