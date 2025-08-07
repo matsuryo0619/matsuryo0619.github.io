@@ -60,6 +60,7 @@ getRecentArticles({type: 'teach', count: 4}).then(pages => {
     const title = document.createElement('h3');
     title.classList.add('teaches_title');
     title.textContent = page.title;
+    title.title = page.title
     div.appendChild(title);
     teaches.appendChild(div);
     setTimeout(() => {
