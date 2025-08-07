@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchQuery = searchtext ? searchtext : '';
     const resultList = document.getElementById('searchResults');
     const tags = searchQuery.match(/#[^\s　#]+/g) || [];
-    const type = searchQuery.match(/@[^\s　@]+/g) || [];
     console.log(`tags: ${tags}`);
-    console.log(`type: ${type}`);
     searchInput.value = searchQuery;
     document.title = `${searchQuery} - スゴスク!`;
 
