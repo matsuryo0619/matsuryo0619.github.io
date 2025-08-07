@@ -27,19 +27,21 @@
 
 #teaches {
   width: 90vw;
-  height: 15vh;
+  height: 25vh;
   display: flex;
+  align-items: center;
   overflow-x: auto;
   white-space: nowrap;
   gap: 10px;
   border: 3px solid #f5bc42;
+  border-radius: 25px;
   padding: 10px;
 }
 
 .teaches_site {
   flex: 0 0 auto;
-  height: 80%;
-  width: auto;
+  height: 95%;
+  aspect-ratio: 3/2;
   border: 2px solid black;
   border-radius: 5px;
 }
