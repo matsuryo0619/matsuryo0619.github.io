@@ -32,3 +32,25 @@ title.addEventListener("animationend", () => {
     }, 200); // 0.2秒待ってから徐々に表示
   });
 });
+
+async function getRecentArticles({ type = null, count = 5, yamlPath = 'Article.yaml' } = {}) {
+  const response = await fetch(yamlPath);
+  const yamlText = await response.text();
+  const pagesData = jsyaml.load(yamlText);
+
+  // 全ページからtypeとpublicをフィルター
+  let filteredPages = Object.entries(pagesData.pages)
+    .filter(([_, page]) => page.public && (!type || page.type === type))
+    .map(([key, page]) => ({ key, ...page }));
+
+  // 日付（data）で新しい順にソート
+  filteredPages.sort((a, b) => new Date(b.data) - new Date(a.data));
+
+  // 指定された件数だけ取得（count件 or それ未満）
+  return filteredPages.slice(0, count);
+}
+
+const teaches = document.getElementById('teaches');
+getRecentArticles({type: 'teach', count: 4}).then(pages => {
+  console.log(pages);
+});
