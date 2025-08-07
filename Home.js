@@ -55,7 +55,7 @@ getRecentArticles({type: 'teach', count: 4}).then(pages => {
   pages.forEach((page, index) => {
     const div = document.createElement('div');
     setTimeout(() => {
-      
+      teaches.appendChild(div);
     }, index * 100);
   });
 });
