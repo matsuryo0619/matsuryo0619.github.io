@@ -28,10 +28,20 @@
 #teaches {
   width: 90vw;
   height: 10vh;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 10px;
+  border: 3px solid #f5bc42;
+  padding: 10px;
 }
 
 .teaches_site {
-
+  flex: 0 0 auto;
+  height: 80%;
+  width: auto;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 @keyframes scaleBounce {
