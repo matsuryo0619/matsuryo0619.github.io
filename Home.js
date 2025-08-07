@@ -52,5 +52,10 @@ async function getRecentArticles({ type = null, count = 5, yamlPath = 'Article.y
 
 const teaches = document.getElementById('teaches');
 getRecentArticles({type: 'teach', count: 4}).then(pages => {
-  console.log(pages);
+  pages.forEach((page, index) => {
+    const div = document.createElement('div');
+    setTimeout(() => {
+      
+    }, index * 100);
+  });
 });
