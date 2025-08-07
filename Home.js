@@ -50,7 +50,7 @@ async function getRecentArticles({ type = null, count = 5, yamlPath = 'Article.y
   return filteredPages.slice(0, count);
 }
 
-const teaches = document.getElementById('teaches');
+const teaches = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 getRecentArticles({type: 'teach', count: 4}).then(pages => {
   pages.forEach((page, index) => {
     const div = document.createElement('div');
