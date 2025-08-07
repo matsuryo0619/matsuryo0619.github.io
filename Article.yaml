@@ -215,27 +215,3 @@ pages:
     content: |
     style: |
     action: |
-  art7:
-    title: "アカウント コメント欄"
-    data: "2025-08-03"
-    public: true
-    type: "teach"
-    content: |
-    style: |
-    action: |
-  art8:
-    title: "アカウント コメント欄"
-    data: "2025-08-03"
-    public: true
-    type: "teach"
-    content: |
-    style: |
-    action: |
-  art9:
-    title: "アカウント コメント欄"
-    data: "2025-08-03"
-    public: true
-    type: "teach"
-    content: |
-    style: |
-    action: |
