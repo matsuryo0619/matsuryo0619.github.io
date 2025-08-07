@@ -54,6 +54,7 @@ const teaches = document.getElementById('teaches');
 getRecentArticles({type: 'teach', count: 4}).then(pages => {
   pages.forEach((page, index) => {
     const div = document.createElement('div');
+    div.classList.add('teaches_site');
     setTimeout(() => {
       teaches.appendChild(div);
     }, index * 100);
