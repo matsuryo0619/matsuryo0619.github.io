@@ -25,6 +25,15 @@
   display: none;
 }
 
+#teaches {
+  width: 90vw;
+  height: 10vh;
+}
+
+.teaches_site {
+
+}
+
 @keyframes scaleBounce {
   0% {
     transform: scale(0.5);
