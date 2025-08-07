@@ -54,9 +54,11 @@ const teaches = document.getElementById('teaches');
 getRecentArticles({type: 'teach', count: 4}).then(pages => {
   pages.forEach((page, index) => {
     const div = document.createElement('div');
+    div.style.opacity = 0;
     div.classList.add('teaches_site');
+    teaches.appendChild(div);
     setTimeout(() => {
-      teaches.appendChild(div);
+      div.style.opacity = 1;
     }, index * 100);
   });
 });
