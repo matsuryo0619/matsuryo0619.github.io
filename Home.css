@@ -27,7 +27,7 @@
 
 #teaches {
   width: 90vw;
-  height: 10vh;
+  height: 15vh;
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
