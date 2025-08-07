@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchtype = urlParams.get('type'); // OR or AND の検索タイプ
     const searchQuery = searchtext ? searchtext : '';
     const resultList = document.getElementById('searchResults');
-    const tags = searchQuery.match(/#[^\s　#]+/g);
-    const type = searchQuery.match(/@[^\s　@]+/g);
+    const tags = searchQuery.match(/#[^\s　#]+/g) || [];
+    const type = searchQuery.match(/@[^\s　@]+/g) || [];
     console.log(`tags: ${tags}`);
     console.log(`type: ${type}`);
     searchInput.value = searchQuery;
