@@ -64,6 +64,6 @@ getRecentArticles({type: 'teach', count: 4}).then(pages => {
     teaches.appendChild(div);
     setTimeout(() => {
       div.style.opacity = 1;
-    }, index * 100);
+    }, index * 500);
   });
 });
