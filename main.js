@@ -77,6 +77,12 @@ if (window.secureAuth) {
 }
 window.addEventListener('authSystemReady', checkAuth);
 
+document.querySelectorAll('[title]').forEach(el => {
+  if (el.title) {
+    el.dataset.title = el.title;
+  }
+});
+
 const Titleobserver = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
     // 属性の変化を監視
