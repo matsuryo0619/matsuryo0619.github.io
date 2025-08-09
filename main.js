@@ -76,3 +76,40 @@ if (window.secureAuth) {
     checkAuth();
 }
 window.addEventListener('authSystemReady', checkAuth);
+
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    // 属性の変化を監視
+    if (mutation.type === 'attributes' && mutation.attributeName === 'title') {
+      const target = mutation.target;
+      if (target.title) {
+        target.dataset.title = target.title;
+      } else {
+        delete target.dataset.title;
+      }
+    }
+
+    // 新しく追加されたノードも監視したいなら
+    if (mutation.type === 'childList') {
+      mutation.addedNodes.forEach(node => {
+        if (node.nodeType === 1) { // ELEMENT_NODE
+          // そのノード自身にtitleがあればセット
+          if (node.title) {
+            node.dataset.title = node.title;
+          }
+          // さらに子孫にtitleがあれば同様に処理
+          node.querySelectorAll('[title]').forEach(el => {
+            el.dataset.title = el.title;
+          });
+        }
+      });
+    }
+  });
+});
+
+observer.observe(document.body, {
+  attributes: true,
+  attributeFilter: ['title'],
+  subtree: true,
+  childList: true,
+});
