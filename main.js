@@ -77,7 +77,7 @@ if (window.secureAuth) {
 }
 window.addEventListener('authSystemReady', checkAuth);
 
-const observer = new MutationObserver(mutations => {
+const Titleobserver = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
     // 属性の変化を監視
     if (mutation.type === 'attributes' && mutation.attributeName === 'title') {
@@ -107,7 +107,7 @@ const observer = new MutationObserver(mutations => {
   });
 });
 
-observer.observe(document.body, {
+Titleobserver.observe(document.body, {
   attributes: true,
   attributeFilter: ['title'],
   subtree: true,
