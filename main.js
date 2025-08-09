@@ -80,6 +80,7 @@ window.addEventListener('authSystemReady', checkAuth);
 document.querySelectorAll('[title]').forEach(el => {
   if (el.title) {
     el.dataset.title = el.title;
+    el.title = '';
   }
 });
 
@@ -90,6 +91,7 @@ const Titleobserver = new MutationObserver(mutations => {
       const target = mutation.target;
       if (target.title) {
         target.dataset.title = target.title;
+        target.title = '';
       } else {
         delete target.dataset.title;
       }
@@ -102,10 +104,12 @@ const Titleobserver = new MutationObserver(mutations => {
           // そのノード自身にtitleがあればセット
           if (node.title) {
             node.dataset.title = node.title;
+            node.title = '';
           }
           // さらに子孫にtitleがあれば同様に処理
           node.querySelectorAll('[title]').forEach(el => {
             el.dataset.title = el.title;
+            el.title = '';
           });
         }
       });
