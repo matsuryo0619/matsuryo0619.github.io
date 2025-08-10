@@ -31,7 +31,7 @@
   display: none;
 }
 
-#teaches {
+.group {
   width: 90vw;
   height: 25vh;
   display: flex;
