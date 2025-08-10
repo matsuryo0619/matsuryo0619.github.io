@@ -63,7 +63,7 @@ getRecentArticles({type: 'teach', count: 4}).then(pages => {
     title.title = page.title
     div.appendChild(title);
     
-    const content = document.createElement('p');
+    const content = document.createElement('pre');
     content.classList.add('teaches_content');
     content.textContent = `${page.content.replace(/<[^>]*>/g, '').slice(0, 50)}...`;
     div.appendChild(content);
