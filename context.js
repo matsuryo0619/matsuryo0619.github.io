@@ -67,7 +67,7 @@ const conditionalMenus = [
               onclick: () => {
                 const query = encodeURIComponent(SelectedText);
                 if (!query) return;
-                window.location.href = `https://matsuryo0619.github.io/scratchblog/Search.html?q=${query}&type=AND`;
+                window.location.href = `https://matsuryo0619.github.io/search?q=${query}&type=AND`;
               }
             },
             {
