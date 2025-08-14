@@ -59,10 +59,10 @@ getRecentArticles({type: 'teach', count: 4}).then(pages => {
 
     const link = document.createElement('a');
     link.href = `https://matsuryo0619.github.io/article/?data=${page.key.match(/\d+$/)}`;
+    link.textContent = page.title;
     
     const title = document.createElement('h3');
     title.classList.add('teaches_title');
-    title.textContent = page.title;
     title.title = page.title;
     title.appendChild(link);
     div.appendChild(title);
