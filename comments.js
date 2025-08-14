@@ -49,6 +49,11 @@ document.addEventListener('PageFinish', function() {
     commentTextarea.required = true;
     commentParagraph.appendChild(commentTextarea);
     form.appendChild(commentParagraph);
+    commentParagraph.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.ctrlKey) {
+        console.log('Ctrl + Enter が押されました！');
+      }
+    });
 
     commentTextarea.addEventListener('input', function() {
       this.style.height = 'auto';
