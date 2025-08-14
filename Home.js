@@ -56,6 +56,9 @@ getRecentArticles({type: 'teach', count: 4}).then(pages => {
     const div = document.createElement('div');
     div.style.opacity = 0;
     div.classList.add('teaches_site');
+
+    const link = document.createElement('a');
+    link.href = `https://matsuryo0619.github.io/article/?data=${page.key.match(/\d+$/)}`;
     
     const title = document.createElement('h3');
     title.classList.add('teaches_title');
