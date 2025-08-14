@@ -2,7 +2,6 @@
 body {
   font-family: 'Nunito', sans-serif;
   margin-left: 270px; /* メニュー分のスペースを確保 */
-  text-align: center;
   background-color: #fafafa; /* 明るい背景 */
   color: #333; /* 文字色 */
 }
