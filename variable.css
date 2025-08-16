@@ -1,7 +1,7 @@
 :root {
   --text: black;
   --backgroundColor: #fafafa;
-  --linkColor: initial;
+  --linkColor: #0000ee;
 }
 
 [data-theme="dark"] {
