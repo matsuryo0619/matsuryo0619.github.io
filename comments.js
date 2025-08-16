@@ -164,7 +164,7 @@ document.addEventListener('PageFinish', function() {
             ALLOWED_ATTR: ['href','target','rel','data-linktype'],
             RETURN_DOM_FRAGMENT: false,
             RETURN_DOM: false
-          }).replace(/<(?!\/?(?:p|br|strong|em|code|pre|a|ul|ol|li|blockquote|h[1-6]|table|thead|tbody|tr|th|td)(?:\s|>))[^>]*>/g, function(match){
+          }).replace(/<(?!\/?(?:p|br|strong|em|code|pre|a|ul|ol|li|blockquote|h[1-6]|table|thead|tbody|tr|th|td|hr)(?:\s|>))[^>]*>/g, function(match){
             return match.replace(/</g,"&lt;").replace(/>/g,"&gt;");
           });
 
