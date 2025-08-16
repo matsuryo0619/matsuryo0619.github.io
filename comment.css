@@ -12,12 +12,12 @@
   background-color: transparent;
   outline: none;
   position: relative;
-  padding-bottom: 5px; /* 下線が表示される位置を少し下に */
+  padding-bottom: 5px;
 }
 
 #form_Name:focus {
-  box-shadow: 0 2px 0 0 black; /* フォーカス時に下線が出現する効果 */
-  transition: box-shadow 0.5s ease; /* box-shadowのアニメーション */
+  box-shadow: 0 2px 0 0 black;
+  transition: box-shadow 0.5s ease;
 }
 
 #Comment_form textarea {
@@ -73,4 +73,97 @@
   margin: 0;
   padding: 0;
   line-height: 1;
+}
+
+.Comment_text h1 {
+  font-size: 1.6em;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.3em;
+  margin-top: 1em;
+}
+
+.Comment_text h2 {
+  font-size: 1.4em;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.2em;
+  margin-top: 0.9em;
+}
+
+.Comment_text h3 {
+  font-size: 1.2em;
+  margin-top: 0.8em;
+}
+
+.Comment_text strong {
+  font-weight: bold;
+  color: #000;
+}
+
+.Comment_text em {
+  font-style: italic;
+  color: #333;
+}
+
+.Comment_text code {
+  background-color: #ECECEC;
+  color: #0D0D0D;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 90%;
+}
+
+.Comment_text pre code {
+  display: block;
+  padding: 0.8em;
+  background-color: #f5f5f5;
+  overflow-x: auto;
+  white-space: pre;
+  border-radius: 4px;
+}
+
+.Comment_text blockquote {
+  border-left: 4px solid #ddd;
+  margin: 0.5em 0;
+  padding: 0.5em 1em;
+  background-color: #fafafa;
+  color: #555;
+}
+
+.Comment_text a {
+  color: #007acc;
+  text-decoration: underline;
+}
+
+.Comment_text ul,
+.Comment_text ol {
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+
+.Comment_text li {
+  margin-bottom: 0.3em;
+}
+
+.Comment_text hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1em 0;
+}
+
+.Comment_text table {
+  border-collapse: collapse;
+  margin: 0.5em 0;
+  width: 100%;
+}
+
+.Comment_text th,
+.Comment_text td {
+  border: 1px solid #ccc;
+  padding: 0.4em 0.6em;
+}
+
+.Comment_text th {
+  background-color: #f0f0f0;
+  font-weight: bold;
 }
