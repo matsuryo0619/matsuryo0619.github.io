@@ -181,6 +181,8 @@ document.addEventListener('PageFinish', function() {
       }
 
       document.getElementById("comments").innerHTML = text;
+      
+      scratchblocks.renderMatching('.scratchblocks', {languages: ["ja"], style: "scratch3" });
 
       document.querySelectorAll('.Comment_text a').forEach(anchor => {
         let url = anchor.href;
