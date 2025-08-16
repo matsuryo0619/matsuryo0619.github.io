@@ -3,7 +3,6 @@ body {
   font-family: 'Nunito', sans-serif;
   margin-left: 270px; /* メニュー分のスペースを確保 */
   background-color: #fafafa; /* 明るい背景 */
-  color: #333; /* 文字色 */
 }
 
 /* 記事の本文 */
@@ -46,6 +45,10 @@ div#content {
   flex-flow: column;
   justify-content: center;
   align-items: center;
+}
+
+#Rough_menu {
+  color: var(--text);
 }
 
 #index {
