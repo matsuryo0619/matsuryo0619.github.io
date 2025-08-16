@@ -6,4 +6,5 @@
 
 html, body {
   min-height: 200vh;
+  background-color: var(--backgroundColor);
 }
