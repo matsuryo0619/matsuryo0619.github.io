@@ -1,6 +1,6 @@
 :root {
   --text: black;
-  --backgroundColor: white;
+  --backgroundColor: #fafafa;
 }
 
 [data-theme="dark"] {
