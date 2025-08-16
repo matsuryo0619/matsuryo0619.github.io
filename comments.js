@@ -2,6 +2,10 @@ document.addEventListener('PageFinish', function() {
   const NGComments = ["死ね", "バカ", ".exe"];
   const regex = new RegExp(NGComments.join("|"));
 
+  function handlebeforeunload(e) {
+    e.returnValue = '';
+  }
+  
   function test(wcheck) {
     if (wcheck.match(regex) != null) {
       alert("ERROR: コメントにNGワードが含まれています");
@@ -55,6 +59,13 @@ document.addEventListener('PageFinish', function() {
     form.appendChild(commentParagraph);
     commentTextarea.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && e.ctrlKey) submitInput.click();
+    });
+    commentTextarea.addEventListener('change', () => {
+      if (commentTextarea.value) {
+        window.addEventListener('beforeunload', handlebeforeunload);
+      } else {
+        window.removeEventListener('beforeunload', handlebeforeunload);
+      }
     });
 
     commentTextarea.addEventListener('input', function() {
