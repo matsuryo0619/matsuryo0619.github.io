@@ -160,12 +160,12 @@ document.addEventListener('PageFinish', function() {
           
           // DOMPurifyでサニタイズしつつ、HTMLタグをテキスト化
           const cleanText = DOMPurify.sanitize(rawHtml, {
-            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'code', 'pre', 'a', 'ul', 'ol', 'li', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-            ALLOWED_ATTR: ['href', 'target', 'rel', 'data-linktype'],
+            ALLOWED_TAGS: ['p','br','strong','em','code','pre','a','ul','ol','li','blockquote','h1','h2','h3','h4','h5','h6','table','thead','tbody','tr','th','td'],
+            ALLOWED_ATTR: ['href','target','rel','data-linktype'],
             RETURN_DOM_FRAGMENT: false,
             RETURN_DOM: false
-          }).replace(/<(?!\/?(?:p|br|strong|em|code|pre|a|ul|ol|li|blockquote|h[1-6])(?:\s|>))[^>]*>/g, function(match) {
-            return match.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          }).replace(/<(?!\/?(?:p|br|strong|em|code|pre|a|ul|ol|li|blockquote|h[1-6]|table|thead|tbody|tr|th|td)(?:\s|>))[^>]*>/g, function(match){
+            return match.replace(/</g,"&lt;").replace(/>/g,"&gt;");
           });
 
           const commentNumber = filteredData.length - index;
