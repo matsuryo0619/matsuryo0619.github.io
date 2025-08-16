@@ -110,6 +110,7 @@ document.addEventListener('PageFinish', function() {
     form.onsubmit = function(event) {
       event.preventDefault();
       if (!test(commentTextarea.value)) return false;
+      window.removeEventListener('beforeunload', handlebeforeunload);
 
       submitInput.disabled = true;
       const iframe = document.createElement("iframe");
