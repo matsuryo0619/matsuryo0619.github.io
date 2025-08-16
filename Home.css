@@ -91,11 +91,15 @@
   flex: 0 0 auto;
   height: 95%;
   aspect-ratio: 3/2;
-  border: 2px solid black;
+  border: 2px solid var(--text);
   border-radius: 5px;
   transition: opacity 0.5s ease;
   text-align: center;
   overflow: hidden;
+}
+
+.teaches_site * {
+  color: var(--text);
 }
 
 .teaches_title {
