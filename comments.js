@@ -1,10 +1,16 @@
 document.addEventListener('PageFinish', function() {
   const NGComments = ["死ね", "バカ", ".exe"];
   const regex = new RegExp(NGComments.join("|"));
+  let isDirty = false;
 
   function handlebeforeunload(e) {
-    e.returnValue = '';
+    if (isDirty) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
   }
+
+  window.addEventListener('beforeunload', handlebeforeunload);
   
   function test(wcheck) {
     if (wcheck.match(regex) != null) {
@@ -61,11 +67,7 @@ document.addEventListener('PageFinish', function() {
       if (e.key === 'Enter' && e.ctrlKey) submitInput.click();
     });
     commentTextarea.addEventListener('input', () => {
-      if (commentTextarea.value) {
-        window.addEventListener('beforeunload', handlebeforeunload);
-      } else {
-        window.removeEventListener('beforeunload', handlebeforeunload);
-      }
+      isDirty = commentTextarea.value.trim() !== '';
     });
 
     commentTextarea.addEventListener('input', function() {
@@ -110,7 +112,7 @@ document.addEventListener('PageFinish', function() {
     form.onsubmit = function(event) {
       event.preventDefault();
       if (!test(commentTextarea.value)) return false;
-      window.removeEventListener('beforeunload', handlebeforeunload);
+      isDirty = false;
 
       submitInput.disabled = true;
       const iframe = document.createElement("iframe");
