@@ -188,7 +188,7 @@ document.addEventListener('PageFinish', function() {
           text += `
             <div class="Comment_block" id="${commentId}">
               ${nameHTML} ${copyLinkHTML}
-              <pre class='Comment_text'>${cleanText}</pre>
+              <div class='Comment_text'>${cleanText}</div>
             </div>
           `;
         });
