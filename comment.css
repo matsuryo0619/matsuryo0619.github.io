@@ -54,6 +54,10 @@
   margin-bottom: 0;
 }
 
+.Comment_text {
+  white-space: pre-wrap;
+}
+
 .Comment_block {
   padding: 0 !important;
   margin-bottom: 0;
