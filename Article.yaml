@@ -191,6 +191,7 @@ pages:
       </div>
     style: |
     action: |
+    scratchblocks.renderMatching('.scratchblocks', {languages: ["ja"], style: "scratch3" });
   art5:
     title: "スクラッチ講座 番外編-1 アカウントの作り方"
     data: "2025-07-25"
