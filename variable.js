@@ -1,8 +1,19 @@
-const mediatheme = window.matchMedia('(prefers-color-scheme: dark)');
-mediatheme.addEventListener('change', e => {
+// prefers-color-scheme を使って端末のテーマを判定
+const mediaTheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+// 現在のテーマに応じて body に属性を付ける
+function applyTheme(e) {
   if (e.matches) {
-    console.log('ダークモードに変更されました');
+    // ダークモード
+    document.documentElement.setAttribute('data-theme', 'dark');
   } else {
-    console.log('ライトモードに変更されました');
+    // ライトモード
+    document.documentElement.setAttribute('data-theme', 'light');
   }
-});
+}
+
+// 初回適用
+applyTheme(mediaTheme);
+
+// 端末テーマが変わったときのイベントを監視
+mediaTheme.addEventListener('change', applyTheme);
