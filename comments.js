@@ -60,7 +60,7 @@ document.addEventListener('PageFinish', function() {
     commentTextarea.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && e.ctrlKey) submitInput.click();
     });
-    commentTextarea.addEventListener('change', () => {
+    commentTextarea.addEventListener('input', () => {
       if (commentTextarea.value) {
         window.addEventListener('beforeunload', handlebeforeunload);
       } else {
