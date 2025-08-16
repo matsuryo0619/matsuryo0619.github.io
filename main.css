@@ -8,3 +8,7 @@ html, body {
   min-height: 200vh;
   background-color: var(--backgroundColor);
 }
+
+a {
+  color: var(--linkColor);
+}
