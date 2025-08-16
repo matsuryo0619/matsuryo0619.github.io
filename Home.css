@@ -98,7 +98,7 @@
   overflow: hidden;
 }
 
-.teaches_site * {
+.teaches_site *:not(a) {
   color: var(--text);
 }
 
