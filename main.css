@@ -1,6 +1,6 @@
 @view-transition {
   navigation: auto;
-  duration: 400ms; /* アニメーション時間を指定 */
+  duration: 1000ms; /* アニメーション時間を指定 */
   timing-function: ease-in-out; /* 緩急をつける */
 }
 
