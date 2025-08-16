@@ -155,7 +155,7 @@ document.addEventListener('PageFinish', function() {
           const rawHtml = marked.parse(commentsText);
           const cleanText = DOMPurify.sanitize(rawHtml, {
             ALLOWED_TAGS: ['p','br','strong','em','code','pre','a','ul','ol','li','blockquote','h1','h2','h3','h4','h5','h6','table','thead','tbody','tr','th','td','hr','div'],
-            ALLOWED_ATTR: ['href','target','rel','data-linktype'],
+            ALLOWED_ATTR: ['href','target','rel','data-linktype', 'class'],
             RETURN_DOM_FRAGMENT: false,
             RETURN_DOM: false
           }).replace(/<(?!\/?(?:p|br|strong|em|code|pre|a|ul|ol|li|blockquote|h[1-6]|table|thead|tbody|tr|th|td|hr|div)(?:\s|>))[^>]*>/g, function(match){
