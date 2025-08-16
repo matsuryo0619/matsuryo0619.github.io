@@ -27,6 +27,10 @@
   animation: scaleBounce 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
+#title span {
+  color: var(--text);
+}
+
 #title span:not(.title_claim) {
   display: none;
 }
