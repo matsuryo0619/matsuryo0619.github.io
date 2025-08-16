@@ -7,13 +7,18 @@ document.addEventListener('DOMContentLoaded', function() {
   fetch('https://matsuryo0619.github.io/Article.yaml')
     .then(response => response.text())
     .then(yamlData => {
+      // YAMLをJavaScriptオブジェクトへ変換
       const pagesData = jsyaml.load(yamlData);
+
+      // 動的にキーを作成
       const pagekey = `art${sitedata}`;
+      // ページデータを取得
       const pageData = pagesData.pages[pagekey];
       const container = document.createElement('div');
 
-      if (pageData && pageData.public) {
-        const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>");
+      if (pageData && (pageData.public)) {
+        // 記事内容の整形と表示
+        const formattedContent = pageData.content.replace(/<(\w+)\st>/g, "<$1>"); // <h3 t> → <h3>
 
         container.id = 'content';
         container.innerHTML = `
@@ -22,39 +27,31 @@ document.addEventListener('DOMContentLoaded', function() {
           <div id="Rough_menu">${formattedContent}</div>
         `;
         document.title = `${pageData.title} - スゴスク!`;
+
         document.body.appendChild(container);
 
-        if (pageData.action) addScriptToHead(pageData.action);
-        if (pageData.style) addStyleToHead(pageData.style);
-
-        // --- ここからMutationObserverで監視 ---
-        const roughMenu = document.getElementById('Rough_menu');
-        const observer = new MutationObserver((mutationsList, observer) => {
-          // 変更があったらscratchblocksをレンダリング
-          scratchblocks.renderMatching('.scratchblocks', { languages: ["ja"], style: "scratch3" });
-        });
-
-        observer.observe(roughMenu, {
-          childList: true,   // 子ノードの追加/削除
-          subtree: true,     // 子孫ノードも監視
-          characterData: true // テキストの変更も監視
-        });
-        // 最初のレンダリングも実行
-        scratchblocks.renderMatching('.scratchblocks', { languages: ["ja"], style: "scratch3" });
-        // --- ここまで ---
-      } else if (pageData && !pageData.public) {
+        // 🛠 actionスクリプトをheadに追加
+        if (pageData.action) {
+          addScriptToHead(pageData.action);
+        }
+        //スタイルをheadに追加
+        if (pageData.style) {
+          addStyleToHead(pageData.style);
+        }
+      } else if(!pageData.public) {
         container.innerHTML = "<p>指定されたページは公開されていません</p>";
         document.body.appendChild(container);
       } else {
         container.innerHTML = "<p>指定されたページは見つかりませんでした。</p>";
         document.body.appendChild(container);
       }
-
+      //ページ作成を知らせるカスタムイベント
       const PageFinish = new CustomEvent('PageFinish');
       document.dispatchEvent(PageFinish);
     })
     .catch(error => console.error('YAML読み込みエラー', error));
 
+  // 🛠 actionスクリプトを<head>に追加する関数
   function addScriptToHead(scriptContent) {
     const scriptElement = document.createElement('script');
     scriptElement.type = 'text/javascript';
