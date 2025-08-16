@@ -53,8 +53,7 @@ document.addEventListener('PageFinish', function() {
     commentTextarea.required = true;
     commentParagraph.appendChild(commentTextarea);
     form.appendChild(commentParagraph);
-
-    commentParagraph.addEventListener('keydown', (e) => {
+    commentTextarea.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && e.ctrlKey) submitInput.click();
     });
 
