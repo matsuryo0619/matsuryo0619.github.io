@@ -1,9 +1,11 @@
 :root {
   --text: black;
   --backgroundColor: #fafafa;
+  --linkColor: ;
 }
 
 [data-theme="dark"] {
   --text: white;
   --backgroundColor: #4b4b4b;
+  --linkColor: #24ccff;
 }
