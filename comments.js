@@ -160,7 +160,7 @@ document.addEventListener('PageFinish', function() {
           
           // DOMPurifyでサニタイズしつつ、HTMLタグをテキスト化
           const cleanText = DOMPurify.sanitize(rawHtml, {
-            ALLOWED_TAGS: ['p','br','strong','em','code','pre','a','ul','ol','li','blockquote','h1','h2','h3','h4','h5','h6','table','thead','tbody','tr','th','td'],
+            ALLOWED_TAGS: ['p','br','strong','em','code','pre','a','ul','ol','li','blockquote','h1','h2','h3','h4','h5','h6','table','thead','tbody','tr','th','td', 'hr'],
             ALLOWED_ATTR: ['href','target','rel','data-linktype'],
             RETURN_DOM_FRAGMENT: false,
             RETURN_DOM: false
