@@ -1,7 +1,9 @@
 :root {
   --text: black;
+  --backgroundColor: white;
 }
 
 [data-theme="dark"] {
   --text: white;
+  --backgroundColor: #ebebeb;
 }
