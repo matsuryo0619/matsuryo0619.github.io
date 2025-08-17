@@ -1,10 +1,17 @@
 pages:
   art1:
-    title: "アカウント コメント欄"
+    title: "アカウントについて"
     data: "2025-08-03"
     public: true
     type: "article"
     content: |
+      <div class='Mainmenu' data-ml='著作表記･クレジットについて'>
+        <h3>著作表記･クレジットについて</h3>
+        <pre>
+          <a href='https://scratch.mit.edu/users/matsumotoryoukotyann'>私のアカウント</a>で共有しているものは､私が書いたものなら､ユーザー名を記すようにしてください
+          また､その他のゲームの素材であれば､私の名ではなく､ゲームの名前を記すようにしてください
+        </pre>
+      </div>
     style: |
     action: |
   art2:
