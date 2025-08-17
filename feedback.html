@@ -10,6 +10,7 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const PageFinish = new CustomEvent('PageFinish');
+        
         document.dispatchEvent(PageFinish);
       });
 
@@ -17,7 +18,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const sitedata = urlParams.get('data');
         
-        fetch('https://matsuryo0619.github.io/Article.yaml')
+        fetch('https://Sugosuku.github.io/Article.yaml')
         .then(response => response.text())
         .then(yamlData => {
           const pagesData = jsyaml.load(yamlData);
@@ -27,7 +28,7 @@
           const pageData = pagesData.pages[pagekey];
           
           const a = document.createElement('a');
-          a.href = `https://matsuryo0619.github.io/article/?data=${sitedata}`;
+          a.href = `https://Sugosuku.github.io/article/?data=${sitedata}`;
           a.textContent = pageData.title;
           document.getElementById('Rough_menu').prepend(a);
         })
