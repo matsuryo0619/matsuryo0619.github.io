@@ -10,6 +10,11 @@
     "tags": ["Pages", "作品"],
     "url": "myStuff"
   }, {
+    "title": "アカウントについて",
+    "content": "アカウントについて",
+    "tags": ["主", "アカウント", "著作"],
+    "url": "article/?data=1"
+  }, {
     "title": "2D RPG風ゲーム 1",
     "content": "2D RPG風ゲーム 1 について",
     "tags": ["プロジェクト", "2D", "RPG",  "主", "作品"],
