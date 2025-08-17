@@ -8,7 +8,7 @@ header.id = 'header';
 // ヘッダーの子要素を作成
 const Logo = document.createElement('img');
 Logo.id = 'header_logo';
-Logo.src = 'https://matsuryo0619.github.io/img/Logo.png';
+Logo.src = 'https://Sugosuku.github.io/img/Logo.png';
 
 // サイト内検索
 const SearchDIV = document.createElement('div');
@@ -65,14 +65,14 @@ accounts_ul.id = 'header_accountsUl';
 
 const accounts_li = [
   { text: "アカウント設定", id: "accounts_setting", onclick: () => {
-    window.location = 'https://matsuryo0619.github.io/accounts?';
+    window.location = 'https://Sugosuku.github.io/accounts?';
   } },
   { text: "ログアウト", id: "accounts_logout", onclick: () => {
     localStorage.removeItem('account');
     if (typeof secureAuth !== 'undefined') {
       secureAuth.clearAuthData()
     }
-    window.location.replace('https://matsuryo0619.github.io');
+    window.location.replace('https://Sugosuku.github.io');
   } }
 ]
 
@@ -115,7 +115,7 @@ ButtonList.forEach((data) => {
     if (data.src.includes('https://')) {
       window.location.href = data.src;
     } else {
-      window.location.href = `https://matsuryo0619.github.io/${data.src}`;
+      window.location.href = `https://Sugosuku.github.io/${data.src}`;
     }
   });
 });
@@ -137,12 +137,12 @@ document.body.prepend(header_margin);
 
 // ヘッダーロゴのクリックイベント
 Logo.addEventListener('click', function () {
-  window.location.href = 'https://matsuryo0619.github.io';
+  window.location.href = 'https://Sugosuku.github.io';
 });
 
 // 検索URLを生成する関数
 function SearchURL(value) {
-  return `https://matsuryo0619.github.io/search?q=${encodeURIComponent(value)}&type=${SearchForm.value}`;
+  return `https://Sugosuku.github.io/search?q=${encodeURIComponent(value)}&type=${SearchForm.value}`;
 }
 
 // 検索バーにEnterが押された時の処理
