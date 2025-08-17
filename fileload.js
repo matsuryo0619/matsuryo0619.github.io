@@ -32,7 +32,7 @@ reqcss.forEach((word) => {
   if (word.startsWith('http')) {
     link.href = word;
   } else {
-    link.href = `https://matsuryo0619.github.io/${word}.css`;
+    link.href = `https://Sugosuku.github.io/${word}.css`;
   }
   
   document.head.appendChild(link);
@@ -46,7 +46,7 @@ reqjs.forEach((file) => {
   if (file.src.startsWith('http')) {
     script.src = file.src;
   } else {
-    script.src = `https://matsuryo0619.github.io/${file.src}.js`;
+    script.src = `https://Sugosuku.github.io/${file.src}.js`;
   }
 
   if (file.defer) script.defer = true;
@@ -58,5 +58,5 @@ reqjs.forEach((file) => {
 // サイトアイコンを設定
 const icon = document.createElement('link');
 icon.rel = 'icon';
-icon.href = 'https://matsuryo0619.github.io/img/icon.png'; // アイコンのURLを設定
+icon.href = 'https://Sugosuku.github.io/img/icon.png'; // アイコンのURLを設定
 document.head.appendChild(icon);
