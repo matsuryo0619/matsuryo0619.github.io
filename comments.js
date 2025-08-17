@@ -75,6 +75,10 @@ document.addEventListener('PageFinish', function() {
     commentTextarea.addEventListener('focus', () => {
       if (!previewWin || previewWin.closed) {
         previewWin = window.open('about:blank', 'preview', 'width=400,height=300');
+        if (!previewWin) {
+          alert("プレビューウィンドウを開けませんでした。ポップアップブロックを確認してください。");
+          return;
+        }
         previewWin.document.body.style.fontFamily = 'sans-serif';
       }
       updatePreview();
@@ -95,7 +99,7 @@ document.addEventListener('PageFinish', function() {
     });
 
     function updatePreview() {
-      if (previewWin && !previewWin.closed) {
+        if (!previewWin || previewWin.closed || !previewWin.document) return;
         let value = commentTextarea.value;
         value = value.replace(exp, function(url) {
           return `<a href="${url}" target="_blank" rel="noopener noreferrer" data-linktype="comment">${url}</a>`;
