@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
           tagElement.addEventListener('click', function (event) {
             event.preventDefault();
             const tag = event.target.textContent;
-            window.location.href = `https://matsuryo0619.github.io/search?q=${encodeURIComponent(tag)}&type=${searchtype}`;
+            window.location.href = `https://Sugosuku.github.io/search?q=${encodeURIComponent(tag)}&type=${searchtype}`;
           });
         }
       });
