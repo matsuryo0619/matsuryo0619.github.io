@@ -32,6 +32,10 @@ document.addEventListener('PageFinish', function() {
   }
 
   async function createGoogleForm() {
+    const Login = async () => {
+      return await secureAuth.quickAuthCheck();
+    }
+    const authResult = await Login();
     const formId = "1FAIpQLSeJi8SiLCAtUaep3Z7wGK0H2OZosK_YEaRMo7vxB_VEFrWq8g";
     const formUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
 
@@ -44,7 +48,7 @@ document.addEventListener('PageFinish', function() {
     const nameInput = document.createElement("input");
     nameInput.name = "entry.691642850";
     nameInput.placeholder = "スクラッチネーム";
-    nameInput.value = "匿名";
+    nameInput.value = authResult.isValid ? authResult.username : "匿名";
     nameInput.required = true;
     nameInput.id = "form_Name";
     nameParagraph.appendChild(nameInput);
@@ -81,14 +85,9 @@ document.addEventListener('PageFinish', function() {
     hiddenInput.value = "art" + dataValue;
     form.appendChild(hiddenInput);
 
-    const Login = async () => {
-      return await secureAuth.quickAuthCheck();
-    }
-
     const submitInput = document.createElement("input");
     submitInput.type = "submit";
     submitInput.id = "submitbutton";
-    const authResult = await Login();
     submitInput.value = authResult.isValid ? "送信" : "コメント送信にはログイン";
     submitInput.disabled = !authResult.isValid;
     form.appendChild(submitInput);
