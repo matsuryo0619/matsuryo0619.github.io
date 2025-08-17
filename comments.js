@@ -96,7 +96,7 @@ document.addEventListener('PageFinish', function() {
     const comments_text = document.createElement('h3');
     comments_text.textContent = 'コメント';
     const comments_allshow = document.createElement('a');
-    comments_allshow.href = `https://matsuryo0619.github.io/comments.html?data=${dataValue}`;
+    comments_allshow.href = `https://Sugosuku.github.io/comments.html?data=${dataValue}`;
     comments_allshow.textContent = 'すべて表示';
     comments_div.appendChild(comments_text);
     comments_div.appendChild(comments_allshow);
