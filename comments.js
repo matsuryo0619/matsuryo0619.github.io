@@ -70,51 +70,10 @@ document.addEventListener('PageFinish', function() {
       isDirty = commentTextarea.value.trim() !== '';
     });
 
-    let previewWin = null;
-
-    commentTextarea.addEventListener('focus', () => {
-      if (!previewWin || previewWin.closed) {
-        previewWin = window.open('about:blank', 'preview', 'width=400,height=300');
-        if (!previewWin) {
-          alert("プレビューウィンドウを開けませんでした。ポップアップブロックを確認してください。");
-          return;
-        }
-        previewWin.document.body.style.fontFamily = 'sans-serif';
-      }
-      updatePreview();
-    });
-
-    commentTextarea.addEventListener('blur', function() {
-      if (previewWin && !previewWin.closed) {
-        previewWin.close();
-        previewWin = null;
-      }
-    });
-
-    
     commentTextarea.addEventListener('input', function() {
       this.style.height = 'auto';
       this.style.height = `${Math.min(this.value.split('\n').length * 20, 200)}px`;
-      updatePreview();
     });
-
-    function updatePreview() {
-        if (!previewWin || previewWin.closed || !previewWin.document) return;
-        let value = commentTextarea.value;
-        value = value.replace(exp, function(url) {
-          return `<a href="${url}" target="_blank" rel="noopener noreferrer" data-linktype="comment">${url}</a>`;
-        });
-
-        value = convertScratchblocks(value);
-        const rawHtml = marked.parse(value);
-        const cleanText = DOMPurify.sanitize(rawHtml, {
-          ALLOWED_TAGS: ['p','br','strong','em','code','pre','a','ul','ol','li','blockquote','h1','h2','h3','h4','h5','h6','table','thead','tbody','tr','th','td','hr','div'],
-          ALLOWED_ATTR: ['href','target','rel','data-linktype','class']
-        });
-
-        previewWin.document.body.innerHTML = cleanText;
-      
-    }
 
     const dataValue = getUrlParameter("data");
     const hiddenInput = document.createElement("input");
