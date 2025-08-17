@@ -37,7 +37,7 @@ const menus = [
       {
         type: 'btn',
         text: '再読み込み',
-        onclick: () => window.location.reload()
+        onclick: () => window.location.reload(true)
       }
     ]
   },
