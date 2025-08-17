@@ -147,11 +147,15 @@ document.addEventListener('PageFinish', function() {
     };
   }
 
-  createGoogleForm();
+  async function initComments() {
+    await createGoogleForm();
 
-  const comments = document.createElement('div');
-  comments.id = 'comments';
-  div.appendChild(comments);
+    const comments = document.createElement('div');
+    comments.id = 'comments';
+    document.getElementById('commentsArea').appendChild(comments);
+  }
+
+  initComments();
 
   const exp = /((?<!href="|href='|src="|src=')(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 
