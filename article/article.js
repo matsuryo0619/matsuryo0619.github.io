@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const sitedata = urlParams.get('data');
 
   // YAMLファイルを読み込む
-  fetch('https://matsuryo0619.github.io/Article.yaml')
+  fetch('https://Sugosuku.github.io/Article.yaml')
     .then(response => response.text())
     .then(yamlData => {
       // YAMLをJavaScriptオブジェクトへ変換
