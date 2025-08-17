@@ -45,7 +45,7 @@ const menus = [
     type: 'btn',
     text: 'フィードバック',
     onclick: () => {
-      window.location.href = 'https://matsuryo0619.github.io/feedback';
+      window.location.href = 'https://Sugosuku.github.io/feedback';
     }
   }
 ];
@@ -67,7 +67,7 @@ const conditionalMenus = [
               onclick: () => {
                 const query = encodeURIComponent(SelectedText);
                 if (!query) return;
-                window.location.href = `https://matsuryo0619.github.io/search?q=${query}&type=AND`;
+                window.location.href = `https://Sugosuku.github.io/search?q=${query}&type=AND`;
               }
             },
             {
