@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
     div.classList.add('result-item');
     div.classList.add('border');
     const tags = (result.tags && result.tags.length > 0)
-      ? result.tags.map(tag => `<a href="#" class="tag-link">${tag}</a>`).join(', ')
+      ? result.tags.map(tag => `<a href="https://matsuryo0619.github.io/search?q=" class="tag-link">${tag}</a>`).join(', ')
       : 'なし';
 
     div.innerHTML = `
