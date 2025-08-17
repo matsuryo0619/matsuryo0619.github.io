@@ -151,7 +151,7 @@ document.addEventListener('PageFinish', function() {
 
   const comments = document.createElement('div');
   comments.id = 'comments';
-  document.getElementById('commentsArea').appendChild(comments);
+  div.appendChild(comments);
 
   const exp = /((?<!href="|href='|src="|src=')(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 
