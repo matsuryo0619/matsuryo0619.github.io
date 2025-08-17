@@ -181,6 +181,11 @@ document.addEventListener('PageFinish', function() {
             return `<a href="${url}" target="_blank" rel="noopener noreferrer" data-linktype="comment">${url}</a>`;
           });
 
+          commentsText = commentsText.replace(/\^(\d+)\^/g, (match, p1) => {
+            const url = `https://scratch.mit.edu/projects/${p1}`;
+            return `<a href='${url}' target='_blank'>${p1}</a>`;
+          });
+
           commentsText = convertScratchblocks(commentsText);
 
           const rawHtml = marked.parse(commentsText);
