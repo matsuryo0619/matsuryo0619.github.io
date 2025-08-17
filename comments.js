@@ -113,7 +113,7 @@ document.addEventListener('PageFinish', function() {
         });
 
         previewWin.document.body.innerHTML = cleanText;
-      }
+      
     }
 
     const dataValue = getUrlParameter("data");
